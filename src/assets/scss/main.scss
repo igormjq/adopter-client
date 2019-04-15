@@ -1,0 +1,9 @@
+@import './_reset.scss';
+@import './colors.scss';
+@import './global.scss';
+
+$dark_gray: #ff0000;
+
+html, body, #app {
+    height: 100%;
+}

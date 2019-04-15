@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style lang="scss">
-  @import './assets/main.scss';
+  @import './assets/scss/main.scss';
   #app {
     display: flex;
     flex-direction: column;
