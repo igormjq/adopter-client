@@ -29,4 +29,9 @@ export default {
 
 <style lang="scss">
   @import './assets/main.scss';
+  #app {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 </style>
