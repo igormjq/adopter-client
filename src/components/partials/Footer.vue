@@ -1,17 +1,14 @@
 <template>
   <footer class="footer">
-    <wrapper-component>
+    <container>
       <h1>oi</h1>
-    </wrapper-component>
+    </container>
   </footer>
 </template>
 
 <script>
-import Wrapper from './Wrapper';
 export default {
-  components: {
-    'wrapper-component': Wrapper
-  }
+
 }
 </script>
 
@@ -24,3 +21,4 @@ export default {
     align-items: center;
   }
 </style>
+

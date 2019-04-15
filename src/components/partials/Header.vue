@@ -1,7 +1,7 @@
 <template>
   <header class="header">
-    <wrapper-component>
-      <div class="header__left flex align-center">
+    <container>
+      <div class="header__left flex align-center space-between --full">
         <div class="logo flex align-center">
           <img src="../../assets/img/logo.png" alt="Adopter logo">
         </div>
@@ -13,20 +13,17 @@
           </ul>
         </div>
       </div>
-      <div class="header__right flex align-center">
+      <div class="header__right flex align-center --full">
         <h1>botao1</h1>
         <h1>botao2</h1>
       </div>
-    </wrapper-component>
+    </container>
   </header>
 </template>
 
 <script>
-import Wrapper from './Wrapper';
 export default {
-  components: {
-    'wrapper-component': Wrapper
-  }
+  
 }
 </script>
 
@@ -37,6 +34,8 @@ export default {
     box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.25);
     display: flex;
     align-items: center;
+    background: #FFF;
+    position: fixed;
 
     >.container {
       justify-content: space-between;
@@ -51,7 +50,7 @@ export default {
       .header__options {
         ul {
           li {
-            padding: 0 30px;
+            padding: 0 15px;
             color: #9D9D9D;
           }
         }

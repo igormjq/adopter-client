@@ -1,6 +1,8 @@
 .flex {
     display: flex;
-
+    &.--full {
+        flex: 1;
+    }
     &.align-center {
         align-items: center;
     }

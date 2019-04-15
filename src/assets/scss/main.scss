@@ -1,9 +1,11 @@
 @import './_reset.scss';
 @import './colors.scss';
+@import './fonts.scss';
 @import './global.scss';
-
-$dark_gray: #ff0000;
 
 html, body, #app {
     height: 100%;
+}
+body {
+    font-family: 'Montserrat'
 }
