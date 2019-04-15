@@ -14,8 +14,6 @@
         </div>
       </div>
       <div class="header__right flex align-center --full">
-        <h1>botao1</h1>
-        <h1>botao2</h1>
       </div>
     </container>
   </header>
@@ -48,6 +46,7 @@ export default {
         }
       }
       .header__options {
+        font-weight: lighter;
         ul {
           li {
             padding: 0 15px;
@@ -55,6 +54,11 @@ export default {
           }
         }
       }
+    }
+
+    &__right {
+      justify-content: flex-end;
+      color: #EF3176;
     }
   }
 </style>
