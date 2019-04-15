@@ -5,9 +5,13 @@ import routes from './routes'
 
 // Global components
 import ContainerComponent from './components/partials/Container'
+import ButtonComponent from './components/Button';
 
-Vue.use(VueRouter);
 Vue.component('container', ContainerComponent);
+Vue.component('button-component', ButtonComponent);
+
+// Router
+Vue.use(VueRouter);
 
 const router = new VueRouter({
   mode: 'history',

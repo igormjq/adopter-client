@@ -14,6 +14,11 @@
         </div>
       </div>
       <div class="header__right flex align-center --full">
+        <button-component 
+          :height="35" 
+          :icon="'../../assets/img/icon/animal/007-paws.svg'"> 
+          Entrar 
+        </button-component>
       </div>
     </container>
   </header>
@@ -21,7 +26,7 @@
 
 <script>
 export default {
-  
+
 }
 </script>
 
