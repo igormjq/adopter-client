@@ -1,8 +1,14 @@
 <template>
   <section id="header" class="flex --full">
     <div class="content flex --full">
-      <container>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat culpa accusamus tenetur, esse cumque eos! Saepe expedita vero reiciendis doloribus ut tempore, porro est voluptate incidunt dolores aperiam eius possimus.</p>
+      <container class="align-center justify-center">
+        <div class="home__form__wrapper">
+          <div class="home__form__wrapper__image">
+            <img src="../assets/img/dog-and-cat-form.png">
+          </div>
+          <card-component :width="400" :height="400">
+          </card-component>
+        </div>
       </container>
     </div>
     <div class="banner flex --full">
@@ -11,7 +17,12 @@
 </template>
 
 <script>
+import CardComponent from './Card'
+
 export default {
+  components: {
+    'card-component': CardComponent
+  },
   data() {
     return {
       
@@ -26,9 +37,24 @@ export default {
     padding-top: 70px;
 
     div {
-      flex: 1;
       &.content {
-        padding-top: 20px;
+        padding-top: 70px;
+
+        .home__form__wrapper {
+          position: relative;
+
+          &__image {
+            position: absolute;
+            top: -88px;
+            width: 220px;
+            left: 50%;
+            transform: translate(-50%, -5px);
+
+            img {
+              width: 100%;
+            }
+          }
+        }
       }
       &.banner {
         background-image: url(../assets/img/pages/home/bg-header.jpg);

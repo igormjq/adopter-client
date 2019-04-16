@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container flex --full">
     <slot></slot>
   </div>
 </template>
@@ -13,7 +13,5 @@ export default {
 <style lang="scss">
   .container {
     padding: 0 30px;
-    display: flex;
-    flex: 1;
   }
 </style>
