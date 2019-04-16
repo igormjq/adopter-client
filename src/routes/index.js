@@ -1,4 +1,4 @@
-import Home from '../components/Home'
+import Home from '../components//views/home/Home'
 
 export default [
   { path: '/', component: Home }

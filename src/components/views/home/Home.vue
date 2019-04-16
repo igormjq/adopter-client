@@ -4,11 +4,12 @@
       <container class="align-center justify-center">
         <div class="home__form__wrapper">
           <div class="home__form__wrapper__image">
-            <img class="img-responsive" src="../assets/img/dog-and-cat-form.png">
+            <img class="img-responsive" src="../../../assets/img/dog-and-cat-form.png">
           </div>
           <card-component :width="375" :height="375">
             <h1 slot="title">Encontrar um amigo</h1>
             <h2 slot="subtitle">Descubra amigos perto de você</h2>
+            <home-form slot="content" />
           </card-component>
         </div>
       </container>
@@ -19,11 +20,13 @@
 </template>
 
 <script>
-import CardComponent from './Card'
+import CardComponent from '../../Card'
+import HomeForm from './HomeForm'
 
 export default {
   components: {
-    'card-component': CardComponent
+    'card-component': CardComponent,
+    'home-form': HomeForm
   },
   data() {
     return {
@@ -56,7 +59,7 @@ export default {
         }
       }
       &.banner {
-        background-image: url(../assets/img/pages/home/bg-header.jpg);
+        background-image: url(../../../assets/img/pages/home/bg-header.jpg);
         background-size: cover;
         background-repeat: no-repeat;
         background-position-y: 30%;
