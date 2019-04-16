@@ -1,5 +1,8 @@
 .flex {
     display: flex;
+    &.flex-column {
+        flex-direction: column;
+    }
     &.--full {
         flex: 1;
     }

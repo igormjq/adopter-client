@@ -17,15 +17,6 @@ export default {
     type: String,
     width: Number,
     height: Number
-  },
-  data() {
-    console.log(icon)
-    return {
-      classObject: {
-        'pink': pink,
-        'white': white
-      }
-    }
   }
 }
 </script>

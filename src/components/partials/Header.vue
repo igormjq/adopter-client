@@ -48,6 +48,7 @@ export default {
       }
       .header__options {
         font-weight: lighter;
+        cursor: pointer;
         ul {
           li {
             padding: 0 15px;
