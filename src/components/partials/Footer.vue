@@ -1,14 +1,14 @@
 <template>
   <footer class="footer">
     <container>
-      <div class="flex flex-column">
+      <div class="flex flex-column justify-center">
         <span>{{ mailAddress }}</span>
         <social :networks="['facebook', 'instagram', 'twitter']" />
       </div>
       <div class="footer-image">
         <img src="../../assets/img/dog-and-cat-footer.png">
       </div>
-      <div class="flex flex-column">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto veniam ipsam voluptatem quod deserunt nisi alias voluptas saepe eos, molestiae soluta eum, sed earum inventore expedita? Amet, nemo quos. Repellat?</div>
+      <div class="flex flex-column justify-center">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto veniam ipsam voluptatem quod deserunt nisi alias voluptas saepe eos, molestiae soluta eum, sed earum inventore expedita? Amet, nemo quos. Repellat?</div>
     </container>
   </footer>
 </template>
@@ -32,7 +32,18 @@ export default {
   footer {
     background-color: #FFF;
     color: #6F6F6F;
-    // padding-bottom: 40px;
+    padding-top: 60px;
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 330px 1fr;
+      grid-column-gap: 40px;
+    }
+
+    .footer-image {
+      img {
+        width: 100%;
+      }
+    }
 
     .icon-social {
       width: 30px;
