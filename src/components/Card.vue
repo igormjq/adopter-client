@@ -1,6 +1,16 @@
 <template>
   <div class="card flex flex-column" :style="{ width: width + 'px', height: height + 'px' }">
-    <h1>Card</h1>
+    <div class="card__header flex flex-column justify-center align-center" v-if="$slots.title">
+      <div class="card__header__title">
+        <slot name="title" />
+      </div>
+      <div class="card__header__subtitle" v-if="$slots.subtitle">
+        <slot name="subtitle" />
+      </div>
+    </div>
+    <div class="card__content">
+      <slot name="content"></slot>
+    </div>
   </div>
 </template>
 
@@ -18,5 +28,19 @@ export default {
     background-color: #FFF;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
     border-radius: 8px;
+
+    &__header {
+      padding: 45px 15px;
+      font-weight: 200;
+      color: #908D8D;
+
+      &__title {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+      &__subtitle {
+        font-size: 12px;
+      }
+    }
   }
 </style>

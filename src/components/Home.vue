@@ -4,9 +4,11 @@
       <container class="align-center justify-center">
         <div class="home__form__wrapper">
           <div class="home__form__wrapper__image">
-            <img src="../assets/img/dog-and-cat-form.png">
+            <img class="img-responsive" src="../assets/img/dog-and-cat-form.png">
           </div>
-          <card-component :width="400" :height="400">
+          <card-component :width="375" :height="375">
+            <h1 slot="title">Encontrar um amigo</h1>
+            <h2 slot="subtitle">Descubra amigos perto de você</h2>
           </card-component>
         </div>
       </container>
@@ -42,6 +44,7 @@ export default {
 
         .home__form__wrapper {
           position: relative;
+          z-index: -1;
 
           &__image {
             position: absolute;
@@ -49,10 +52,6 @@ export default {
             width: 220px;
             left: 50%;
             transform: translate(-50%, -5px);
-
-            img {
-              width: 100%;
-            }
           }
         }
       }
@@ -61,6 +60,16 @@ export default {
         background-size: cover;
         background-repeat: no-repeat;
         background-position-y: 30%;
+        position: relative;
+        z-index: -1;
+
+        &:after {
+          content: '';
+          position: absolute;
+          background: rgba(239, 49, 118, 0.4);
+          width: 100%;
+          height: 100%;
+        }
       }
     }
   }
