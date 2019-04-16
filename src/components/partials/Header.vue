@@ -14,11 +14,7 @@
         </div>
       </div>
       <div class="header__right flex align-center --full">
-        <button-component 
-          :height="35" 
-          :icon="'../../assets/img/icon/animal/007-paws.svg'"> 
-          Entrar 
-        </button-component>
+        <button-component :height="35" :type="'white'"> Entrar <i slot="icon" class="icon icon-paw"></i> </button-component>
       </div>
     </container>
   </header>

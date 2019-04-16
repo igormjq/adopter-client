@@ -1,13 +1,12 @@
 <template>
   <button 
     class="flex align-center btn" 
-    :class="{ 'btn-block': block }"
-    :style="{ width: width + 'px', height: height + 'px' }"
-  >
+    :class="{ 'btn-block': block, [type]: type }"
+    :style="{ width: width + 'px', height: height + 'px' }">
     <span>
       <slot></slot>
     </span>
-    <i v-if="icon" :style="{ backgroundImage: 'url(' + icon + ')'}"></i>
+    <slot name="icon"></slot>
   </button>
 </template>
 
@@ -15,12 +14,17 @@
 export default {
   props: {
     block: Boolean,
-    icon: String,
+    type: String,
     width: Number,
     height: Number
   },
   data() {
+    console.log(icon)
     return {
+      classObject: {
+        'pink': pink,
+        'white': white
+      }
     }
   }
 }
@@ -30,19 +34,34 @@ export default {
   .btn {
     border: 0.5px solid #EF3176;
     font-weight: 600;
+    font-size: 14px;
     color: #EF3176;
     height: 20px;
     justify-content: center;
     border-radius: 7px;
     outline: none;
+    transition: opacity .1s;
+    padding: 0 15px;
     cursor: pointer;
+
+    &:hover {
+      opacity: .6;
+    }
 
     &.btn-block {
       flex: 1;
     }
-    i {
-      width: 15px;
-      height: 15px;
+
+    &.pink {
+      background-color: #EF3176;
+      color: #FFF;
     }
+    &.white {
+      background-color: #FFF;
+      color: #EF3176;
+    }
+  }
+  i {
+    margin-left: 5px;
   }
 </style>

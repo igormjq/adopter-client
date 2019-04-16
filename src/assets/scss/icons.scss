@@ -1,0 +1,10 @@
+.icon {
+    width: 12px;
+    height: 12px;
+    background-size: cover;
+
+    &.icon-paw {
+        background-image: url(assets/img/icon/animal/008-animal-paw.svg);
+        fill: red;
+    }
+}
