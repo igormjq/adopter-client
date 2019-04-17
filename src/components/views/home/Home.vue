@@ -47,7 +47,6 @@ export default {
 
         .home__form__wrapper {
           position: relative;
-          z-index: -1;
 
           &__image {
             position: absolute;
@@ -64,7 +63,6 @@ export default {
         background-repeat: no-repeat;
         background-position-y: 30%;
         position: relative;
-        z-index: -1;
 
         &:after {
           content: '';

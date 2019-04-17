@@ -35,6 +35,7 @@ export default {
     align-items: center;
     background: #FFF;
     position: fixed;
+    z-index: 1;
 
     >.container {
       justify-content: space-between;
