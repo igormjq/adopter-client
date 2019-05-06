@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
+import VueApollo from 'vue-apollo'
 import routes from './routes'
+import apolloClient from './apollo';
 
 // Global components
 import ContainerComponent from './components/partials/Container'
@@ -12,6 +14,11 @@ Vue.component('button-component', ButtonComponent);
 
 // Router
 Vue.use(VueRouter);
+Vue.use(VueApollo);
+
+const apolloProvider = new VueApollo({
+  defaultClient: apolloClient
+})
 
 const router = new VueRouter({
   mode: 'history',
@@ -20,6 +27,7 @@ const router = new VueRouter({
 
 new Vue({
   router,
+  apolloProvider,
   el: '#app',
   render: h => h(App)
 })
