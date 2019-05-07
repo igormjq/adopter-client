@@ -3,7 +3,8 @@ import App from './App.vue'
 import VueRouter from 'vue-router'
 import VueApollo from 'vue-apollo'
 import routes from './routes'
-import apolloClient from './apollo';
+import apolloClient from './apollo'
+import store from './store'
 
 // Global components
 import ContainerComponent from './components/partials/Container'
@@ -28,6 +29,7 @@ const router = new VueRouter({
 new Vue({
   router,
   apolloProvider,
+  store,
   el: '#app',
   render: h => h(App)
 })
