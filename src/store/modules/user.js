@@ -1,8 +1,4 @@
-const state = {
-    id: 1,
-    name: "Igor Marini Jaekel Quevedo"
-}
-
+const state = {}
 const getters = {}
 const mutations = {}
 const actions = {}
