@@ -5,7 +5,12 @@ export const GET_ANIMALS = gql`query {
     id
     profileImg
     name
+    type
     size
     gender
+    address {
+      city
+      uf
+    }
   }
 }`

@@ -5,7 +5,12 @@
 
     &.icon-paw {
         background-image: url(assets/img/icon/animal/008-animal-paw.svg);
-        fill: red;
+    }
+    &.dog {
+        background-image: url(assets/img/icon/animal/003-dog.svg)
+    }
+    &.cat {
+        background-image: url(assets/img/icon/animal/002-cat.svg)
     }
 }
 

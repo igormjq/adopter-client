@@ -4,11 +4,20 @@
       <h1>{{ title }}</h1>
       <div class="list flex">
         <card v-for="animal in animals" :key="animal.id">
-          <div slot="thumbnail" :style='{ backgroundImage: "url(" + animal.profileImg + ")"}'></div>
+          <div 
+            slot="thumbnail" 
+            :style='{ backgroundImage: "url(" + animal.profileImg + ")"}'
+          >
+          <div class="icon" :class="[animal.type.toLowerCase()]">
+          </div>
+          </div>
           <div slot="content" class="flex flex-column">
             <div class="animal__info">
               <div class="animal__info__name">
                 <span>{{ animal.name }}</span>
+              </div>
+              <div class="animal__info__location">
+                <span>{{ animal.address.city }} - {{ animal.address.uf }}</span>
               </div>
             </div>
           </div>
@@ -50,12 +59,34 @@ export default {
       width: 235px;
       margin: 0 20px 20px 0;
 
+      &__thumbnail {
+        position: relative;
+        
+        .icon {
+          width: 29px;
+          height: 29px;
+          position: absolute;
+          bottom: -3px;
+          right: -3px;
+          border-radius: 4px;
+          background-color:#FFF;
+          background-size: 80%;
+          background-position: center;
+          background-repeat: no-repeat;
+        }      
+      }
+
       .animal__info {
         &__name {
           color: #EF3176;
           font-weight: 700;
           font-size: 14px;
           padding: 10px 0;
+        }
+        &__location {
+          color: #6F6F6F;
+          font-size: 12px;
+          font-weight: lighter;
         }
       }
     }
