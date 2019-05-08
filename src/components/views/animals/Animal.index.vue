@@ -3,7 +3,8 @@
     <container class="flex-column">
       <h1>{{ title }}</h1>
       <div class="list flex">
-        <card v-for="animal in animals" :key="animal.id">
+        <card v-for="animal in animals" :key="animal.id" :imgUrl="animal.profileImg">
+          <div slot="thumbnail"/>
           <div slot="content">
             {{ animal.name }}
             {{ animal.gender }}
@@ -43,9 +44,9 @@ export default {
     margin-top: 25px;
 
     .card {
-      padding: 15px;
+      padding: 5px;
       width: 235px;
-      margin-right: 10px;
+      margin: 0 20px 20px 0;
     }
   }
 </style>

@@ -8,6 +8,12 @@
         <slot name="subtitle" />
       </div>
     </div>
+    <div 
+      class="card__thumbnail" 
+      v-if="$slots.thumbnail" 
+      :style='{ backgroundImage: "url(" + imgUrl + ")"}'
+    >
+    </div>
     <div class="card__content">
       <slot name="content"></slot>
     </div>
@@ -18,14 +24,15 @@
 export default {
   props: {
     width: Number,
-    height: Number
+    height: Number,
+    imgUrl: String
   }
 }
 </script>
 
 <style lang="scss">
   .card {
-    background-color: #FFF;
+    background-color:#FFF;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
     border-radius: 8px;
 
@@ -40,6 +47,17 @@ export default {
       }
       &__subtitle {
         font-size: 12px;
+      }
+    }
+    &__thumbnail {
+      height: 185px;
+      background: red;
+      border-radius: 6px;
+      background-size: cover;
+      background-position: center;
+      img {
+        width: 100%;
+        height: 100%;
       }
     }
   }
