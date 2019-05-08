@@ -1,5 +1,5 @@
-import Home from '../components/views/home/Home'
-import Animals from '../components/views/animals/Index.vue'
+import Home from '../components/views/home/Home.index.vue'
+import Animals from '../components/views/animals/Animal.index.vue'
 
 export default [
   { path: '/', component: Home },
