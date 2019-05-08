@@ -8,11 +8,8 @@
         <slot name="subtitle" />
       </div>
     </div>
-    <div 
-      class="card__thumbnail" 
-      v-if="$slots.thumbnail" 
-      :style='{ backgroundImage: "url(" + imgUrl + ")"}'
-    >
+    <div class="card__thumbnail" v-if="$slots.thumbnail">
+      <slot name="thumbnail"></slot>
     </div>
     <div class="card__content">
       <slot name="content"></slot>
@@ -51,12 +48,15 @@ export default {
     }
     &__thumbnail {
       height: 185px;
-      border-radius: 6px;
-      background-size: cover;
-      background-position: center;
-      img {
+      div, img {
         width: 100%;
         height: 100%;
+        border-radius: 6px;
+      }
+      div {
+        background-position: center;
+        background-size: cover;
+        background-position: center;
       }
     }
   }

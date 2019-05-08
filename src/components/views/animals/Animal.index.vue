@@ -3,8 +3,8 @@
     <container class="flex-column">
       <h1>{{ title }}</h1>
       <div class="list flex">
-        <card v-for="animal in animals" :key="animal.id" :imgUrl="animal.profileImg">
-          <div slot="thumbnail"/>
+        <card v-for="animal in animals" :key="animal.id">
+          <div slot="thumbnail" :style='{ backgroundImage: "url(" + animal.profileImg + ")"}'></div>
           <div slot="content" class="flex flex-column">
             <div class="animal__info">
               <div class="animal__info__name">
@@ -55,7 +55,7 @@ export default {
           color: #EF3176;
           font-weight: 700;
           font-size: 14px;
-          padding: 5px 0;
+          padding: 10px 0;
         }
       }
     }
