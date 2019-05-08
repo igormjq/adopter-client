@@ -5,10 +5,12 @@
       <div class="list flex">
         <card v-for="animal in animals" :key="animal.id" :imgUrl="animal.profileImg">
           <div slot="thumbnail"/>
-          <div slot="content">
-            {{ animal.name }}
-            {{ animal.gender }}
-            {{ animal.size }}
+          <div slot="content" class="flex flex-column">
+            <div class="animal__info">
+              <div class="animal__info__name">
+                <span>{{ animal.name }}</span>
+              </div>
+            </div>
           </div>
         </card>
       </div>
@@ -47,6 +49,15 @@ export default {
       padding: 5px;
       width: 235px;
       margin: 0 20px 20px 0;
+
+      .animal__info {
+        &__name {
+          color: #EF3176;
+          font-weight: 700;
+          font-size: 14px;
+          padding: 5px 0;
+        }
+      }
     }
   }
 </style>

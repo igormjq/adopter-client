@@ -51,7 +51,6 @@ export default {
     }
     &__thumbnail {
       height: 185px;
-      background: red;
       border-radius: 6px;
       background-size: cover;
       background-position: center;
