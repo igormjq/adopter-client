@@ -26,8 +26,9 @@ export default {
 <style lang="scss">
   @import './assets/scss/main.scss';
   #app {
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: space-between;
+    section {
+      padding-top: 70px;
+      height: 100vh
+    }
   }
 </style>
