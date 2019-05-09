@@ -22,9 +22,11 @@
               <div class="animal__info__detail flex space-between align-center">
                 <span>{{ animalAgeGroup(animal) }} - {{ animalGender(animal) }}</span>
                 <div class="animal__info__detail__size flex --full">
-                  <div class="icon icon-paw small" :class="{'--pink': checkAnimalSize(animal, 'small') }"></div>
-                  <div class="icon icon-paw medium" :class="{'--pink': checkAnimalSize(animal, 'medium') }"></div>
-                  <div class="icon icon-paw large" :class="{'--pink': checkAnimalSize(animal, 'large') }"></div>
+                  <div 
+                    v-for="size in possibleSizes" :key="size"
+                    class="icon icon-paw"
+                    :class="{ [size]: animal.size.toLowerCase(), '--pink': checkAnimalSize(animal, size) }"
+                  />
                 </div>
               </div>
             </div>
@@ -45,7 +47,7 @@ export default {
   data() {
     return {
       animals: [],
-      possibleSizes: ['SMALL', 'MEDIUM', 'LARGE'],
+      possibleSizes: ['small', 'medium', 'large'],
       title: 'Seu mais novo amigo pode estar aqui'
     }
   },
