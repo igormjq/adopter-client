@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="header__right flex align-center --full">
-        <button-component :height="35" :type="'white'"> Entrar <i slot="icon" class="icon icon-paw"></i> </button-component>
+        <button-component :height="35" :type="'white'"> Entrar <i slot="icon" class="icon icon-paw --pink"></i> </button-component>
       </div>
     </container>
   </header>

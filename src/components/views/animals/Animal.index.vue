@@ -19,10 +19,12 @@
               <div class="animal__info__location">
                 <span>{{ animal.address.city }} - {{ animal.address.uf }}</span>
               </div>
-              <div class="animal__info__detail flex space-between">
+              <div class="animal__info__detail flex space-between align-center">
                 <span>{{ animalAgeGroup(animal) }} - {{ animalGender(animal) }}</span>
-                <div class="animal__info__detail__size">
-                  <span>{{ animal.size }}</span>
+                <div class="animal__info__detail__size flex --full">
+                  <div class="icon icon-paw small" :class="{'--pink': checkAnimalSize(animal, 'small') }"></div>
+                  <div class="icon icon-paw medium" :class="{'--pink': checkAnimalSize(animal, 'medium') }"></div>
+                  <div class="icon icon-paw large" :class="{'--pink': checkAnimalSize(animal, 'large') }"></div>
                 </div>
               </div>
             </div>
@@ -43,6 +45,7 @@ export default {
   data() {
     return {
       animals: [],
+      possibleSizes: ['SMALL', 'MEDIUM', 'LARGE'],
       title: 'Seu mais novo amigo pode estar aqui'
     }
   },
@@ -58,6 +61,9 @@ export default {
     },
     animalAgeGroup({ ageGroup }) {
       return ageGroup === 'ADULT' ? 'Adulto' : 'Filhote';
+    },
+    checkAnimalSize({ size }, targetSize) {
+      return size.toLowerCase() === targetSize;
     }
   }
 }
@@ -103,6 +109,15 @@ export default {
           color: #EF3176;
           font-weight: 700;
           font-size: 14px;
+        }
+
+        &__detail__size {
+          justify-content: flex-end;
+          align-items: flex-end;
+
+          .icon {
+            margin-left: 3px;
+          }
         }
       }
     }
