@@ -8,6 +8,7 @@ export const GET_ANIMALS = gql`query {
     type
     size
     gender
+    ageGroup
     address {
       city
       uf

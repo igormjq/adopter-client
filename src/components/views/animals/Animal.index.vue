@@ -19,6 +19,12 @@
               <div class="animal__info__location">
                 <span>{{ animal.address.city }} - {{ animal.address.uf }}</span>
               </div>
+              <div class="animal__info__detail flex space-between">
+                <span>{{ animalAgeGroup(animal) }} - {{ animalGender(animal) }}</span>
+                <div class="animal__info__detail__size">
+                  <span>{{ animal.size }}</span>
+                </div>
+              </div>
             </div>
           </div>
         </card>
@@ -45,6 +51,14 @@ export default {
       query: GET_ANIMALS,
       fetchPolicy: 'cache-and-network'
     }
+  },
+  methods: {
+    animalGender({ gender }) {
+      return gender === 'MALE' ? 'Macho' : 'Fêmea';
+    },
+    animalAgeGroup({ ageGroup }) {
+      return ageGroup === 'ADULT' ? 'Adulto' : 'Filhote';
+    }
   }
 }
 </script>
@@ -55,20 +69,20 @@ export default {
     margin-top: 25px;
 
     .card {
-      padding: 5px;
       width: 235px;
       margin: 0 20px 20px 0;
 
       &__thumbnail {
         position: relative;
+        padding: 5px;
         
         .icon {
           width: 24px;
           height: 24px;
           position: absolute;
-          bottom: -3px;
-          right: -3px;
-          border-radius: 4px;
+          bottom: 3px;
+          right: 3px;
+          border-radius: 4px 0px 0px 0px;
           background-color:#FFF;
           background-size: 80%;
           background-position: center;
@@ -77,16 +91,18 @@ export default {
       }
 
       .animal__info {
+        padding: 10px 5px;
+
+        & > * {
+          padding-bottom: 10px;
+          color: #6F6F6F;
+          font-size: 12px;
+          font-weight: lighter;
+        }
         &__name {
           color: #EF3176;
           font-weight: 700;
           font-size: 14px;
-          padding: 10px 0;
-        }
-        &__location {
-          color: #6F6F6F;
-          font-size: 12px;
-          font-weight: lighter;
         }
       }
     }
