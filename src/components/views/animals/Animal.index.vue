@@ -63,8 +63,8 @@ export default {
         position: relative;
         
         .icon {
-          width: 29px;
-          height: 29px;
+          width: 24px;
+          height: 24px;
           position: absolute;
           bottom: -3px;
           right: -3px;
