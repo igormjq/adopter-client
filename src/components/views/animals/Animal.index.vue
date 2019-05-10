@@ -2,7 +2,7 @@
   <section>
     <container class="flex-column">
       <h1>{{ title }}</h1>
-      <div class="list flex">
+      <div class="list flex justify-center">
         <card v-for="animal in animals" :key="animal.id">
           <div 
             slot="thumbnail" 
@@ -33,8 +33,11 @@
           </div>
         </card>
       </div>
-      <button @click="fetchMoreAnimals">mais animais</button>
+      
     </container>
+    <button-component class="btn-see-more pink" :onClick="fetchMoreAnimals" :height="50">
+        <span>VEJA MAIS AMIGOS</span>
+    </button-component>
   </section>
 </template>
 
@@ -90,10 +93,14 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+  .container {
+    background-color: #eaebed;
+  }
   .list {
     flex-wrap: wrap;
     margin-top: 25px;
+    margin-bottom: 25px;
 
     .card {
       width: 235px;

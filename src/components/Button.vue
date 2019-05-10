@@ -2,7 +2,9 @@
   <button 
     class="flex align-center btn" 
     :class="{ 'btn-block': block, [type]: type }"
-    :style="{ width: width + 'px', height: height + 'px' }">
+    :style="{ width: width + 'px', height: height + 'px' }"
+    @click.prevent="onClick"
+    >
     <span>
       <slot></slot>
     </span>
@@ -16,7 +18,8 @@ export default {
     block: Boolean,
     type: String,
     width: Number,
-    height: Number
+    height: Number,
+    onClick: Function
   }
 }
 </script>
@@ -50,6 +53,12 @@ export default {
     &.white {
       background-color: #FFF;
       color: #EF3176;
+    }
+
+    &.btn-see-more {
+      border-radius: 0;
+      width: 100%;
+      font-weight: bolder;
     }
   }
   i {
