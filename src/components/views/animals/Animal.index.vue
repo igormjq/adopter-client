@@ -7,7 +7,7 @@
           <card v-for="animal in animals" :key="animal.id">
             <div slot="thumbnail" :style='{ backgroundImage: "url(" + animal.profileImg + ")"}'>
               <div class="icon" :class="[animal.type.toLowerCase()]"></div>
-              <div class="icon icon-favorite" :class="{ 'is-favorite': Math.random() > 0.5 }"></div>
+              <div class="icon icon-favorite" @click="$event.target.classList.add('is-favorite')" :class="{ 'is-favorite': Math.random() > 0.5 }"></div>
             </div>
             <div slot="content" class="flex flex-column">
               <div class="animal__info">
@@ -103,7 +103,23 @@ export default {
   .card {
     width: 235px;
     margin: 0 20px 20px 0;
-
+    .icon-favorite {
+      right: -5px;
+      opacity: 0;
+      transition: .5s ease-in-out;
+      &.is-favorite {
+        &:before {
+          animation: like .6s ease-in-out;
+          background-image: url(../../../assets/img/icon/011-like-full.svg);
+        }
+      }
+    }
+    &:hover {
+      .icon-favorite{ 
+        right: 10px;
+        opacity: 1;
+      }
+    }
     &__thumbnail {
       position: relative;
       padding: 5px;
