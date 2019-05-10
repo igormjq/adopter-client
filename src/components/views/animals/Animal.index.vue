@@ -33,6 +33,7 @@
           </div>
         </card>
       </div>
+      <button @click="fetchMoreAnimals">mais animais</button>
     </container>
   </section>
 </template>
@@ -47,6 +48,8 @@ export default {
   data() {
     return {
       animals: [],
+      first: 20,
+      skip: 0,
       possibleSizes: ['small', 'medium', 'large'],
       title: 'Seu mais novo amigo pode estar aqui'
     }
@@ -54,7 +57,10 @@ export default {
   apollo: {
     animals: {
       query: GET_ANIMALS,
-      fetchPolicy: 'cache-and-network'
+      variables: {
+        first: 20,
+        skip: 0,
+      }
     }
   },
   methods: {
@@ -66,6 +72,19 @@ export default {
     },
     checkAnimalSize({ size }, targetSize) {
       return size.toLowerCase() === targetSize;
+    },
+    async fetchMoreAnimals() {
+      this.skip = this.first + this.skip;
+      
+      const { data: { animals }} = await this.$apollo.query({
+        query: GET_ANIMALS,
+        variables: {
+          first: this.first,
+          skip: this.skip
+        }
+      });
+
+      this.animals = this.animals.concat(animals);
     }
   }
 }
