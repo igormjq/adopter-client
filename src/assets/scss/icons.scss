@@ -27,6 +27,39 @@
     &.cat {
         background-image: url(assets/img/icon/animal/002-cat.svg)
     }
+
+    &.icon-favorite {
+        position: absolute;
+        display: flex;
+        width: 30px;
+        height: 30px;
+        background-color: #FFF;
+        border-radius: 50%;
+        right: 10px;
+        top: 10px;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        
+        &:before {
+            content: '';
+            background-image: url(assets/img/icon/010-like.svg);
+            background-position: center;
+            position: absolute;
+            display: block;
+            width: 65%;
+            height: 65%;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        &.is-favorite {
+            &:before {
+                background-image: url(assets/img/icon/011-like-full.svg);
+                margin-top: 1px;
+            }
+        }
+    }
 }
 
 .social {

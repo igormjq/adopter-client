@@ -34,14 +34,16 @@ export default {
     justify-content: center;
     border-radius: 7px;
     outline: none;
-    transition: opacity .1s;
+    transition: opacity .3s;
     padding: 0 15px;
     cursor: pointer;
 
     &:hover {
-      opacity: .6;
+      opacity: .8;
     }
-
+    &:active {
+      filter: contrast(1.6)
+    }
     &.btn-block {
       flex: 1;
     }
