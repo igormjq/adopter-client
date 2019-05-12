@@ -34,7 +34,7 @@
         </transition-group>
       </div>
     </container>
-    <button-component class="btn-see-more pink" :onClick="fetchMoreAnimals" :height="50">
+    <button-component v-if="hasNextPage" class="btn-see-more pink" :onClick="fetchMoreAnimals" :height="50">
       <span>VEJA MAIS AMIGOS</span>
     </button-component>
   </section>
@@ -52,18 +52,10 @@ export default {
       animals: [],
       first: 20,
       skip: 0,
+      hasNextPage: true,
       possibleSizes: ["small", "medium", "large"],
       title: "Seu mais novo amigo pode estar aqui"
     };
-  },
-  apollo: {
-    animals: {
-      query: GET_ANIMALS,
-      variables: {
-        first: 20,
-        skip: 0
-      }
-    }
   },
   methods: {
     animalGender({ gender }) {
@@ -88,8 +80,27 @@ export default {
         }
       });
 
+      this.checkNextPage(animals);
       this.animals = this.animals.concat(animals);
+    },
+    checkNextPage(animals) {
+      console.log(animals.length);
+      this.hasNextPage = animals.length >= this.first;
     }
+  },
+  async mounted() {
+    const { 
+      data: { animals } 
+    } = await this.$apollo.query({
+      query: GET_ANIMALS,
+      variables: {
+        first: this.first,
+        skip: this.skip
+      }
+    });
+
+    this.checkNextPage(animals);
+    this.animals = animals;
   }
 };
 </script>
