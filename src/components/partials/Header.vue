@@ -14,15 +14,31 @@
         </div>
       </div>
       <div class="header__right flex align-center --full">
-        <button-component :height="35" :type="'white'"> Entrar <i slot="icon" class="icon icon-paw --pink"></i> </button-component>
+        <button-component :onClick="toggleUserForm" :height="35" :type="'white'"> Entrar <i slot="icon" class="icon icon-paw --pink"></i> </button-component>
       </div>
     </container>
+    <transition name="slide">
+      <login-form v-if="showUserForm"></login-form>
+    </transition>
   </header>
 </template>
 
 <script>
+import LoginForm from '../LoginForm'
 export default {
-
+  components: {
+    LoginForm
+  },
+  data() {
+    return {
+      showUserForm: false
+    }
+  },
+  methods: {
+    toggleUserForm() {
+      this.showUserForm = !this.showUserForm;
+    }
+  }
 }
 </script>
 
