@@ -1,7 +1,9 @@
 <template>
   <section>
     <container class="flex-column">
-      <h1>{{ title }}</h1>
+      <div class="title">
+        <h1>{{ title }}</h1>
+      </div>
       <div >
         <transition-group  name="fade" tag="div" class="list flex justify-center">
           <card v-for="animal in animals" :key="animal.id">
@@ -108,7 +110,6 @@ export default {
 <style lang="scss">
 .list {
   flex-wrap: wrap;
-  margin-top: 25px;
   margin-bottom: 25px;
 
   .card {
@@ -172,6 +173,14 @@ export default {
       &__detail__size {
         justify-content: flex-end;
         align-items: flex-end;
+        position: relative;
+
+        &:before {
+          content: 'Porte';
+          font-size: 10px;
+          position: absolute;
+          top: -15px;
+        }
 
         .icon {
           margin-left: 3px;
