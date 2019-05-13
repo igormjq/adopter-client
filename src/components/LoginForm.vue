@@ -1,15 +1,8 @@
 <template>
   <form class="login-form">
-    <div class="login-form__header flex">
-      <div 
-        class="option flex justify-center align-center --full"
-        :class="{ 'active': this.active === 'login' }"
-        @click="setActive('login')">Entrar</div>
-      <div 
-        class="option flex justify-center align-center --full" 
-        :class="{ 'active': this.active === 'register' }"
-        @click="setActive('register')"
-        >Registrar-se</div>
+    <div class="login-form__header flex flex-column align-center justify-center">
+      <h2>Entre</h2>
+      <h3>Insira suas credenciais para ajudar na causa!</h3>
     </div>
   </form>
 </template>
@@ -22,13 +15,10 @@ export default {
   },
   data() {
     return {
-      active: 'login'
     }
   },
   methods: {
-    setActive(value) {
-      this.active = value;
-    }
+    
   },
 }
 </script>
@@ -37,15 +27,25 @@ export default {
   .login-form {
     height: 100vh;
     width: 25vw;
-    position: absolute;
     right: 0;
     top: 70px;
+    position: absolute;
     background: #FFF;
     color: black;
 
     &__header {
-      height: 50px;
-
+      color: #EF3176;
+      
+      h2 {
+        font-size: 24px;
+        font-weight: 700;
+      }
+      h3 {
+        font-size: 12px;
+        font-weight: 500;
+        margin-top: 5px;
+        font-weight: 300;
+      }
       .option {
         font-weight: bolder;
         color: #908D8D;

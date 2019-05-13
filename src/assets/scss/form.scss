@@ -1,5 +1,33 @@
 .form {
-  &__section {
-    margin-bottom: 10px;
+  select, input, textarea {
+    outline: none;
+    border: 1px solid #9D9D9D;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+
+  select:focus {
+    border-color: #EF3176;
+  }
+
+  .input__radio {
+    opacity: 0;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+
+    & + label {
+      width: 20px;
+      height: 20px;
+      border: 1px solid #EF3176;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    &:checked {
+      & + label {
+        border: 1px solid green;
+      }
+    }
   }
 }
