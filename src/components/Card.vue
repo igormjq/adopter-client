@@ -34,7 +34,7 @@ export default {
     border-radius: 8px;
 
     &__header {
-      padding: 45px 15px;
+      padding: 45px 15px 20px 15px;
       font-weight: 200;
       color: #908D8D;
 
