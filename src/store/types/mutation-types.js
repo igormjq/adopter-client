@@ -1,1 +1,2 @@
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const TOGGLE_USER_MENU = 'TOGGLE_USER_MENU';

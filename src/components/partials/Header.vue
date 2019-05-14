@@ -14,30 +14,31 @@
         </div>
       </div>
       <div class="header__right flex align-center --full">
-        <button class="btn" @click="toggleUserForm">Entrar</button>
+        <button class="btn" @click="toggleUserMenu">Entrar</button>
       </div>
     </container>
     <transition name="slide">
-      <login-form v-if="showUserForm"></login-form>
+      <user-area-component v-show="showUserForm"></user-area-component>
     </transition>
   </header>
 </template>
 
 <script>
-import LoginForm from '../LoginForm'
+import { mapState, mapActions } from 'vuex'
+import UserArea from './user/UserArea'
 export default {
   components: {
-    LoginForm
+    'user-area-component': UserArea
   },
-  data() {
-    return {
-      showUserForm: false
-    }
+  computed: {
+    ...mapState({
+      showUserForm: state => state.user.showUserForm
+    })
   },
   methods: {
-    toggleUserForm() {
-      this.showUserForm = !this.showUserForm;
-    }
+    ...mapActions([
+      'toggleUserMenu'
+    ])
   }
 }
 </script>

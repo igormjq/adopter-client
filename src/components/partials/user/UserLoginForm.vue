@@ -24,8 +24,9 @@
 </template>
 
 <script>
-import Card from './Card'
-import { LOG_USER } from '../graphql/mutations'
+import Card from '../../Card'
+import { LOG_USER } from '../../../graphql/mutations.js'
+
 export default {
   components: {
     Card
@@ -50,11 +51,16 @@ export default {
           }
         });
 
-        this.$store.dispatch('logUser', login.user); 
+        this.$store.dispatch('logUser', login.user);
+        this.$store.dispatch('toggleUserMenu');
 
       } catch(e) {
         this.error = e.message.split('error:')[1];
       }
+    },
+    resetForm() {
+      this.user.email = ''
+      this.user.password = ''
     }
   },
 }
@@ -62,14 +68,6 @@ export default {
 
 <style lang="scss">
   .login-form {
-    height: 100vh;
-    width: 100vw;
-    right: 0;
-    top: 70px;
-    position: absolute;
-    background: #FFF;
-    padding: 0 25px;
-
     &__header {
       color: #EF3176;
       margin-bottom: 25px;
