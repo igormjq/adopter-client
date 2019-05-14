@@ -1,6 +1,3 @@
-import apollo from '../../apollo';
-import { LOG_USER } from '../../graphql/mutations'
-
 const state = {
     currentUser: {},
 }
@@ -8,11 +5,13 @@ const getters = {}
 const mutations = {
     SET_CURRENT_USER(state, user) {
         state.currentUser = user;
+
+        console.log('O ESTADO FICOU ASIM', state);
     }
 }
 const actions = {
     async logUser({ commit }, user) {
-        
+        commit('SET_CURRENT_USER', user);
     }
 }
 

@@ -9,6 +9,12 @@ export const LOG_USER = gql`mutation login($email: String!, $password: String!) 
     user {
       id
       name
+      email
+      profileImg
+      role {
+        name
+        displayName
+      }
     }
   }
 }`

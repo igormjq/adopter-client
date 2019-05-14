@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section id="animalsList">
     <container class="flex-column">
       <div class="title">
         <h1>{{ title }}</h1>
@@ -108,6 +108,9 @@ export default {
 </script>
 
 <style lang="scss">
+#animalsList {
+  background-color: #eaebed;
+}
 .list {
   flex-wrap: wrap;
   margin-bottom: 25px;
@@ -188,10 +191,5 @@ export default {
       }
     }
   }
-}
-</style>
-<style lang="scss" scoped>
-.container {
-  background-color: #eaebed;
 }
 </style>

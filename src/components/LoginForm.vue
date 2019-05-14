@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     async logUser() {
-      const res = await this.$apollo.mutate({
+      const { data: { login }} = await this.$apollo.mutate({
         mutation: LOG_USER,
         variables: {
           email: this.user.email,
@@ -50,8 +50,7 @@ export default {
         }
       });
 
-      console.log('rapazote', res);
-      
+      this.$store.dispatch('logUser', login.user);      
     }
   },
 }
