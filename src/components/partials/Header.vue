@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="header__right flex align-center --full">
-        <button-component :onClick="toggleUserForm" :height="35" :type="'white'"> Entrar <i slot="icon" class="icon icon-paw --pink"></i> </button-component>
+        <button class="btn" @click="toggleUserForm">Entrar</button>
       </div>
     </container>
     <transition name="slide">

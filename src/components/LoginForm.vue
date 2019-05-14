@@ -1,28 +1,26 @@
 <template>
-  <form class="form login-form">
+  <div class="login-form">
     <div class="login-form__header flex flex-column align-center justify-center">
       <h2>Entre</h2>
       <h3>Insira suas credenciais para ajudar na causa!</h3>
     </div>
-    <div class="form__body">
-      <div class="form__element flex align-center">
-        <span class="flex align-center">Email</span>
-        <input class="flex --full" type="text" v-model="user.email">
+    <form class="form" @submit.prevent="logUser">
+      <div class="form__body">
+        <div class="form__element flex flex-column">
+          <span class="flex align-center">Email</span>
+          <input class="flex --full" type="text" v-model="user.email" required>
+        </div>
+        <div class="form__element flex flex-column">
+          <span class="flex align-center">Senha</span>
+          <input class="flex --full" type="password" v-model="user.password" required>
+        </div>
+        <p v-if="error">{{ error }}</p>
       </div>
-      <div class="form__element flex align-center">
-        <span class="flex align-center">Senha</span>
-        <input class="flex --full" type="password" v-model="user.password">
-      </div>
-    </div>
-    <div class="form__footer flex">
-      <button-component 
-        :onClick="logUser"
-        class="btn-block pink" 
-        :height="40">
-          Acessar
-      </button-component>
-    </div>
-  </form>
+        <div class="form__footer flex">
+          <button class="btn btn-block pink" type="submit">ENTRAR</button>
+        </div>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -34,6 +32,7 @@ export default {
   },
   data() {
     return {
+      error: null,
       user: {
         email: '',
         password: ''
@@ -42,15 +41,20 @@ export default {
   },
   methods: {
     async logUser() {
-      const { data: { login }} = await this.$apollo.mutate({
-        mutation: LOG_USER,
-        variables: {
-          email: this.user.email,
-          password: this.user.password
-        }
-      });
+      try {
+        const { data: { login }} = await this.$apollo.mutate({
+          mutation: LOG_USER,
+          variables: {
+            email: this.user.email,
+            password: this.user.password
+          }
+        });
 
-      this.$store.dispatch('logUser', login.user);      
+        this.$store.dispatch('logUser', login.user); 
+
+      } catch(e) {
+        this.error = e.message.split('error:')[1];
+      }
     }
   },
 }
@@ -59,7 +63,7 @@ export default {
 <style lang="scss">
   .login-form {
     height: 100vh;
-    width: 25vw;
+    width: 100vw;
     right: 0;
     top: 70px;
     position: absolute;
@@ -83,10 +87,15 @@ export default {
     }
 
     .form {
+      width: 25%;
+      margin: 0 auto;
       &__body {
         .form__element {
-          display: grid;
-          grid-template-columns: 60px 1fr;
+          span {
+            font-size: 12px;
+            font-weight: 400;
+            margin-bottom: 5px;
+          }
         }
       }
       &__footer {

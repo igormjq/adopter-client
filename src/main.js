@@ -8,10 +8,8 @@ import store from './store'
 
 // Global components
 import ContainerComponent from './components/partials/Container'
-import ButtonComponent from './components/Button';
 
 Vue.component('container', ContainerComponent);
-Vue.component('button-component', ButtonComponent);
 
 // Router
 Vue.use(VueRouter);

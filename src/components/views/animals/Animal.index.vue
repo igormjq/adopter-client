@@ -36,9 +36,9 @@
         </transition-group>
       </div>
     </container>
-    <button-component v-if="hasNextPage" class="btn-see-more pink" :onClick="fetchMoreAnimals" :height="50">
-      <span>VEJA MAIS AMIGOS</span>
-    </button-component>
+    <button v-if="hasNextPage" class="btn btn-block pink" @click="fetchMoreAnimals">
+      VEJA MAIS AMIGOS
+    </button>
   </section>
 </template>
 
