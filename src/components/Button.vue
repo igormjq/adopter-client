@@ -1,7 +1,7 @@
 <template>
   <button 
     class="flex align-center btn" 
-    :class="{ 'btn-block': block, [type]: type }"
+    :class="{[type]: type }"
     :style="{ width: width + 'px', height: height + 'px' }"
     @click.prevent="onClick"
     >
@@ -15,7 +15,6 @@
 <script>
 export default {
   props: {
-    block: Boolean,
     type: String,
     width: Number,
     height: Number,

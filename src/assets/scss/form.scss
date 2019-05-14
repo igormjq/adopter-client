@@ -5,12 +5,32 @@
     border-radius: 6px;
     font-size: 14px;
     color: #EF3176;
+    background-color: #FFF;
+    padding: 0 15px;
+    height: 40px;
+    font-size: 16px;
   }
 
   select {
     -moz-appearance:none; /* Firefox */
     -webkit-appearance:none; /* Safari and Chrome */
     appearance:none;
-    padding: 0 15px;
+  }
+
+  &__body {
+    width: 100%;
+    & > * {
+      margin: 8px 0;
+    }
+  }
+  &__element {
+    width: 100%;
+    color: #EF3176;
+
+    &.multiple {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-column-gap: 5px;
+    }
   }
 }

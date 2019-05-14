@@ -1,7 +1,20 @@
-const state = {}
+import apollo from '../../apollo';
+import { LOG_USER } from '../../graphql/mutations'
+
+const state = {
+    currentUser: {},
+}
 const getters = {}
-const mutations = {}
-const actions = {}
+const mutations = {
+    SET_CURRENT_USER(state, user) {
+        state.currentUser = user;
+    }
+}
+const actions = {
+    async logUser({ commit }, user) {
+        
+    }
+}
 
 export default {
     state,
