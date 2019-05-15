@@ -1,8 +1,7 @@
 import {
-  LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGOUT,
-  TOGGLE_MENU
+  TOGGLE_MENU,
 } from '../types/mutation-types';
 
 const state = {
@@ -15,10 +14,15 @@ const getters = {
 };
 const mutations = {
   [LOGIN_SUCCESS](state) {
+    setTimeout(() => {
       state.isLoggedIn = true;
+    }, 300);
+      
   },
   [LOGOUT](state) {
+    setTimeout(() => {
       state.isLoggedIn = false;
+    }, 300);
   },
   [TOGGLE_MENU](state) {
       state.showMenu = !state.showMenu;
@@ -26,11 +30,9 @@ const mutations = {
 }
 const actions = {
   async login({ commit }, authPayload) {
-    commit(LOGIN_REQUEST);
-
-    localStorage.setItem('token', authPayload.token);
-    commit(TOGGLE_MENU);
-    commit(LOGIN_SUCCESS);
+      localStorage.setItem('token', authPayload.token);
+      commit(LOGIN_SUCCESS);
+      commit(TOGGLE_MENU);
   },
   logout({ commit }) {
       localStorage.removeItem('token');

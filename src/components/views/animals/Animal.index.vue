@@ -86,11 +86,11 @@ export default {
       this.animals = this.animals.concat(animals);
     },
     checkNextPage(animals) {
-      console.log(animals.length);
       this.hasNextPage = animals.length >= this.first;
     }
   },
   async mounted() {
+    this.$store.dispatch('loadPage');
     const { 
       data: { animals } 
     } = await this.$apollo.query({
@@ -103,6 +103,7 @@ export default {
 
     this.checkNextPage(animals);
     this.animals = animals;
+    this.$store.dispatch('loadPage', false);
   }
 };
 </script>

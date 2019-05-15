@@ -42,8 +42,10 @@ export default {
   },
   methods: {
     async logUser() {
+      this.$store.dispatch('loadPage');
+      
       try {
-        const { data: { login }} = await this.$apollo.mutate({
+        const { data } = await this.$apollo.mutate({
           mutation: LOG_USER,
           variables: {
             email: this.user.email,
@@ -51,7 +53,8 @@ export default {
           }
         });
 
-        this.$store.dispatch('login', login);
+        this.$store.dispatch('login', data.login);
+        this.$store.dispatch('loadPage', false);
 
       } catch(e) {
         this.error = e.message.split('error:')[1];
@@ -84,7 +87,6 @@ export default {
     }
 
     .form {
-      width: 25%;
       margin: 0 auto;
       &__body {
         .form__element {

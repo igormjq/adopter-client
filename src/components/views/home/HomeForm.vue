@@ -28,7 +28,7 @@
           <option value="MEDIUM">Médio</option>
           <option value="LARGE">Grande</option>
         </select>
-        <select name="" v-model="size">
+        <select name="">
           <option value="SMALL">Macho</option>
           <option value="MEDIUM">Fêmea</option>
         </select>
