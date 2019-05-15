@@ -88,6 +88,7 @@ export default {
 
     .form {
       margin: 0 auto;
+      padding: 0 25px;
       &__body {
         .form__element {
           span {

@@ -92,7 +92,7 @@ export default {
 
     .user {
       &-info {
-
+        cursor: pointer;
       }
       &-avatar {
         width: 30px;

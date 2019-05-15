@@ -31,6 +31,9 @@ export default {
     top: 70px;
     position: absolute;
     background: #FFF;
-    padding: 0 25px;
+
+    &.is-logged {
+      height: auto;
+    }
   }
 </style>

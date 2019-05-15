@@ -1,9 +1,9 @@
 <template>
-  <ul>
+  <ul class="user-menu">
     <li>menu</li>
     <li>menu</li>
     <li>menu</li>
-    <button class="btn" @click="logout">Sair</button>
+    <li @click="logout">Sair</li>
   </ul>
 </template>
 
@@ -18,6 +18,15 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+  .user-menu {
+    li {
+      border-bottom: 1px solid #EF3176;
+      padding: 10px;
 
+      &:last-of-type {
+        border: none;
+      }
+    }
+  }
 </style>
