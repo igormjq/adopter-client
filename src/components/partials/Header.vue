@@ -24,20 +24,22 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import UserArea from './user/UserArea'
+
 export default {
   components: {
     UserArea
   },
-  data() {
-    return {
-      showMenu: false
-    }
+  computed: {
+    ...mapGetters([
+      'showMenu'
+    ])
   },
   methods: {
-    toggleMenu() {
-      this.showMenu = ! this.showMenu;
-    }
+    ...mapActions([
+      'toggleMenu'
+    ])
   }
 }
 </script>
