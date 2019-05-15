@@ -1,2 +1,3 @@
-export const SET_CURRENT_USER = 'SET_CURRENT_USER';
-export const TOGGLE_USER_MENU = 'TOGGLE_USER_MENU';
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGOUT = 'LOGOUT';

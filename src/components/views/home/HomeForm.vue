@@ -23,7 +23,7 @@
         </div>
       </div>
       <div class="form__element multiple">
-        <select name="" v-model="size">
+        <select name="">
           <option value="SMALL">Pequeno</option>
           <option value="MEDIUM">Médio</option>
           <option value="LARGE">Grande</option>

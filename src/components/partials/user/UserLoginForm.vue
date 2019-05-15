@@ -51,8 +51,7 @@ export default {
           }
         });
 
-        this.$store.dispatch('logUser', login.user);
-        this.$store.dispatch('toggleUserMenu');
+        this.$store.dispatch('login', login);
 
       } catch(e) {
         this.error = e.message.split('error:')[1];

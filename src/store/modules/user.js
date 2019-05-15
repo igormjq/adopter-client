@@ -1,27 +1,36 @@
-import { 
-    SET_CURRENT_USER,
-    TOGGLE_USER_MENU
+import {
+    LOGIN_REQUEST,
+    LOGIN_SUCCESS,
+    LOGOUT
 } from '../types/mutation-types';
 
 const state = {
-    currentUser: {},
+    isLoggedIn: !!localStorage.getItem('token'),
     showUserForm: false
 }
-const getters = {};
+const getters = {
+    isLoggedIn: state => state.isLoggedIn
+};
 const mutations = {
-    [SET_CURRENT_USER](state, user) {
-        state.currentUser = user;
+    [LOGIN_SUCCESS](state) {
+        state.isLoggedIn = true;
     },
-    [TOGGLE_USER_MENU](state) {
-        state.showUserForm = !state.showUserForm;
+    [LOGOUT](state) {
+        state.isLoggedIn = false;
     }
 }
 const actions = {
-    async logUser({ commit }, user) {
-        commit(SET_CURRENT_USER, user);
+    async login({ commit }, authPayload) {
+        commit(LOGIN_REQUEST);
+
+        setTimeout(() => {
+            localStorage.setItem('token', authPayload.token);
+            commit(LOGIN_SUCCESS);
+        }, 3000);
     },
-    toggleUserMenu({ commit }) {
-        commit(TOGGLE_USER_MENU);
+    logout({ commit }) {
+        localStorage.removeItem('token');
+        commit(LOGOUT);
     }
 }
 

@@ -1,12 +1,12 @@
 <template>
-  <nav class="user-area" :class="{ 'is-logged': user.id }">
-    <UserLoginForm v-if="!user.id" />
-    <UserMenu v-if="user.id"/>
+  <nav class="user-area" :class="{ 'is-logged': isLoggedIn }">
+    <UserLoginForm v-if="!isLoggedIn" />
+    <UserMenu v-if="isLoggedIn"/>
   </nav>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 import UserLoginForm from './UserLoginForm';
 import UserMenu from './UserMenu';
 
@@ -16,10 +16,10 @@ export default {
     UserMenu
   },
   computed: {
-    ...mapState({
-      user: state => state.user.currentUser
-    })
-  },
+    ...mapGetters([
+      'isLoggedIn'
+    ])
+  }
 }
 </script>
 
