@@ -14,7 +14,13 @@
         </div>
       </div>
       <div class="header__right flex align-center --full">
-        <button class="btn" @click="toggleMenu">Entrar</button>
+        <button class="btn" @click="toggleMenu" v-if="!isLoggedIn">Entrar</button>
+        <div class="user-info flex align-center" @click="toggleMenu" v-else>
+          {{ currentUser.name }}
+          <div class="user-avatar">
+            <img class="img-responsive" :src="currentUser.profileImg">
+          </div>
+        </div>
       </div>
     </container>
     <transition name="slide">
@@ -33,7 +39,9 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'showMenu'
+      'showMenu',
+      'isLoggedIn',
+      'currentUser'
     ])
   },
   methods: {
@@ -80,6 +88,20 @@ export default {
     &__right {
       justify-content: flex-end;
       color: #EF3176;
+    }
+
+    .user {
+      &-info {
+
+      }
+      &-avatar {
+        width: 30px;
+        margin-left: 10px;
+
+        img {
+          border-radius: 50%;
+        }
+      }
     }
   }
 </style>

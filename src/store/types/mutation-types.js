@@ -3,3 +3,4 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOUT = 'LOGOUT';
 export const TOGGLE_MENU = 'TOGGLE_MENU';
 export const LOADING = 'LOADING';
+export const SET_USER = 'SET_USER';

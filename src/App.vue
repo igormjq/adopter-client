@@ -12,6 +12,7 @@ import { mapGetters } from 'vuex'
 import HeaderComponent from './components/partials/Header'
 import FooterComponent from './components/partials/Footer'
 import Spinner from './components/Spinner'
+import { USER_ME } from './graphql/queries'
 
 export default {
   name: 'app',
@@ -24,6 +25,12 @@ export default {
     ...mapGetters([
       'isLoading'
     ])
+  },
+  async mounted() {
+    const { data: { me } } = await this.$apollo.query({
+      query: USER_ME
+    });
+    this.$store.dispatch('setUser', me);
   }
 }
 </script>

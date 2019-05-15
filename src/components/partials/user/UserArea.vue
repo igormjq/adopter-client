@@ -26,7 +26,7 @@ export default {
 <style lang="scss">
   .user-area {
     height: 100vh;
-    width: 30vw;
+    width: 25vw;
     right: 0;
     top: 70px;
     position: absolute;
