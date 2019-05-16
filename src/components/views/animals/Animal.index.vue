@@ -11,7 +11,7 @@
               <div class="icon" :class="[animal.type.toLowerCase()]"></div>
               <div 
                 class="icon icon-favorite" 
-                @click="$event.target.classList.add('is-favorite')" 
+                @click="toggleFavoriteAnimal($event, animal.id)" 
                 :class="{'is-favorite': checkFavorite(animal.id) }">
               </div>
             </div>
@@ -50,6 +50,8 @@
 import { mapGetters } from 'vuex';
 import Card from "../../Card.vue";
 import { GET_ANIMALS } from "../../../graphql/queries.js";
+import { TOGGLE_FAVORITE_ANIMAL } from '../../../graphql/mutations.js';
+
 export default {
   components: {
     Card
@@ -82,6 +84,21 @@ export default {
     checkFavorite(animalId) {
       return this.currentUser.favoriteAnimals.map(({ id }) => id ).includes(animalId);
     },
+    async toggleFavoriteAnimal(e, animalId) {
+      try {
+        const { data } = await this.$apollo.mutate({
+          mutation: TOGGLE_FAVORITE_ANIMAL,
+          variables: {
+            animalId
+          }
+        });
+
+        e.target.classList.toggle('is-favorite');
+
+      } catch(e) {
+        console.log(e);
+      }
+    },
     async fetchMoreAnimals() {
       this.skip = this.first + this.skip;
 
@@ -100,7 +117,7 @@ export default {
     },
     checkNextPage(animals) {
       this.hasNextPage = animals.length >= this.first;
-    }
+    },
   },
   async mounted() {
     this.$store.dispatch('loadPage');
