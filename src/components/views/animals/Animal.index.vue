@@ -9,7 +9,11 @@
           <card v-for="animal in animals" :key="animal.id">
             <div slot="thumbnail" :style='{ backgroundImage: "url(" + animal.profileImg + ")"}'>
               <div class="icon" :class="[animal.type.toLowerCase()]"></div>
-              <div class="icon icon-favorite" @click="$event.target.classList.add('is-favorite')" :class="{ 'is-favorite': Math.random() > 0.5 }"></div>
+              <div 
+                class="icon icon-favorite" 
+                @click="$event.target.classList.add('is-favorite')" 
+                :class="{'is-favorite': checkFavorite(animal.id) }">
+              </div>
             </div>
             <div slot="content" class="flex flex-column">
               <div class="animal__info">
@@ -43,6 +47,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Card from "../../Card.vue";
 import { GET_ANIMALS } from "../../../graphql/queries.js";
 export default {
@@ -59,6 +64,11 @@ export default {
       title: "Seu mais novo amigo pode estar aqui"
     };
   },
+  computed: {
+    ...mapGetters([
+      'currentUser'
+    ]),
+  },
   methods: {
     animalGender({ gender }) {
       return gender === "MALE" ? "Macho" : "Fêmea";
@@ -68,6 +78,9 @@ export default {
     },
     checkAnimalSize({ size }, targetSize) {
       return size.toLowerCase() === targetSize;
+    },
+    checkFavorite(animalId) {
+      return this.currentUser.favoriteAnimals.map(({ id }) => id ).includes(animalId);
     },
     async fetchMoreAnimals() {
       this.skip = this.first + this.skip;
