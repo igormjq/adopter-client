@@ -14,9 +14,14 @@
         </div>
       </div>
       <div class="header__right flex align-center --full">
-        <button class="btn" @click="toggleMenu" v-if="!isLoggedIn">Entrar</button>
+        <button class="btn flex align-center" @click="toggleMenu" v-if="!isLoggedIn">
+          <span class="icon icon-paw --pink"/>
+          <span>Entrar</span>
+        </button>
         <div class="user-info flex align-center" @click="toggleMenu" v-else>
-          {{ currentUser.name }}
+          <div class="user-name">
+            {{ currentUser.name }}
+          </div>
           <div class="user-avatar">
             <img class="img-responsive" :src="currentUser.profileImg">
           </div>
@@ -88,6 +93,11 @@ export default {
     &__right {
       justify-content: flex-end;
       color: #EF3176;
+
+      .btn {
+        padding: 0 10px;
+        height: 35px;
+      }
     }
 
     .user {
