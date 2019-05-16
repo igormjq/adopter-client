@@ -82,7 +82,9 @@ export default {
       return size.toLowerCase() === targetSize;
     },
     checkFavorite(animalId) {
-      return this.currentUser.favoriteAnimals.map(({ id }) => id ).includes(animalId);
+      return this.currentUser ? 
+        this.currentUser.favoriteAnimals.map(({ id }) => id ).includes(animalId) :
+        false;
     },
     async toggleFavoriteAnimal(e, animalId) {
       try {
@@ -97,6 +99,7 @@ export default {
 
       } catch(e) {
         console.log(e);
+        alert('Você precisa estar logado');
       }
     },
     async fetchMoreAnimals() {

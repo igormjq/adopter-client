@@ -8,7 +8,7 @@ import {
 const state = {
   isLoggedIn: !!localStorage.getItem('token'),
   showMenu: false,
-  currentUser: {}
+  currentUser: null
 }
 const getters = {
   isLoggedIn: state => state.isLoggedIn,

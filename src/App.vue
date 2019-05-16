@@ -27,10 +27,19 @@ export default {
     ])
   },
   async mounted() {
-    const { data: { me } } = await this.$apollo.query({
-      query: USER_ME
-    });
-    this.$store.dispatch('setUser', me);
+    const token = localStorage.getItem('token');
+
+    if(token) {
+      try {
+        const { data: { me } } = await this.$apollo.query({
+          query: USER_ME
+        });
+        this.$store.dispatch('setUser', me);
+
+      } catch(error) {
+        console.log('lorem ipsum', error);
+      }
+    }
   }
 }
 </script>
