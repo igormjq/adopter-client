@@ -6,7 +6,7 @@ import {
 } from '../types/mutation-types';
 
 const state = {
-  isLoggedIn: !!localStorage.getItem('token'),
+  isLoggedIn: false,
   showMenu: false,
   currentUser: null
 }
@@ -34,6 +34,7 @@ const mutations = {
   },
   [SET_USER](state, user) {
     state.currentUser = user;
+    state.isLoggedIn = true;
   }
 }
 const actions = {

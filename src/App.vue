@@ -9,10 +9,10 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { USER_ME } from './graphql/queries'
 import HeaderComponent from './components/partials/Header'
 import FooterComponent from './components/partials/Footer'
 import Spinner from './components/Spinner'
-import { USER_ME } from './graphql/queries'
 
 export default {
   name: 'app',
@@ -27,6 +27,7 @@ export default {
     ])
   },
   async mounted() {
+    this.$store.dispatch('loadPage');
     const token = localStorage.getItem('token');
 
     if(token) {
@@ -37,9 +38,12 @@ export default {
         this.$store.dispatch('setUser', me);
 
       } catch(error) {
-        console.log('lorem ipsum', error);
+        console.log('Erro', error);
+        alert('Não autorizado');
       }
     }
+
+    this.$store.dispatch('loadPage', false);
   }
 }
 </script>
