@@ -26,7 +26,7 @@ const mutations = {
   [LOGOUT](state) {
     setTimeout(() => {
       state.isLoggedIn = false;
-      state.setCurrentUser = {};
+      state.setCurrentUser = null;
     }, 300);
   },
   [TOGGLE_MENU](state) {
@@ -39,17 +39,17 @@ const mutations = {
 }
 const actions = {
   async login({ commit }, { token, user }) {
-      localStorage.setItem('token', token);
-      commit(LOGIN_SUCCESS, user);
-      commit(TOGGLE_MENU);
+    localStorage.setItem('token', token);
+    commit(LOGIN_SUCCESS, user);
+    commit(TOGGLE_MENU);
   },
   logout({ commit }) {
-      localStorage.removeItem('token');
-      commit(TOGGLE_MENU);
-      commit(LOGOUT);
+    localStorage.removeItem('token');
+    commit(TOGGLE_MENU);
+    commit(LOGOUT);
   },
   toggleMenu({ commit }) {
-      commit(TOGGLE_MENU);
+    commit(TOGGLE_MENU);
   },
   setUser({ commit }, user) {
     commit(SET_USER, user);
