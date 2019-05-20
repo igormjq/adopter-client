@@ -1,7 +1,7 @@
 <template>
   <section id="animalsList">
     <container class="flex-column">
-      <list></list>
+      <list :query="query"></list>
     </container>
   </section>
 </template>

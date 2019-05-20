@@ -15,7 +15,6 @@ const mutations = {
 }
 const actions = {
   loadPage({ commit }, condition = true) {
-    console.log('CARREGANDO');
     commit(LOADING, condition);
   }
 }

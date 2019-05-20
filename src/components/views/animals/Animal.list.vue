@@ -1,37 +1,34 @@
 <template>
-  <ApolloQuery :query="query" :variables="{ first, skip }">
-    <template v-slot="{ result: { loading, error, data }}">
-      <div v-if="data" class="list flex">
-        <card v-for="animal in data.animals" :key="animal.id">
-          <div slot="thumbnail" :style='{ backgroundImage: "url(" + animal.profileImg + ")"}'>
-            <div class="icon" :class="[animal.type.toLowerCase()]"></div>
+  <div class="list flex">
+    <card v-for="animal in animals" :key="animal.id">
+      <div slot="thumbnail" :style='{ backgroundImage: "url(" + animal.profileImg + ")"}'>
+        <div class="icon" :class="[animal.type.toLowerCase()]"></div>
+      </div>
+      <div slot="content" class="flex flex-column">
+        <div class="animal__info">
+          <div class="animal__info__name">
+            <span>{{ animal.name }}</span>
           </div>
-          <div slot="content" class="flex flex-column">
-            <div class="animal__info">
-              <div class="animal__info__name">
-                <span>{{ animal.name }}</span>
-              </div>
-              <div class="animal__info__location">
-                <span>{{ animal.address.city }} - {{ animal.address.uf }}</span>
-              </div>
-              <div class="animal__info__detail flex space-between align-center">
-                <span>{{ animalAgeGroup(animal) }} - {{ animalGender(animal) }}</span>
-                <div class="animal__info__detail__size flex --full">
-                  <div
-                    v-for="size in possibleSizes"
-                    :key="size"
-                    class="icon icon-paw"
-                    :class="{ [size]: animal.size.toLowerCase(), '--pink': animalSize(animal, size) }"
-                  />
-                </div>
-              </div>
+          <div class="animal__info__location">
+            <span>{{ animal.address.city }} - {{ animal.address.uf }}</span>
+          </div>
+          <div class="animal__info__detail flex space-between align-center">
+            <span>{{ animalAgeGroup(animal) }} - {{ animalGender(animal) }}</span>
+            <div class="animal__info__detail__size flex --full">
+              <div
+                v-for="size in possibleSizes"
+                :key="size"
+                class="icon icon-paw"
+                :class="{ [size]: animal.size.toLowerCase(), '--pink': animalSize(animal, size) }"
+              />
             </div>
           </div>
-        </card>
+        </div>
       </div>
-      <button @click="fetchMore(data.animals)">MAIS</button>
-    </template>
-  </ApolloQuery>
+    </card>
+    <button class="btn btn-block" v-if="hasNextPage" @click=fetchMore>AEEEEE</button>
+  </div>
+  
 </template>
 
 <script>
@@ -46,14 +43,21 @@ export default {
   },
   data() {
     return {
-      query: GET_ANIMALS,
-      animals: [],
       first: 20,
       skip: 0,
       hasNextPage: true,
       possibleSizes: ["small", "medium", "large"],
       title: "Seu mais novo amigo pode estar aqui"
     };
+  },
+  apollo: {
+    animals: {
+      query: GET_ANIMALS,
+      variables: {
+        first: 20,
+        skip: this.skip
+      }
+    }
   },
   methods: {
     animalAgeGroup({ ageGroup }) {
@@ -65,11 +69,27 @@ export default {
     animalSize({ size }, targetSize) {
       return size.toLowerCase() === targetSize;
     },
-    async fetchMore(animals) {
-      console.log('a galera', animals);
+    async fetchMore() {
       this.skip = this.skip + this.first;
-    }
-  }
+
+      this.$apollo.queries.animals.fetchMore({
+        variables: {
+          first: this.first,
+          skip: this.skip,
+        },
+        updateQuery: (previousResult, { fetchMoreResult }) => {
+          const moreAnimals = fetchMoreResult.animals;
+
+          this.hasNextPage = moreAnimals.length >= 20;
+
+          return {
+            animals: [...previousResult.animals, ...moreAnimals]
+          }
+        }
+      })
+    },
+  },
+
 };
 </script>
 <style lang="scss">
