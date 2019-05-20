@@ -1,9 +1,37 @@
 <template>
-  <section id="animalsList">
-    <container class="flex-column">
-      <list></list>
-    </container>
-  </section>
+  <ApolloQuery :query="query" :variables="{ first, skip }">
+    <template v-slot="{ result: { loading, error, data }}">
+      <div v-if="data" class="list flex">
+        <card v-for="animal in data.animals" :key="animal.id">
+          <div slot="thumbnail" :style='{ backgroundImage: "url(" + animal.profileImg + ")"}'>
+            <div class="icon" :class="[animal.type.toLowerCase()]"></div>
+          </div>
+          <div slot="content" class="flex flex-column">
+            <div class="animal__info">
+              <div class="animal__info__name">
+                <span>{{ animal.name }}</span>
+              </div>
+              <div class="animal__info__location">
+                <span>{{ animal.address.city }} - {{ animal.address.uf }}</span>
+              </div>
+              <div class="animal__info__detail flex space-between align-center">
+                <span>{{ animalAgeGroup(animal) }} - {{ animalGender(animal) }}</span>
+                <div class="animal__info__detail__size flex --full">
+                  <div
+                    v-for="size in possibleSizes"
+                    :key="size"
+                    class="icon icon-paw"
+                    :class="{ [size]: animal.size.toLowerCase(), '--pink': animalSize(animal, size) }"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </card>
+      </div>
+      <button @click="fetchMore(data.animals)">MAIS</button>
+    </template>
+  </ApolloQuery>
 </template>
 
 <script>
@@ -11,16 +39,15 @@ import { mapGetters } from 'vuex';
 import Card from "../../Card.vue";
 import { GET_ANIMALS } from "../../../graphql/queries.js";
 import { TOGGLE_FAVORITE_ANIMAL } from '../../../graphql/mutations.js';
-import List from './Animal.list';
 
 export default {
   components: {
-    Card,
-    List
+    Card
   },
   data() {
     return {
       query: GET_ANIMALS,
+      animals: [],
       first: 20,
       skip: 0,
       hasNextPage: true,
@@ -28,19 +55,23 @@ export default {
       title: "Seu mais novo amigo pode estar aqui"
     };
   },
-  computed: {
-    ...mapGetters([
-      'currentUser'
-    ]),
-  },
   methods: {
-    async fetchMore() {
+    animalAgeGroup({ ageGroup }) {
+      return ageGroup === 'ADULT' ? 'Adulto' : 'Filhote';
+    },
+    animalGender({ gender }) {
+      return gender === 'MALE' ? 'Macho' : 'Fêmea';
+    },
+    animalSize({ size }, targetSize) {
+      return size.toLowerCase() === targetSize;
+    },
+    async fetchMore(animals) {
+      console.log('a galera', animals);
       this.skip = this.skip + this.first;
     }
   }
 };
 </script>
-
 <style lang="scss">
 #animalsList {
   background-color: #eaebed;
@@ -51,7 +82,6 @@ export default {
 
   .card {
     width: 235px;
-    margin: 0 20px 20px 0;
     .icon-favorite {
       right: -5px;
       opacity: 0;
@@ -82,7 +112,7 @@ export default {
           height: 24px;
           position: absolute;
           bottom: 3px;
-          right: 3px;
+          right: 0px;
           border-radius: 4px 0px 0px 0px;
           background-color: #fff;
           background-size: 80%;
@@ -127,3 +157,4 @@ export default {
   }
 }
 </style>
+
