@@ -1,36 +1,37 @@
 <template>
-  <div class="list flex">
-    <transition-group name="fade" tag="div" class="list flex">
-      <card v-for="animal in animals" :key="animal.id">
-        <div slot="thumbnail" :style='{ backgroundImage: "url(" + animal.profileImg + ")"}'>
-          <div class="icon" :class="[animal.type.toLowerCase()]"></div>
-        </div>
-        <div slot="content" class="flex flex-column">
-          <div class="animal__info">
-            <div class="animal__info__name">
-              <span>{{ animal.name }}</span>
-            </div>
-            <div class="animal__info__location">
-              <span>{{ animal.address.city }} - {{ animal.address.uf }}</span>
-            </div>
-            <div class="animal__info__detail flex space-between align-center">
-              <span>{{ animalAgeGroup(animal) }} - {{ animalGender(animal) }}</span>
-              <div class="animal__info__detail__size flex --full">
-                <div
-                  v-for="size in possibleSizes"
-                  :key="size"
-                  class="icon icon-paw"
-                  :class="{ [size]: animal.size.toLowerCase(), '--pink': animalSize(animal, size) }"
-                />
+  <section id="animalsList">
+    <container class="container-fluid flex-column">
+      <transition-group name="fade" tag="div" class="list flex space-between">
+        <card v-for="animal in animals" :key="animal.id">
+          <div slot="thumbnail" :style='{ backgroundImage: "url(" + animal.profileImg + ")"}'>
+            <div class="icon" :class="[animal.type.toLowerCase()]"></div>
+          </div>
+          <div slot="content" class="flex flex-column">
+            <div class="animal__info">
+              <div class="animal__info__name">
+                <span>{{ animal.name }}</span>
+              </div>
+              <div class="animal__info__location">
+                <span>{{ animal.address.city }} - {{ animal.address.uf }}</span>
+              </div>
+              <div class="animal__info__detail flex space-between align-center">
+                <span>{{ animalAgeGroup(animal) }} - {{ animalGender(animal) }}</span>
+                <div class="animal__info__detail__size flex --full">
+                  <div
+                    v-for="size in possibleSizes"
+                    :key="size"
+                    class="icon icon-paw"
+                    :class="{ [size]: animal.size.toLowerCase(), '--pink': animalSize(animal, size) }"
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </card>
-    </transition-group>
-    <button class="btn btn-block pink" v-if="hasNextPage" @click=fetchMore>AEEEEE</button>
-  </div>
-  
+        </card>
+      </transition-group>
+      <button class="btn pink btn-block" v-if="hasNextPage" @click="$emit('fetchMore')">VEJA MAIS AMIGOS</button>
+    </container>
+  </section>
 </template>
 
 <script>
@@ -43,23 +44,14 @@ export default {
   components: {
     Card
   },
+  props: ['animals', 'hasNextPage'],
   data() {
     return {
       first: 20,
       skip: 0,
-      hasNextPage: true,
       possibleSizes: ["small", "medium", "large"],
       title: "Seu mais novo amigo pode estar aqui"
     };
-  },
-  apollo: {
-    animals: {
-      query: GET_ANIMALS,
-      variables: {
-        first: 20,
-        skip: this.skip
-      }
-    }
   },
   methods: {
     animalAgeGroup({ ageGroup }) {
@@ -71,25 +63,6 @@ export default {
     animalSize({ size }, targetSize) {
       return size.toLowerCase() === targetSize;
     },
-    async fetchMore() {
-      this.skip = this.skip + this.first;
-
-      this.$apollo.queries.animals.fetchMore({
-        variables: {
-          first: this.first,
-          skip: this.skip,
-        },
-        updateQuery: (previousResult, { fetchMoreResult }) => {
-          const moreAnimals = fetchMoreResult.animals;
-
-          this.hasNextPage = moreAnimals.length >= 20;
-
-          return {
-            animals: [...previousResult.animals, ...moreAnimals]
-          }
-        }
-      })
-    },
   },
 
 };
@@ -97,13 +70,20 @@ export default {
 <style lang="scss">
 #animalsList {
   background-color: #eaebed;
+
+  .btn {
+    padding: 15px 0;
+  }
 }
 .list {
   flex-wrap: wrap;
   margin-bottom: 25px;
+  padding: 0 25px;
 
   .card {
     width: 235px;
+    margin: 10px 0;
+
     .icon-favorite {
       right: -5px;
       opacity: 0;

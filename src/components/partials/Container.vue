@@ -13,5 +13,9 @@ export default {
 <style lang="scss">
   .container {
     padding: 0 30px;
+
+    &-fluid {
+      padding: 0;
+    }
   }
 </style>
