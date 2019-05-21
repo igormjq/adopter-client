@@ -1,32 +1,34 @@
 <template>
   <div class="list flex">
-    <card v-for="animal in animals" :key="animal.id">
-      <div slot="thumbnail" :style='{ backgroundImage: "url(" + animal.profileImg + ")"}'>
-        <div class="icon" :class="[animal.type.toLowerCase()]"></div>
-      </div>
-      <div slot="content" class="flex flex-column">
-        <div class="animal__info">
-          <div class="animal__info__name">
-            <span>{{ animal.name }}</span>
-          </div>
-          <div class="animal__info__location">
-            <span>{{ animal.address.city }} - {{ animal.address.uf }}</span>
-          </div>
-          <div class="animal__info__detail flex space-between align-center">
-            <span>{{ animalAgeGroup(animal) }} - {{ animalGender(animal) }}</span>
-            <div class="animal__info__detail__size flex --full">
-              <div
-                v-for="size in possibleSizes"
-                :key="size"
-                class="icon icon-paw"
-                :class="{ [size]: animal.size.toLowerCase(), '--pink': animalSize(animal, size) }"
-              />
+    <transition-group name="fade" tag="div" class="list flex">
+      <card v-for="animal in animals" :key="animal.id">
+        <div slot="thumbnail" :style='{ backgroundImage: "url(" + animal.profileImg + ")"}'>
+          <div class="icon" :class="[animal.type.toLowerCase()]"></div>
+        </div>
+        <div slot="content" class="flex flex-column">
+          <div class="animal__info">
+            <div class="animal__info__name">
+              <span>{{ animal.name }}</span>
+            </div>
+            <div class="animal__info__location">
+              <span>{{ animal.address.city }} - {{ animal.address.uf }}</span>
+            </div>
+            <div class="animal__info__detail flex space-between align-center">
+              <span>{{ animalAgeGroup(animal) }} - {{ animalGender(animal) }}</span>
+              <div class="animal__info__detail__size flex --full">
+                <div
+                  v-for="size in possibleSizes"
+                  :key="size"
+                  class="icon icon-paw"
+                  :class="{ [size]: animal.size.toLowerCase(), '--pink': animalSize(animal, size) }"
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </card>
-    <button class="btn btn-block" v-if="hasNextPage" @click=fetchMore>AEEEEE</button>
+      </card>
+    </transition-group>
+    <button class="btn btn-block pink" v-if="hasNextPage" @click=fetchMore>AEEEEE</button>
   </div>
   
 </template>
