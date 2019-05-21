@@ -23,10 +23,17 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 
+const defaultOptions = {
+  query: {
+    fetchPolicy: 'network-only'
+  }
+}
+
 // Create the apollo client
 const apolloClient = new ApolloClient({
   link: authLink.concat(httpLink),
   cache,
+  defaultOptions
 })
 
 export default apolloClient

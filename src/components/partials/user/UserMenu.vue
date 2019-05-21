@@ -1,6 +1,11 @@
 <template>
   <ul class="user-menu">
-    <li class="flex align-center"><span class="icon icon-paw --pink"/>Meus animais favoritos</li>
+    <router-link 
+      to="favorites" 
+      tag="li" 
+      @click.native="toggleMenu">
+        Favoritos
+    </router-link>
     <li class="flex align-center"><span class="icon icon-paw"/>Cadastrar um animal</li>
     <li class="flex align-center"><span class="icon icon-paw"/>Lorem Ipsum</li>
     <li @click="logout">Sair</li>
@@ -11,8 +16,12 @@
 import { mapActions } from 'vuex'
 export default {
   methods: {
+    logout() {
+      this.$store.dispatch('logout');
+      this.$router.push('/');
+    },
     ...mapActions([
-      'logout'
+      'toggleMenu'
     ])
   }
 }

@@ -50,7 +50,6 @@ export default {
       first: 20,
       skip: 0,
       possibleSizes: ["small", "medium", "large"],
-      title: "Seu mais novo amigo pode estar aqui"
     };
   },
   methods: {

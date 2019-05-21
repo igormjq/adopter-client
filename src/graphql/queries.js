@@ -24,6 +24,16 @@ export const USER_ME = gql`query me {
     profileImg
     favoriteAnimals {
       id
+      profileImg
+      name
+      type
+      size
+      gender
+      ageGroup
+      address {
+        city
+        uf
+      }
     }
     role {
       name
