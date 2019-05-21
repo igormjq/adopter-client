@@ -2,14 +2,15 @@
   <header class="header">
     <container>
       <div class="header__left flex align-center space-between --full">
-        <div class="logo flex align-center">
+        <router-link to="/" tag="div" class="logo flex align-center">
           <img src="../../assets/img/logo.png" alt="Adopter logo">
-        </div>
+        </router-link>
         <div class="header__options">
           <ul class="flex">
             <li>Sobre nós</li>
             <li>Como adotar</li>
             <li>Parceiros</li>
+            <router-link to="animals" tag="li">Animais</router-link>
           </ul>
         </div>
       </div>
@@ -74,6 +75,7 @@ export default {
 
     &__left {
       .logo {
+        cursor: pointer;
         img {
           max-width: 110px;
         }
