@@ -63,6 +63,9 @@ export default {
       return size.toLowerCase() === targetSize;
     },
   },
+  created() {
+    console.log('porra tem o fdp', this.$store.state.user.currentUser);
+  }
 
 };
 </script>

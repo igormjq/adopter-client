@@ -52,6 +52,7 @@ const actions = {
     commit(TOGGLE_MENU);
   },
   setUser({ commit }, user) {
+    console.log('MERDA DO USUARIO', user);
     commit(SET_USER, user);
   }
 }

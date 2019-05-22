@@ -27,8 +27,8 @@ export default {
     ])
   },
   async mounted() {
-    this.$store.dispatch('loadPage');
     const token = localStorage.getItem('token');
+    this.$store.dispatch('loadPage');
 
     if(token) {
       try {
