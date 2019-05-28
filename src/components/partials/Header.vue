@@ -21,10 +21,10 @@
         </button>
         <div class="user-info flex align-center" @click="toggleMenu" v-else>
           <div class="user-name">
-            {{ currentUser.name }}
+            {{ user.name }}
           </div>
           <div class="user-avatar">
-            <img class="img-responsive" :src="currentUser.profileImg">
+            <img class="img-responsive" :src="user.profileImg">
           </div>
         </div>
       </div>
@@ -47,7 +47,7 @@ export default {
     ...mapGetters([
       'showMenu',
       'isLoggedIn',
-      'currentUser'
+      'user'
     ])
   },
   methods: {

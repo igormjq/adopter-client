@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 import List from './Animal.list'
 import Card from "../../Card.vue"
 
@@ -13,9 +13,12 @@ export default {
     List
   },
   computed: {
-    ...mapState({
-      user: state => state.user.currentUser
-    })
+    ...mapGetters([
+      'user'
+    ])
   },
+  mounted() {
+    console.log(this.$store.state);
+  }
 }
 </script>

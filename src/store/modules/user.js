@@ -2,39 +2,43 @@ import {
   LOGIN_SUCCESS,
   LOGOUT,
   TOGGLE_MENU,
-  SET_USER
+  SET_USER,
+  ADD_FAVORITE_ANIMAL,
+  REMOVE_FAVORITE_ANIMAL
 } from '../types/mutation-types';
 
 const state = {
   isLoggedIn: false,
-  showMenu: false,
-  currentUser: null
+  user: null
 }
 const getters = {
   isLoggedIn: state => state.isLoggedIn,
   showMenu: state => state.showMenu,
-  currentUser: state => state.currentUser
+  user: state => state.user
 };
 const mutations = {
   [LOGIN_SUCCESS](state, user) {
     setTimeout(() => {
       state.isLoggedIn = true;
-      state.currentUser = user;
+      state.user = user;
     }, 300);
       
   },
   [LOGOUT](state) {
     setTimeout(() => {
       state.isLoggedIn = false;
-      state.setCurrentUser = null;
+      state.user = null;
     }, 300);
   },
-  [TOGGLE_MENU](state) {
-    state.showMenu = !state.showMenu;
-  },
   [SET_USER](state, user) {
-    state.currentUser = user;
+    state.user = user;
     state.isLoggedIn = true;
+  },
+  [ADD_FAVORITE_ANIMAL](state, animal) {
+    state.user.favoriteAnimals.push(animal);
+  },
+  [REMOVE_FAVORITE_ANIMAL](state, animalId) {
+    state.user.favoriteAnimals = state.user.favoriteAnimals.filter(animal => animal.id != animalId);
   }
 }
 const actions = {
@@ -48,12 +52,14 @@ const actions = {
     commit(TOGGLE_MENU);
     commit(LOGOUT);
   },
-  toggleMenu({ commit }) {
-    commit(TOGGLE_MENU);
-  },
   setUser({ commit }, user) {
-    console.log('MERDA DO USUARIO', user);
     commit(SET_USER, user);
+  },
+  addFavoriteAnimal({ commit }, animal) {
+    commit(ADD_FAVORITE_ANIMAL, animal);
+  },
+  removeFavoriteAnimal({ commit }, { id }) {
+    commit(REMOVE_FAVORITE_ANIMAL, id);
   }
 }
 
