@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
 import VueApollo from 'vue-apollo'
+import VueToasted from 'vue-toasted'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCoffee, faHeart } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -20,6 +21,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 // Router
 Vue.use(VueRouter);
 Vue.use(VueApollo);
+Vue.use(VueToasted, { iconPack: 'fontawesome' });
 
 const apolloProvider = new VueApollo({
   defaultClient: apolloClient
