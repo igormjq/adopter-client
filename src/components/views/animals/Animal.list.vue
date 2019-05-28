@@ -1,7 +1,7 @@
 <template>
   <section id="animalsList">
-    <container class="container-fluid flex-column">
-      <transition-group name="fade" tag="div" class="list flex space-between">
+    <container class="container">
+      <transition-group name="fade" tag="div" class="list">
         <card v-for="animal in animals" :key="animal.id">
           <div slot="thumbnail" :style='{ backgroundImage: "url(" + animal.profileImg + ")"}'>
             <div class="icon" :class="[animal.type.toLowerCase()]"></div>
@@ -29,8 +29,8 @@
           </div>
         </card>
       </transition-group>
-      <button class="btn pink btn-block" v-if="hasNextPage" @click="$emit('fetchMore')">VEJA MAIS AMIGOS</button>
     </container>
+    <button class="btn pink btn-block" v-if="hasNextPage" @click="$emit('fetchMore')">VEJA MAIS AMIGOS</button>
   </section>
 </template>
 
@@ -78,13 +78,16 @@ export default {
   }
 }
 .list {
-  flex-wrap: wrap;
-  margin-bottom: 25px;
-  padding: 0 25px;
+  width: 100%;
+  margin: 25px 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
 
   .card {
-    width: 235px;
-    margin: 10px 0;
+    // width: 235px;
+    // margin: 10px 0;
 
     .icon-favorite {
       right: -5px;

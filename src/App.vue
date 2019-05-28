@@ -1,7 +1,9 @@
 <template>
   <div id="app" :class="{ 'loading': isLoading }">
     <header-component />
-    <router-view></router-view>
+    <transition name="enter">
+      <router-view></router-view>
+    </transition>
     <footer-component></footer-component>
     <Spinner v-if="isLoading" />
   </div>
@@ -32,7 +34,11 @@ export default {
 
     if(token) {
       try {
-        const { data: { me } } = await this.$apollo.query({
+        const { 
+          data: { 
+              me 
+            } 
+          } = await this.$apollo.query({
           query: USER_ME
         });
         this.$store.dispatch('setUser', me);

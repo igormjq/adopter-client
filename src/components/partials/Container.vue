@@ -6,16 +6,16 @@
 
 <script>
 export default {
-
+  // card -> 235px
+  // container -> max-width 1140
 }
 </script>
 
 <style lang="scss">
   .container {
-    padding: 0 30px;
-
-    &-fluid {
-      padding: 0;
-    }
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1200px;
+    
   }
 </style>
