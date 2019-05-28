@@ -4,3 +4,6 @@ export const LOGOUT = 'LOGOUT';
 export const TOGGLE_MENU = 'TOGGLE_MENU';
 export const LOADING = 'LOADING';
 export const SET_USER = 'SET_USER';
+
+export const ADD_FAVORITE_ANIMAL = 'ADD_FAVORITE_ANIMAL';
+export const REMOVE_FAVORITE_ANIMAL = 'REMOVE_FAVORITE_ANIMAL';

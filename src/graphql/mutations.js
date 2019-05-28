@@ -35,5 +35,7 @@ export const LOG_USER = gql`mutation login($email: String!, $password: String!) 
 export const TOGGLE_FAVORITE_ANIMAL = gql`mutation toggleFavoriteAnimal($animalId: ID!) {
   toggleFavoriteAnimal(animalId: $animalId) {
     success
+    operation
+    message
   }
 }`

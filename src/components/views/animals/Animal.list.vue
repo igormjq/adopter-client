@@ -24,9 +24,11 @@
                     :class="{ [size]: animal.size.toLowerCase(), '--pink': animalSize(animal, size) }"
                   />
                 </div>
+                <button @click="toggleFavoriteAnimal(animal)">gostei desse carinha</button>
               </div>
             </div>
           </div>
+          
         </card>
       </transition-group>
     </container>
@@ -35,7 +37,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import Card from "../../Card.vue";
 import { GET_ANIMALS } from "../../../graphql/queries.js";
 import { TOGGLE_FAVORITE_ANIMAL } from '../../../graphql/mutations.js';
@@ -62,10 +64,31 @@ export default {
     animalSize({ size }, targetSize) {
       return size.toLowerCase() === targetSize;
     },
+    async toggleFavoriteAnimal(animal) {
+      try {
+        const { 
+          data: { 
+            toggleFavoriteAnimal: { operation, message, success }
+          }
+        } = await this.$apollo.mutate({
+          mutation: TOGGLE_FAVORITE_ANIMAL,
+          variables: {
+            animalId: animal.id
+          }
+        });
+
+  console.log( 'sucesso ou nem', success);
+        if(success) {
+          console.log('sucessssso');
+          this.$store.dispatch(operation, animal);
+        }
+
+
+      } catch (e) {
+        console.log('errrrrrrrrrro', e);
+      }
+    },
   },
-  created() {
-    console.log('porra tem o fdp', this.$store.state.user.currentUser);
-  }
 
 };
 </script>
