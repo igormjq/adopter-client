@@ -1,34 +1,32 @@
 <template>
   <header class="header">
-    <container>
-      <div class="header__left flex align-center space-between --full">
-        <router-link to="/" tag="div" class="logo flex align-center">
-          <img src="../../assets/img/logo.png" alt="Adopter logo">
-        </router-link>
-        <div class="header__options">
-          <ul class="flex">
-            <li>Sobre nós</li>
-            <li>Como adotar</li>
-            <li>Parceiros</li>
-            <router-link to="animals" tag="li">Animais</router-link>
-          </ul>
+    <div class="header__left flex align-center space-between --full">
+      <router-link to="/" tag="div" class="logo flex align-center">
+        <img src="../../assets/img/logo.png" alt="Adopter logo">
+      </router-link>
+      <div class="header__options">
+        <ul class="flex">
+          <li>Sobre nós</li>
+          <li>Como adotar</li>
+          <li>Parceiros</li>
+          <router-link to="animals" tag="li">Animais</router-link>
+        </ul>
+      </div>
+    </div>
+    <div class="header__right flex align-center --full">
+      <button class="btn flex align-center" @click="toggleMenu" v-if="!isLoggedIn">
+        <span class="icon icon-paw --pink"/>
+        <span>Entrar</span>
+      </button>
+      <div class="user-info flex align-center" @click="toggleMenu" v-else>
+        <div class="user-name">
+          {{ user.name }}
+        </div>
+        <div class="user-avatar">
+          <img class="img-responsive" :src="user.profileImg">
         </div>
       </div>
-      <div class="header__right flex align-center --full">
-        <button class="btn flex align-center" @click="toggleMenu" v-if="!isLoggedIn">
-          <span class="icon icon-paw --pink"/>
-          <span>Entrar</span>
-        </button>
-        <div class="user-info flex align-center" @click="toggleMenu" v-else>
-          <div class="user-name">
-            {{ user.name }}
-          </div>
-          <div class="user-avatar">
-            <img class="img-responsive" :src="user.profileImg">
-          </div>
-        </div>
-      </div>
-    </container>
+    </div>
     <transition name="slide">
       <user-area v-show="showMenu"></user-area>
     </transition>
@@ -68,6 +66,7 @@ export default {
     background: #FFF;
     position: fixed;
     z-index: 1;
+    padding: 0 15px;
 
     >.container {
       justify-content: space-between;
