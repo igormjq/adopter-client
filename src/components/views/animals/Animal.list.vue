@@ -4,7 +4,10 @@
       <transition-group name="fade" tag="div" class="list">
         <card v-for="animal in animals" :key="animal.id">
           <div slot="thumbnail" :style='{ backgroundImage: "url(" + animal.profileImg + ")"}'>
-            <div class="icon icon-favorite" />
+            <div 
+              class="icon icon-favorite" 
+              :class="{ 'is-favorite': animalIsFavorite(animal.id) }"
+              @click="toggleFavoriteAnimal(animal)" />
             <div class="icon" :class="[animal.type.toLowerCase()]"></div>
           </div>
           <div slot="content" class="flex flex-column">
@@ -25,7 +28,6 @@
                     :class="{ [size]: animal.size.toLowerCase(), '--pink': animalSize(animal, size) }"
                   />
                 </div>
-                <button @click="toggleFavoriteAnimal(animal)">gostei desse carinha</button>
               </div>
             </div>
           </div>
@@ -70,6 +72,9 @@ export default {
     animalSize({ size }, targetSize) {
       return size.toLowerCase() === targetSize;
     },
+    animalIsFavorite(animalId) {
+      if(this.user) return this.user.favoriteAnimals.some(({ id }) => id === animalId);
+    },
     async toggleFavoriteAnimal(animal) {
 
       if(!this.user) 
@@ -101,7 +106,7 @@ export default {
   computed: {
     ...mapGetters([
       'user'
-    ])
+    ]),
   }
 };
 </script>
