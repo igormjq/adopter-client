@@ -4,6 +4,7 @@
       <transition-group name="fade" tag="div" class="list">
         <card v-for="animal in animals" :key="animal.id">
           <div slot="thumbnail" :style='{ backgroundImage: "url(" + animal.profileImg + ")"}'>
+            <div class="icon icon-favorite" />
             <div class="icon" :class="[animal.type.toLowerCase()]"></div>
           </div>
           <div slot="content" class="flex flex-column">
@@ -52,6 +53,11 @@ export default {
       first: 20,
       skip: 0,
       possibleSizes: ["small", "medium", "large"],
+      toastOptions: {
+        duration: 3000,
+        keepOnHover: true,
+        className: 'adopter-toast'
+      }
     };
   },
   methods: {
@@ -65,6 +71,10 @@ export default {
       return size.toLowerCase() === targetSize;
     },
     async toggleFavoriteAnimal(animal) {
+
+      if(!this.user) 
+        return this.$toasted.show('Faça login para curtir a bicharada :)', this.toastOptions);
+
       try {
         const { 
           data: { 
@@ -77,19 +87,22 @@ export default {
           }
         });
 
-  console.log( 'sucesso ou nem', success);
         if(success) {
-          console.log('sucessssso');
           this.$store.dispatch(operation, animal);
+          this.$toasted.show(`${animal.name} ${message}`, this.toastOptions);
         }
 
 
       } catch (e) {
-        console.log('errrrrrrrrrro', e);
+        alert(e);
       }
     },
   },
-
+  computed: {
+    ...mapGetters([
+      'user'
+    ])
+  }
 };
 </script>
 <style lang="scss">
@@ -109,8 +122,6 @@ export default {
   grid-row-gap: 20px;
 
   .card {
-    // width: 235px;
-    // margin: 10px 0;
 
     .icon-favorite {
       right: -5px;
@@ -132,6 +143,7 @@ export default {
     &__thumbnail {
       position: relative;
       padding: 5px;
+      cursor: pointer;
 
       .icon {
         position: absolute;
