@@ -1,13 +1,12 @@
 const state = {
   edit: {},
   search: {
-    size: null,
-    gender: null,
-    type: 'DOG',
-    ageGroup: 'ADULT',
+    size_in: ['SMALL', 'MEDIUM', 'LARGE'],
+    gender_in: ['MALE', 'FEMALE'],
+    type_in: ['DOG', 'CAT'],
+    ageGroup_in: ['ADULT', 'PUPPY'],
     address: {
-      uf: null,
-      city: null
+      city_contains: '',
     }
   }
 }
