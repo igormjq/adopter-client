@@ -1,13 +1,13 @@
 const state = {
   edit: {},
-  searchFilter: {
-    size: '',
-    gender: '',
-    type: '',
-    ageGroup: '',
+  search: {
+    size: null,
+    gender: null,
+    type: 'DOG',
+    ageGroup: 'ADULT',
     address: {
-      uf: '',
-      city: ''
+      uf: null,
+      city: null
     }
   }
 }

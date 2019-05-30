@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
-export const GET_ANIMALS = gql`query animals($first: Int, $skip: Int) {
-  animals(first: $first, skip: $skip) {
+export const GET_ANIMALS = gql`query animals($first: Int, $skip: Int, $where: AnimalWhereInput) {
+  animals(first: $first, skip: $skip, where: $where) {
     id
     profileImg
     name

@@ -1,9 +1,9 @@
 <template>
-  <list :animals="animals" :hasNextPage= "hasNextPage" @fetchMore="fetchMore"></list>
+  <list :animals="$data.animals" :hasNextPage= "hasNextPage" @fetchMore="fetchMore"></list>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapState } from 'vuex';
 import Card from "../../Card.vue";
 import { GET_ANIMALS } from "../../../graphql/queries.js";
 import { TOGGLE_FAVORITE_ANIMAL } from '../../../graphql/mutations.js';
@@ -22,15 +22,6 @@ export default {
       possibleSizes: ["small", "medium", "large"],
       title: "Seu mais novo amigo pode estar aqui"
     };
-  },
-  apollo: {
-    animals: {
-      query: GET_ANIMALS,
-      variables: {
-        first: 20,
-        skip: this.skip
-      }
-    }
   },
   methods: {
     async fetchMore() {
@@ -52,6 +43,21 @@ export default {
         }
       })
     },
+  },
+  computed: {
+    ...mapState({
+      search: state => state.animal.search
+    })
+  },
+  created() {
+    this.$apollo.addSmartQuery('animals', {
+      query: GET_ANIMALS,
+      variables: {
+        first: 20,
+        skip: this.skip,
+        where: this.search
+      }
+    });
   }
 };
 </script>
