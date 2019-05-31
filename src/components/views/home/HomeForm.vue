@@ -112,7 +112,8 @@ export default {
       toastOptions: {
         duration: 3000,
         keepOnHover: true,
-        className: 'adopter-toast'
+        className: 'adopter-toast',
+        position: 'top-left'
       }
     }
   },
@@ -152,7 +153,11 @@ export default {
 
 <style lang="scss">
   @import '../../../assets/scss/mixins.scss';
-
+  .card {
+    &__content {
+      padding-bottom: 25px;
+    }
+  }
   .home__form {
     padding: 0 25px;
 
@@ -166,6 +171,11 @@ export default {
     }
     .form__footer {
       justify-content: flex-end;
+      margin-top: 10px;
+
+      button {
+        width: 145px;
+      }
     }
   }
 </style>
