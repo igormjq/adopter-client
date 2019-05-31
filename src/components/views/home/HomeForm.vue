@@ -1,50 +1,51 @@
 <template>
   <form class="form home__form flex align-center justify-center">
     <div class="form__body">
-      <multiselect 
-        v-model="uf.selected" 
-        :options="uf.options"
-        :show-labels="false"
-        :track-by="uf.nome"
-        label="nome"
-        placeholder="UF"
-        :searchable="true"
-        @select="resetCities"
-        @input="fetchCities">
-      </multiselect>
-      <multiselect
-        v-model="city.selected"
-        placeholder="Cidade"
-        :options="city.options"
-        :show-labels="false"
-        :preselect-first="true">
-      </multiselect>
-      <div class="multi-tags">
-        <multiselect
-          v-model="type.selected"
-          placeholder="Tipo"
-          label="name"
-          track-by="value"
-          :close-on-select="false"
-          :multiple="true"
-          :options="type.options"
+      <div class="address flex">
+        <multiselect 
+          v-model="uf.selected" 
+          label="sigla"
+          placeholder="UF"
+          class="uf-select"
+          :options="uf.options"
           :show-labels="false"
-          :taggable="true"
-          @input="updateType"
-        >
+          :searchable="true"
+          @select="resetCities"
+          @input="fetchCities">
         </multiselect>
         <multiselect
-          v-model="size.selected"
-          placeholder="Porte"
-          label="name"
-          :close-on-select="false"
-          :multiple="true"
-          :options="size.options"
+          v-model="city.selected"
+          placeholder="Cidade"
+          :options="city.options"
           :show-labels="false"
-          @input="updateSize"
-        >
+          :preselect-first="true">
         </multiselect>
       </div>
+      <multiselect
+        v-model="type.selected"
+        placeholder="Tipo"
+        label="name"
+        track-by="value"
+        :close-on-select="false"
+        :multiple="true"
+        :options="type.options"
+        :show-labels="false"
+        :taggable="true"
+        @input="updateType"
+      >
+      </multiselect>
+      <multiselect
+        v-model="size.selected"
+        placeholder="Porte"
+        label="name"
+        track-by="value"
+        :close-on-select="false"
+        :multiple="true"
+        :options="size.options"
+        :show-labels="false"
+        @input="updateSize"
+      >
+      </multiselect>
     </div>
   </form>
 </template>
@@ -67,7 +68,7 @@ export default {
       type: {
         value: [],
         options: [
-          { name: 'Cachorro', value: 'DOG' },
+          { name: 'Cão', value: 'DOG' },
           { name: 'Gato', value: 'CAT' },
         ]
       },
@@ -100,6 +101,12 @@ export default {
       const { data } = await axios(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${id}/municipios`);
       this.city.options = data.map(({ nome }) => nome);
     },
+    async fetchStates() {
+      const { data } = await axios('https://servicodados.ibge.gov.br/api/v1/localidades/estados');
+      this.uf.options = data
+        .map(({ id, sigla }) => ({ id, sigla }))
+          .sort((a, b) => a.sigla > b.sigla ? 1 : -1);
+    },
     resetCities() {
       this.$children[1].select('');
     },
@@ -111,21 +118,24 @@ export default {
     ])
   },
   async created() {
-    const { data } = await axios('https://servicodados.ibge.gov.br/api/v1/localidades/estados');
-    this.uf.options = data.map(({ id, nome }) => ({ id, nome }));
-    this.$children[1].deactivate();
+    this.fetchStates();
   },
 }
 </script>
 
 <style lang="scss">
+  @import '../../../assets/scss/mixins.scss';
+
   .home__form {
     padding: 0 25px;
 
-    .multi-tags {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-column-gap: 10px;
+    .form__body {
+      .address {
+        .uf-select {
+          flex: 1;
+          margin-right: 5px;
+        }
+      }
     }
   }
 </style>

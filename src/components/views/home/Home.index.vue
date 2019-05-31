@@ -6,7 +6,7 @@
           <div class="home__form__wrapper__image">
             <img class="img-responsive" src="../../../assets/img/dog-and-cat-form.png">
           </div>
-          <card-component :width="375" :height="375">
+          <card-component :width="450" :height="450">
             <h1 slot="title">Encontrar um amigo</h1>
             <h2 slot="subtitle">Descubra amigos perto de você</h2>
             <home-form slot="content" />

@@ -56,6 +56,7 @@ export default {
 
 <style lang="scss">
   @import './assets/scss/main.scss';
+  
   #app {
     section {
       padding-top: 70px;
