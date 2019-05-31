@@ -3,6 +3,7 @@ import App from './App.vue'
 import VueRouter from 'vue-router'
 import VueApollo from 'vue-apollo'
 import VueToasted from 'vue-toasted'
+import Multiselect from 'vue-multiselect'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCoffee, faHeart } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -17,6 +18,7 @@ library.add(faCoffee, faHeart);
 
 Vue.component('container', ContainerComponent);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
+Vue.component('multiselect', Multiselect);
 
 // Router
 Vue.use(VueRouter);
