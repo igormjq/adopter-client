@@ -18,7 +18,7 @@ export default {
     return {
       first: 20,
       skip: 0,
-      hasNextPage: true,
+      hasNextPage: false,
       possibleSizes: ["small", "medium", "large"],
       title: "Seu mais novo amigo pode estar aqui"
     };
@@ -48,6 +48,9 @@ export default {
     ...mapState({
       search: state => state.animal.search
     })
+  },
+  mounted() {
+    if(this.$data.animals.length >= 20) this.hasNextPage = true;
   },
   created() {
     this.$apollo.addSmartQuery('animals', {

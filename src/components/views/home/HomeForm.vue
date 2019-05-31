@@ -1,8 +1,9 @@
 <template>
-  <form class="form home__form flex align-center justify-center" @submit.prevent="fetchAnimalsByFilter">
+  <form class="form home__form flex flex-column align-center justify-center" @submit.prevent="fetchAnimalsByFilter">
     <div class="form__body">
       <div class="address flex">
-        <multiselect 
+        <multiselect
+          :class="{ 'selected' : uf.selected }"
           v-model="uf.selected" 
           label="sigla"
           placeholder="UF"
@@ -11,10 +12,10 @@
           :show-labels="false"
           :searchable="true"
           @select="resetCities"
-          @input="fetchCities"
-          required>
+          @input="fetchCities">
         </multiselect>
         <multiselect
+          :class="{ 'selected' : city.selected }"
           v-model="city.selected"
           placeholder="Cidade"
           :options="city.options"
@@ -24,6 +25,7 @@
         </multiselect>
       </div>
       <multiselect
+        :class="{ 'selected' : type.selected.length > 0 }"
         v-model="type.selected"
         placeholder="Tipo"
         label="name"
@@ -32,10 +34,10 @@
         :options="type.options"
         :show-labels="false"
         :taggable="true"
-        @input="updateType"
-      >
+        @input="updateType">
       </multiselect>
       <multiselect
+        :class="{ 'selected' : size.selected.length > 0 }"
         v-model="size.selected"
         placeholder="Porte"
         label="name"
@@ -43,10 +45,10 @@
         :multiple="true"
         :options="size.options"
         :show-labels="false"
-        @input="updateSize"
-      >
+        @input="updateSize">
       </multiselect>
       <multiselect
+        :class="{ 'selected' : gender.selected.length > 0 }"
         v-model="gender.selected"
         placeholder="Sexo"
         label="name"
@@ -54,12 +56,11 @@
         :multiple="true"
         :options="gender.options"
         :show-labels="false"
-        @input="updateGender"
-      >
+        @input="updateGender">
       </multiselect>
     </div>
-    <div class="form__footer">
-      <button type="submit"> vem</button>
+    <div class="form__footer flex">
+      <button class="btn pink" type="submit"> Buscar</button>
     </div>
   </form>
 </template>
@@ -80,7 +81,7 @@ export default {
         options: [],
       },
       type: {
-        value: [],
+        selected: [],
         options: [
           { name: 'Cão', value: 'DOG' },
           { name: 'Gato', value: 'CAT' },
@@ -162,6 +163,9 @@ export default {
           margin-right: 5px;
         }
       }
+    }
+    .form__footer {
+      justify-content: flex-end;
     }
   }
 </style>

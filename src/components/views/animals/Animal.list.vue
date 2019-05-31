@@ -49,7 +49,13 @@ export default {
   components: {
     Card
   },
-  props: ['animals', 'hasNextPage'],
+  props: {
+    animals: Array,
+    hasNextPage: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       first: 20,
