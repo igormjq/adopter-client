@@ -9,21 +9,26 @@
         label="nome"
         placeholder="UF"
         :searchable="true"
+        @select="resetCities"
         @input="fetchCities">
       </multiselect>
       <multiselect
         v-model="city.selected"
+        placeholder="Cidade"
         :options="city.options"
-        :show-labels="false">
+        :show-labels="false"
+        :preselect-first="true">
       </multiselect>
-      <div class="multiple">
+      <div class="multi-tags">
         <multiselect
           v-model="type.selected"
           placeholder="Tipo"
+          label="name"
+          track-by="value"
+          :close-on-select="false"
           :multiple="true"
           :options="type.options"
           :show-labels="false"
-          label="name"
           :taggable="true"
           @input="updateType"
         >
@@ -31,11 +36,11 @@
         <multiselect
           v-model="size.selected"
           placeholder="Porte"
+          label="name"
+          :close-on-select="false"
           :multiple="true"
           :options="size.options"
           :show-labels="false"
-          label="name"
-          :taggable="true"
           @input="updateSize"
         >
         </multiselect>
@@ -57,13 +62,13 @@ export default {
       },
       city: {
         selected: '',
-        options: []
+        options: [],
       },
       type: {
         value: [],
         options: [
-          { key:'type', name: 'Cachorro', value: 'DOG' },
-          { key:'type', name: 'Gato', value: 'CAT' },
+          { name: 'Cachorro', value: 'DOG' },
+          { name: 'Gato', value: 'CAT' },
         ]
       },
       size: {
@@ -95,6 +100,9 @@ export default {
       const { data } = await axios(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${id}/municipios`);
       this.city.options = data.map(({ nome }) => nome);
     },
+    resetCities() {
+      this.$children[1].select('');
+    },
     ...mapActions([
       'updateType',
       'updateSize',
@@ -102,11 +110,11 @@ export default {
       'updateGender',
     ])
   },
-    async created() {
-      const { data } = await axios('https://servicodados.ibge.gov.br/api/v1/localidades/estados');
-      this.uf.options = data.map(({ id, nome }) => ({ id, nome }));
-    }
-  
+  async created() {
+    const { data } = await axios('https://servicodados.ibge.gov.br/api/v1/localidades/estados');
+    this.uf.options = data.map(({ id, nome }) => ({ id, nome }));
+    this.$children[1].deactivate();
+  },
 }
 </script>
 
@@ -114,7 +122,7 @@ export default {
   .home__form {
     padding: 0 25px;
 
-    .multiple {
+    .multi-tags {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-column-gap: 10px;

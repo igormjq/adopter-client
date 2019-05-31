@@ -1,19 +1,18 @@
 .form {
-  // select, input, textarea {
-  //   outline: none;
-  //   border: 1px solid #EF3176;
-  //   border-radius: 6px;
-  //   font-size: 14px;
-  //   color: #EF3176;
-  //   background-color: #FFF;
-  //   padding: 10px 15px;
-  //   font-size: 16px;
-  // }
-
-  select {
-    -moz-appearance:none; /* Firefox */
-    -webkit-appearance:none; /* Safari and Chrome */
-    appearance:none;
+  .multiselect {
+    &__tags {
+      border: 1px solid #EF3176;
+      border-radius: 6px;
+      color: #EF3176;
+      background-color: #FFF;
+      font-weight: 300;
+    }
+    &__select {
+      &:before {
+        color: #EF3176;
+        border-color: #EF3176 transparent transparent;
+      }
+    }
   }
 
   &__body {
