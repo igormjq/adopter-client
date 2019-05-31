@@ -1,16 +1,27 @@
 .form {
   .multiselect {
     &__tags {
-      border: 1px solid #EF3176;
+      border: 1px solid #c4c4c4;
       border-radius: 6px;
       color: #EF3176;
       background-color: #FFF;
       font-weight: 300;
     }
+    &__tag {
+      background-color: #EF3176;
+      &-icon {
+        background-color: #f9639a;
+
+        &:after {
+          color: #FFF;
+        }
+
+      }
+    }
     &__select {
       &:before {
-        color: #EF3176;
-        border-color: #EF3176 transparent transparent;
+        color: #c4c4c4;
+        border-color: #c4c4c4 transparent transparent;
       }
     }
   }

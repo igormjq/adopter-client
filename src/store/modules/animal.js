@@ -2,7 +2,8 @@ import {
   UPDATE_SEARCH_TYPE,
   UPDATE_SEARCH_GENDER,
   UPDATE_SEARCH_SIZE,
-  UPDATE_SEARCH_AGE_GROUP
+  UPDATE_SEARCH_AGE_GROUP,
+  UPDATE_SEARCH_CITY
 } from '../types/mutation-types';
 
 const state = {
@@ -31,6 +32,9 @@ const mutations = {
   [UPDATE_SEARCH_AGE_GROUP](state, ageGroups) {
     state.search.ageGroup_in = ageGroups.map(({ value }) => value);
   },
+  [UPDATE_SEARCH_CITY](state, city) {
+    if(city) state.search.address.city_contains = city;
+  }
 }
 const actions = {
   updateType({ commit }, types) {
@@ -44,6 +48,9 @@ const actions = {
   },
   updateAgeGroup({ commit }, ageGroups) {
     commit(UPDATE_SEAERCH_AGE_GROUP, ageGroups);
+  },
+  updateCity({ commit }, city) {
+    commit(UPDATE_SEARCH_CITY, city);
   }
 }
 

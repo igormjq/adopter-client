@@ -1,5 +1,5 @@
 <template>
-  <form class="form home__form flex align-center justify-center">
+  <form class="form home__form flex align-center justify-center" @submit.prevent="fetchAnimalsByFilter">
     <div class="form__body">
       <div class="address flex">
         <multiselect 
@@ -11,14 +11,16 @@
           :show-labels="false"
           :searchable="true"
           @select="resetCities"
-          @input="fetchCities">
+          @input="fetchCities"
+          required>
         </multiselect>
         <multiselect
           v-model="city.selected"
           placeholder="Cidade"
           :options="city.options"
           :show-labels="false"
-          :preselect-first="true">
+          :preselect-first="true"
+          @input="updateCity">
         </multiselect>
       </div>
       <multiselect
@@ -26,7 +28,6 @@
         placeholder="Tipo"
         label="name"
         track-by="value"
-        :close-on-select="false"
         :multiple="true"
         :options="type.options"
         :show-labels="false"
@@ -39,13 +40,26 @@
         placeholder="Porte"
         label="name"
         track-by="value"
-        :close-on-select="false"
         :multiple="true"
         :options="size.options"
         :show-labels="false"
         @input="updateSize"
       >
       </multiselect>
+      <multiselect
+        v-model="gender.selected"
+        placeholder="Sexo"
+        label="name"
+        track-by="value"
+        :multiple="true"
+        :options="gender.options"
+        :show-labels="false"
+        @input="updateGender"
+      >
+      </multiselect>
+    </div>
+    <div class="form__footer">
+      <button type="submit"> vem</button>
     </div>
   </form>
 </template>
@@ -94,6 +108,11 @@ export default {
           { name: 'Fêmea', value: 'FEMALE' },
         ]
       },
+      toastOptions: {
+        duration: 3000,
+        keepOnHover: true,
+        className: 'adopter-toast'
+      }
     }
   },
   methods: {
@@ -108,13 +127,20 @@ export default {
           .sort((a, b) => a.sigla > b.sigla ? 1 : -1);
     },
     resetCities() {
-      this.$children[1].select('');
+      this.city.selected = '';
+    },
+    fetchAnimalsByFilter(e) {
+      if(this.uf.selected && !this.city.selected) {
+        return this.$toasted.show('Selecione uma cidade', this.toastOptions);
+      }
+      this.$router.push('animals');
     },
     ...mapActions([
       'updateType',
       'updateSize',
       'updateAgeGroup',
       'updateGender',
+      'updateCity'
     ])
   },
   async created() {
@@ -132,7 +158,7 @@ export default {
     .form__body {
       .address {
         .uf-select {
-          flex: 1;
+          width: 100px;
           margin-right: 5px;
         }
       }
