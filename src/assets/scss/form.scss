@@ -10,6 +10,12 @@
       }
     }
 
+    &__option {
+      &--highlight {
+        background-color: #EF3176;
+      }
+    }
+
     &__tags {
       border: 1px solid #c4c4c4;
       border-radius: 6px;
