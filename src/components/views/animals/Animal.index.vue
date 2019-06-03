@@ -1,5 +1,25 @@
 <template>
-  <list :animals="$data.animals" :hasNextPage= "$data.animals.length >= 20" @fetchMore="fetchMore"></list>
+  <div>
+    <list
+      v-if="$data.animals.length > 0"
+      :animals="$data.animals" 
+      :hasNextPage= "$data.animals.length >= 20" 
+      @fetchMore="fetchMore">
+    </list>
+    <div class="no-result flex align-center justify-center" v-else>
+      <div class="no-result__wrapper flex flex-column align-center">
+        <font-awesome-layers class="no-result__icon fa-8x" :style="{ color: '#9D9D9D' }">
+          <font-awesome-icon icon="search"></font-awesome-icon>
+          <font-awesome-icon icon="dog" transform="shrink-11 left-2 up-2"></font-awesome-icon>
+        </font-awesome-layers>
+        <div class="no-result__message">
+          <h2>Que pena! Não há animais cadastrados próximos</h2>
+          <h3>Que tal começar cadastrando um?</h3>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -61,3 +81,19 @@ export default {
   }
 };
 </script>
+<style lang="scss">
+  .no-result {
+    height: 100vh;
+
+    &__icon {
+      margin-bottom: 10px;
+    }
+
+    &__message {
+      font-size: 24px;
+      text-align: center;
+      font-weight: 300;
+      color: #9D9D9D;
+    }
+  }
+</style>

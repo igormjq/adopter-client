@@ -5,8 +5,8 @@ import VueApollo from 'vue-apollo'
 import VueToasted from 'vue-toasted'
 import Multiselect from 'vue-multiselect'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCoffee, faHeart } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faSearch, faCat, faDog } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
 import routes from './routes'
 import apolloClient from './apollo'
 import store from './store'
@@ -14,10 +14,11 @@ import store from './store'
 // Global components
 import ContainerComponent from './components/partials/Container'
 
-library.add(faCoffee, faHeart);
+library.add(faSearch, faCat, faDog);
 
 Vue.component('container', ContainerComponent);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
+Vue.component('font-awesome-layers', FontAwesomeLayers);
 Vue.component('multiselect', Multiselect);
 
 // Router

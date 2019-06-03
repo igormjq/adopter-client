@@ -99,8 +99,7 @@ export default {
           this.$store.dispatch(operation, animal);
           this.$toasted.show(`${animal.name} ${message}`, this.toastOptions);
         }
-
-
+        
       } catch (e) {
         alert(e);
       }
