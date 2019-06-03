@@ -15,7 +15,7 @@ const INITIAL_STATE = {
   address: {
     city_contains: '',
   }
-}
+};
 
 const state = {
   edit: {},
@@ -41,8 +41,12 @@ const mutations = {
     if(city) state.search.address.city_contains = city;
   },
   [RESET_SEARCH_FILTER](state) {
-    state.search = { ...INITIAL_STATE };
-    console.log('state.search', state.search);
+    state.search = { 
+      ...INITIAL_STATE,
+      address: {
+        ...INITIAL_STATE.address
+      }
+    };
   }
 }
 const actions = {

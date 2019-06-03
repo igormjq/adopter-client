@@ -1,7 +1,7 @@
 <template>
   <section id="animalsList">
     <container class="container">
-      <transition-group name="fade" tag="div" class="list">
+      <transition-group name="fade" tag="div" class="list" v-if="animals">
         <card v-for="animal in animals" :key="animal.id">
           <div slot="thumbnail" :style='{ backgroundImage: "url(" + animal.profileImg + ")"}'>
             <div 
@@ -51,10 +51,7 @@ export default {
   },
   props: {
     animals: Array,
-    hasNextPage: {
-      type: Boolean,
-      default: false
-    }
+    hasNextPage: Boolean
   },
   data() {
     return {
@@ -113,7 +110,7 @@ export default {
     ...mapGetters([
       'user'
     ]),
-  }
+  },
 };
 </script>
 <style lang="scss">
