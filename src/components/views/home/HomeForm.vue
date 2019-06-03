@@ -142,10 +142,12 @@ export default {
       'updateSize',
       'updateAgeGroup',
       'updateGender',
-      'updateCity'
+      'updateCity',
+      'resetSearchFilter'
     ])
   },
   async created() {
+    this.resetSearchFilter();
     this.fetchStates();
   },
 }
