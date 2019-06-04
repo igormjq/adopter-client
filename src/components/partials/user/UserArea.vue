@@ -31,6 +31,7 @@ export default {
     top: 70px;
     position: absolute;
     background: #FFF;
+    box-shadow: 1px 10px 10px rgba(0, 0, 0, 0.25);
 
     &.is-logged {
       height: auto;
