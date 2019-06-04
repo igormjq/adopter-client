@@ -2,8 +2,7 @@
   <div>
     <list
       v-if="$data.animals.length > 0"
-      :animals="$data.animals" 
-      :hasNextPage= "$data.animals.length >= 20" 
+      :animals="$data.animals"
       @fetchMore="fetchMore">
     </list>
     <div class="no-result flex align-center justify-center" v-else>
@@ -23,7 +22,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import Card from "../../Card.vue";
 import { GET_ANIMALS } from "../../../graphql/queries.js";
 import { TOGGLE_FAVORITE_ANIMAL } from '../../../graphql/mutations.js';
@@ -38,12 +37,13 @@ export default {
     return {
       first: 20,
       skip: 0,
-      hasNextPage: null,
-      possibleSizes: ["small", "medium", "large"],
       title: "Seu mais novo amigo pode estar aqui"
     };
   },
   methods: {
+    ...mapActions([
+      'checkNextPage'
+    ]),
     async fetchMore() {
       this.skip = this.skip + this.first;
 
@@ -55,7 +55,7 @@ export default {
         updateQuery: (previousResult, { fetchMoreResult }) => {
           const moreAnimals = fetchMoreResult.animals;
 
-          this.hasNextPage = moreAnimals.length >= 20;
+          this.checkNextPage(moreAnimals.length >= this.first);
 
           return {
             animals: [...previousResult.animals, ...moreAnimals]
@@ -70,7 +70,7 @@ export default {
     })
   },
   created() {
-    this.$apollo.addSmartQuery('animals', {
+    const query = this.$apollo.addSmartQuery('animals', {
       query: GET_ANIMALS,
       variables: {
         first: 20,
@@ -78,7 +78,7 @@ export default {
         where: this.search
       }
     });
-  }
+  },
 };
 </script>
 <style lang="scss">

@@ -4,7 +4,8 @@ import {
   UPDATE_SEARCH_SIZE,
   UPDATE_SEARCH_AGE_GROUP,
   UPDATE_SEARCH_CITY,
-  RESET_SEARCH_FILTER
+  RESET_SEARCH_FILTER,
+  CHECK_NEXT_PAGE,
 } from '../types/mutation-types';
 
 const INITIAL_STATE = {
@@ -19,11 +20,14 @@ const INITIAL_STATE = {
 
 const state = {
   edit: {},
-  search: {
-    ...INITIAL_STATE
-  }
-}
-const getters = {}
+  search: { ...INITIAL_STATE },
+  hasNextPage: true
+};
+
+const getters = {
+  hasNextPage: state => state.hasNextPage
+};
+
 const mutations = {
   [UPDATE_SEARCH_TYPE](state, types) {
     state.search.type_in = types.map(({ value }) => value);
@@ -47,6 +51,9 @@ const mutations = {
         ...INITIAL_STATE.address
       }
     };
+  },
+  [CHECK_NEXT_PAGE](state, result) {
+    state.hasNextPage = result;
   }
 }
 const actions = {
@@ -67,6 +74,10 @@ const actions = {
   },
   resetSearchFilter({ commit }) {
     commit(RESET_SEARCH_FILTER);
+  },
+  checkNextPage({ commit }, result) {
+    console.log('tem proxima página?', result);
+    commit(CHECK_NEXT_PAGE, result);
   }
 }
 

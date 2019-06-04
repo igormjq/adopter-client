@@ -51,7 +51,6 @@ export default {
   },
   props: {
     animals: Array,
-    hasNextPage: Boolean
   },
   data() {
     return {
@@ -107,7 +106,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'user'
+      'user',
+      'hasNextPage'
     ]),
   },
 };
