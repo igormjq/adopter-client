@@ -177,6 +177,7 @@ export default {
 
       button {
         width: 145px;
+        height: 45px;
       }
     }
   }

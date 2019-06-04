@@ -8,11 +8,11 @@
       <div class="form__body">
         <div class="form__element flex flex-column">
           <span class="flex align-center">Email</span>
-          <input class="flex --full" type="text" v-model="user.email" required>
+          <input class="flex --full adopter-input" type="text" v-model="user.email" required>
         </div>
         <div class="form__element flex flex-column">
           <span class="flex align-center">Senha</span>
-          <input class="flex --full" type="password" v-model="user.password" required>
+          <input class="flex --full adopter-input" type="password" v-model="user.password" required>
         </div>
         <p v-if="error">{{ error }}</p>
       </div>
