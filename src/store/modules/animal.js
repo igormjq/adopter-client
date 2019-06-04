@@ -66,7 +66,6 @@ const actions = {
     commit(UPDATE_SEARCH_CITY, city);
   },
   resetSearchFilter({ commit }) {
-    console.log('resetei essa merda');
     commit(RESET_SEARCH_FILTER);
   }
 }
