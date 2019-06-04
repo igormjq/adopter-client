@@ -10,6 +10,7 @@ import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome
 import routes from './routes'
 import apolloClient from './apollo'
 import store from './store'
+import '../node_modules/vue-multiselect/dist/vue-multiselect.min.css'
 
 // Global components
 import ContainerComponent from './components/partials/Container'

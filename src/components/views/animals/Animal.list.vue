@@ -3,7 +3,7 @@
     <container class="container">
       <transition-group name="fade" tag="div" class="list" v-if="animals">
         <card v-for="animal in animals" :key="animal.id">
-          <div slot="thumbnail" :style='{ backgroundImage: "url(" + animal.profileImg + ")"}'>
+          <div class="thumbnail__image" slot="thumbnail" :style='{ backgroundImage: "url(" + animal.profileImg + ")"}'>
             <div 
               class="icon icon-favorite" 
               :class="{ 'is-favorite': animalIsFavorite(animal.id) }"
@@ -129,7 +129,6 @@ export default {
   grid-row-gap: 20px;
 
   .card {
-
     .icon-favorite {
       right: -5px;
       opacity: 0;
@@ -149,8 +148,31 @@ export default {
     }
     &__thumbnail {
       position: relative;
-      padding: 5px;
+      // padding: 5px;
       cursor: pointer;
+
+      .thumbnail__image {
+        &:before {
+          content: '';
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          opacity: 0;
+          transition: opacity .5s;
+          border-radius: 6px 6px 0 0;
+          background-color: rgba(219, 49, 220, 0.5);
+        }
+      }
+
+      &:hover {
+        .thumbnail__image {
+          &:before {
+            opacity: 1;
+          }
+        }
+      }
 
       .icon {
         position: absolute;
@@ -160,7 +182,7 @@ export default {
           width: 24px;
           height: 24px;
           position: absolute;
-          bottom: 3px;
+          bottom: 0px;
           right: 0px;
           border-radius: 4px 0px 0px 0px;
           background-color: #fff;
@@ -191,15 +213,15 @@ export default {
         align-items: flex-end;
         position: relative;
 
+        .icon:nth-child(2) {
+          margin: 0 5px;
+        }
+
         &:before {
           content: 'Porte';
           font-size: 10px;
           position: absolute;
           top: -15px;
-        }
-
-        .icon {
-          margin-left: 3px;
         }
       }
     }
