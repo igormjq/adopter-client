@@ -66,7 +66,8 @@ export default {
       toastOptions: {
         duration: 3000,
         keepOnHover: true,
-        className: 'adopter-toast'
+        className: 'adopter-toast',
+        position: 'bottom-center',
       }
     };
   },
@@ -168,7 +169,7 @@ export default {
           opacity: 0;
           transition: opacity .5s;
           border-radius: 6px 6px 0 0;
-          background-color: rgba(219, 49, 220, 0.5);
+          background-color: rgba(239, 49, 118, 0.79)
         }
         &__hover {
           opacity: 0;

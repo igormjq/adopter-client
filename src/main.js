@@ -5,7 +5,15 @@ import VueApollo from 'vue-apollo'
 import VueToasted from 'vue-toasted'
 import Multiselect from 'vue-multiselect'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSearch, faCat, faDog, faHeart, faInfoCircle, faSignOutAlt, faPaw } from '@fortawesome/free-solid-svg-icons'
+import { 
+  faSearch, 
+  faCat, 
+  faDog, 
+  faHeart, 
+  faInfoCircle, 
+  faSignOutAlt, 
+  faPaw,
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
 import routes from './routes'
 import apolloClient from './apollo'
@@ -15,7 +23,7 @@ import '../node_modules/vue-multiselect/dist/vue-multiselect.min.css'
 // Global components
 import ContainerComponent from './components/partials/Container'
 
-library.add(faSearch, faCat, faDog, faHeart, faInfoCircle, faSignOutAlt, faPaw);
+library.add(faSearch, faCat, faDog, faHeart, faInfoCircle, faSignOutAlt, faPaw, faHeart);
 
 Vue.component('container', ContainerComponent);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
