@@ -9,6 +9,12 @@
               :class="{ 'is-favorite': animalIsFavorite(animal.id) }"
               @click="toggleFavoriteAnimal(animal)" />
             <div class="icon" :class="[animal.type.toLowerCase()]"></div>
+            <font-awesome-icon 
+              icon="paw" 
+              :style="{ color: '#FFF' }"
+              class="thumbnail__image__hover"
+              size="3x"
+            />
           </div>
           <div slot="content" class="flex flex-column">
             <div class="animal__info">
@@ -164,11 +170,23 @@ export default {
           border-radius: 6px 6px 0 0;
           background-color: rgba(219, 49, 220, 0.5);
         }
+        &__hover {
+          opacity: 0;
+          transition: opacity .6s;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
       }
 
       &:hover {
         .thumbnail__image {
           &:before {
+            opacity: 1;
+          }
+          &__hover {
+            display: block;
             opacity: 1;
           }
         }
