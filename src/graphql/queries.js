@@ -16,6 +16,20 @@ export const GET_ANIMALS = gql`query animals($first: Int, $skip: Int, $where: An
   }
 }`
 
+export const GET_ANIMAL = gql`query animal($id: ID!) {
+  animal(id: $id) {
+    id
+    name
+    type
+    owner {
+      id
+      name
+      email
+    }
+    photos
+  }
+} `
+
 export const USER_ME = gql`query me {
   me {
     id
