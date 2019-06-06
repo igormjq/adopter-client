@@ -155,13 +155,9 @@ export default {
 
 <style lang="scss">
   @import '../../../assets/scss/mixins.scss';
-  .card {
-    &__content {
-      padding-bottom: 25px;
-    }
-  }
+  
   .home__form {
-    padding: 0 25px;
+    padding: 0 25px 25px 25px;
 
     .form__body {
       .address {

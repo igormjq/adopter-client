@@ -1,7 +1,7 @@
 <template>
   <div>
     <list
-      v-if="$data.animals.length > 0"
+      v-if="hasResults"
       :animals="$data.animals"
       @fetchMore="fetchMore">
     </list>
@@ -37,7 +37,8 @@ export default {
     return {
       first: 20,
       skip: 0,
-      title: "Seu mais novo amigo pode estar aqui"
+      title: "Seu mais novo amigo pode estar aqui",
+      hasResults: null,
     };
   },
   methods: {
@@ -46,11 +47,12 @@ export default {
     ]),
     async fetchMore() {
       this.skip = this.skip + this.first;
-
+  
       this.$apollo.queries.animals.fetchMore({
         variables: {
           first: this.first,
           skip: this.skip,
+          where: this.search
         },
         updateQuery: (previousResult, { fetchMoreResult }) => {
           const moreAnimals = fetchMoreResult.animals;
@@ -70,12 +72,16 @@ export default {
     })
   },
   created() {
-    const query = this.$apollo.addSmartQuery('animals', {
+    this.$apollo.addSmartQuery('animals', {
       query: GET_ANIMALS,
       variables: {
         first: 20,
         skip: this.skip,
         where: this.search
+      },
+      fetchPolicy: 'network-only',
+      result({ data }) {
+        this.hasResults = data.animals.length > 0;
       }
     });
   },
