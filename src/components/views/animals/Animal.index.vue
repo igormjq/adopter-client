@@ -15,7 +15,6 @@
           <h2>Que pena! Não há animais cadastrados próximos</h2>
           <h3>Que tal começar cadastrando um?</h3>
         </div>
-
       </div>
     </div>
   </div>
@@ -57,7 +56,7 @@ export default {
         updateQuery: (previousResult, { fetchMoreResult }) => {
           const moreAnimals = fetchMoreResult.animals;
 
-          this.checkNextPage(moreAnimals.length >= this.first);
+          this.checkNextPage(moreAnimals);
 
           return {
             animals: [...previousResult.animals, ...moreAnimals]
@@ -82,9 +81,15 @@ export default {
       fetchPolicy: 'network-only',
       result({ data }) {
         this.hasResults = data.animals.length > 0;
+        this.checkNextPage(data.animals);
       }
     });
   },
+  updated() {
+    if(this.$data.animals) {
+      this.checkNextPage(this.$data.animals);
+    }
+  }
 };
 </script>
 <style lang="scss">
