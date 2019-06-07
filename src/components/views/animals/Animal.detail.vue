@@ -98,10 +98,10 @@ export default {
   #animal {
     background-color: #eaebed;
     .card {
-      margin-top: 40px;
+      margin: 40px 0;
     }
     .animal-card {
-      padding: 45px;
+      padding: 35px;
       font-weight: 300;
 
       .animal {
@@ -157,7 +157,7 @@ export default {
             position: relative;
             h1 {
               font-size: 36px;
-              font-weight: bolder;
+              font-weight: 800;
             }
             .icon-favorite {
               width: 45px;
