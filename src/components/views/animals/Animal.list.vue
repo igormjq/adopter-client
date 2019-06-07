@@ -127,6 +127,7 @@ export default {
 };
 </script>
 <style lang="scss">
+@import '../../../assets/scss/mixins.scss';
 #animalsList {
   background-color: #eaebed;
 
@@ -138,8 +139,7 @@ export default {
   width: 100%;
   margin: 25px 0;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-column-gap: 20px;
+  @include grid(5, 20px);
   grid-row-gap: 20px;
 
   .card {
