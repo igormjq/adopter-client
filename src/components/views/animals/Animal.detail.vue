@@ -1,6 +1,16 @@
 <template>
   <section id="animal">
-    <container v-if="animal">
+    <container v-if="animal" class="flex-column">
+      <div class="back">
+        <router-link to="/animals">
+          <font-awesome-icon 
+            class="icon-arrow-back"
+            icon="arrow-left" 
+            :style="{ 'color': '#EF3176' }" 
+            size="2x"
+          />
+        </router-link>
+      </div>
       <card>
         <div slot="content" class="animal-card">
           <div class="animal__info">
@@ -97,8 +107,13 @@ export default {
 
   #animal {
     background-color: #eaebed;
-    .card {
-      margin: 40px 0;
+    .back {
+      margin: 15px 0;
+
+      .icon-arrow-back {
+        cursor: pointer;
+      }
+
     }
     .animal-card {
       padding: 35px;

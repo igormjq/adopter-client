@@ -13,6 +13,7 @@ import {
   faInfoCircle, 
   faSignOutAlt, 
   faPaw,
+  faArrowLeft
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
 import routes from './routes'
@@ -23,7 +24,7 @@ import '../node_modules/vue-multiselect/dist/vue-multiselect.min.css'
 // Global components
 import ContainerComponent from './components/partials/Container'
 
-library.add(faSearch, faCat, faDog, faHeart, faInfoCircle, faSignOutAlt, faPaw, faHeart);
+library.add(faSearch, faCat, faDog, faHeart, faInfoCircle, faSignOutAlt, faPaw, faHeart, faArrowLeft);
 
 Vue.component('container', ContainerComponent);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
