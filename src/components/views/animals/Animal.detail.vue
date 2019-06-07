@@ -32,8 +32,13 @@
                   <li>Idade: {{ animalAgeGroup(animal) }} </li>
                 </ul>
                 <ul class="animal__info__details__specific">
-                  <li>Castrado</li>
-                  <li>Vacinado</li>
+                  <li 
+                    v-for="{ displayName, iconName, key } in animalInfo" 
+                    :key="key"
+                    v-if="animal[key]">
+                    <font-awesome-icon :icon="iconName" :style="{ 'color': '#EF3176' }"/>
+                    <span>{{ displayName }}</span>
+                  </li>
                 </ul>
               </div>
               <div class="animal__info__about">
@@ -180,7 +185,7 @@ export default {
             }
           }
           &__details {
-            font-size: 12px;
+            font-size: 14px;
             width: 70%;
             @include grid(2, 10px);
 

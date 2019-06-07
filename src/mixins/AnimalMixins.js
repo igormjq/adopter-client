@@ -1,6 +1,14 @@
 import { TOGGLE_FAVORITE_ANIMAL } from '../graphql/mutations';
 
 export default {
+  data() {
+    return {
+      animalInfo: [
+        { key: 'vaccinated', displayName: 'Vacinado', iconName: 'syringe'  },
+        { key: 'castrated', displayName: 'Castrado', iconName: 'briefcase-medical' }
+      ]
+    }
+  },
   methods: {
     animalType({ type }) {
       return type === 'DOG' ? 'Cão' : 'Gato';
@@ -13,6 +21,11 @@ export default {
     },
     animalSize({ size }, targetSize) {
       return size.toLowerCase() === targetSize;
+    },
+    animalSizeName({ size }) {
+      switch(size) {
+
+      }
     },
     animalIsFavorite(animalId) {
       if(this.user) return this.user.favoriteAnimals.some(({ id }) => id === animalId);

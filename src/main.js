@@ -9,11 +9,12 @@ import {
   faSearch, 
   faCat, 
   faDog, 
-  faHeart, 
   faInfoCircle, 
   faSignOutAlt, 
   faPaw,
-  faArrowLeft
+  faArrowLeft,
+  faBriefcaseMedical,
+  faSyringe,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
 import routes from './routes'
@@ -24,7 +25,17 @@ import '../node_modules/vue-multiselect/dist/vue-multiselect.min.css'
 // Global components
 import ContainerComponent from './components/partials/Container'
 
-library.add(faSearch, faCat, faDog, faHeart, faInfoCircle, faSignOutAlt, faPaw, faHeart, faArrowLeft);
+library.add(
+  faSearch, 
+  faCat, 
+  faDog, 
+  faInfoCircle, 
+  faSignOutAlt, 
+  faPaw, 
+  faArrowLeft, 
+  faBriefcaseMedical,
+  faSyringe
+);
 
 Vue.component('container', ContainerComponent);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
