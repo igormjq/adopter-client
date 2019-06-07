@@ -65,7 +65,7 @@ export default {
     align-items: center;
     background: #FFF;
     position: fixed;
-    z-index: 1;
+    z-index: 5;
     padding: 0 15px;
 
     >.container {

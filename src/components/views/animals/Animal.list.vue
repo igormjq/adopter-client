@@ -7,12 +7,12 @@
             class="thumbnail__image" 
             slot="thumbnail" 
             :style='{ backgroundImage: "url(" + animal.profileImg + ")"}'
-            @click="goTo(animal.id)"
+            @click.stop="goTo(animal.id)"
           >
             <div 
               class="icon icon-favorite" 
               :class="{ 'is-favorite': animalIsFavorite(animal.id) }"
-              @click="toggleFavoriteAnimal(animal)" />
+              @click.stop="toggleFavoriteAnimal(animal)" />
             <div class="icon" :class="[animal.type.toLowerCase()]"></div>
             <font-awesome-icon 
               icon="paw" 
@@ -89,7 +89,6 @@ export default {
       if(this.user) return this.user.favoriteAnimals.some(({ id }) => id === animalId);
     },
     async toggleFavoriteAnimal(animal) {
-
       if(!this.user) 
         return this.$toasted.show('Faça login para curtir a bicharada :)', this.toastOptions);
 
@@ -215,6 +214,7 @@ export default {
           background-size: 80%;
           background-position: center;
           background-repeat: no-repeat;
+          z-index: 0;
         }
       }
     }

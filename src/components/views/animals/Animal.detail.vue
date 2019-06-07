@@ -1,7 +1,7 @@
 <template>
   <section id="animal">
-    <container>
-      <card class="--full">
+    <container v-if="animal">
+      <card>
         <div slot="content" class="animal-card">
           <div class="flex flex-column">
             <div class="animal__avatar" :style="{ backgroundImage: `url(${animal.profileImg})` }" />
@@ -125,6 +125,10 @@ export default {
   @import '../../../assets/scss/mixins.scss';
 
   #animal {
+    background-color: #eaebed;
+    .card {
+      margin-top: 40px;
+    }
     .animal-card {
       padding: 45px;
       display: grid;
