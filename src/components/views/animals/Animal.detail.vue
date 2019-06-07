@@ -23,10 +23,14 @@
               />
             </div>
             <div class="animal__info__details">
-              <ul>
+              <ul class="animal__info__details__general">
                 <li>Espécie: {{ animalType(animal) }} </li>
                 <li>Sexo: {{ animalGender(animal) }} </li>
                 <li>Idade: {{ animalAgeGroup(animal) }} </li>
+              </ul>
+              <ul class="animal__info__details__specific">
+                <li>Castrado</li>
+                <li>Vacinado</li>
               </ul>
             </div>
             <div class="animal__info__about">
@@ -94,6 +98,7 @@ export default {
       display: grid;
       grid-template-columns: .7fr 1fr;
       grid-column-gap: 40px;
+      font-weight: 300;
 
       .animal {
         &__avatar {
@@ -128,8 +133,8 @@ export default {
           &__header {
             position: relative;
             h1 {
-              font-size: 32px;
-              font-weight: 600;
+              font-size: 36px;
+              font-weight: bolder;
             }
             .icon-favorite {
               width: 45px;
@@ -137,17 +142,38 @@ export default {
             }
           }
           &__details {
-            font-size: 14px;
+            font-size: 12px;
+            width: 60%;
+            @include grid(2, 10px);
 
             ul {
               margin-top: 15px;
-              li:not(:first-child):not(:last-child) {
+              li{
                 margin: 10px 0;
+              }
+            }
+
+            &__general, &__specific {
+              &:before {
+                font-size: 16px;
+                color: #EF3176;
+              }
+            }
+            &__specific {
+              &:before {
+                content: 'Outras características';
+              }
+            }
+
+            &__general {
+              &:before {
+                content: 'Detalhes';
               }
             }
           }
           &__about {
             margin-top: 30px;
+            line-height: 20px;
           }
         }
       }
