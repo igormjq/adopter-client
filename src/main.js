@@ -37,11 +37,18 @@ Vue.use(VueToasted, { iconPack: 'fontawesome' });
 
 const apolloProvider = new VueApollo({
   defaultClient: apolloClient
-})
+});
 
 const router = new VueRouter({
   mode: 'history',
   routes
+});
+
+/**
+ * Scroll to top of the current view after redirection
+ */
+router.afterEach(() => {
+  window.scrollTo(0,0);
 })
 
 new Vue({
