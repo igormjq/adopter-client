@@ -195,8 +195,10 @@ export default {
             }
           }
           &__about {
-            margin-top: 30px;
+            margin-top: 15px;
             line-height: 20px;
+            max-height: 200px;
+            overflow-y: scroll;
           }
         }
       }
