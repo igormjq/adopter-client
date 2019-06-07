@@ -9,7 +9,7 @@
           <li>Sobre nós</li>
           <li>Como adotar</li>
           <li>Parceiros</li>
-          <router-link to="animals" tag="li">Animais</router-link>
+          <router-link to="/animals" tag="li">Animais</router-link>
         </ul>
       </div>
     </div>

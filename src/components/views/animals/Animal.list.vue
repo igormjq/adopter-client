@@ -3,7 +3,12 @@
     <container class="container">
       <transition-group name="fade" tag="div" class="list" v-if="animals">
         <card v-for="animal in animals" :key="animal.id">
-          <div class="thumbnail__image" slot="thumbnail" :style='{ backgroundImage: "url(" + animal.profileImg + ")"}'>
+          <div 
+            class="thumbnail__image" 
+            slot="thumbnail" 
+            :style='{ backgroundImage: "url(" + animal.profileImg + ")"}'
+            @click="goTo(animal.id)"
+          >
             <div 
               class="icon icon-favorite" 
               :class="{ 'is-favorite': animalIsFavorite(animal.id) }"
@@ -37,7 +42,6 @@
               </div>
             </div>
           </div>
-          
         </card>
       </transition-group>
     </container>
@@ -110,6 +114,9 @@ export default {
         alert(e);
       }
     },
+    goTo(id) {
+      this.$router.push(`animals/${id}`);
+    }
   },
   computed: {
     ...mapGetters([

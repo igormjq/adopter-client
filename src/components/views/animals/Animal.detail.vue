@@ -1,7 +1,7 @@
 <template>
   <section id="animal">
     <container>
-      <h2>Oi, meu nome é {{ animal.name }}</h2>
+      <h1>EU SOU {{ animal.name }}</h1>
     </container>
   </section>
 </template>
@@ -16,7 +16,7 @@ export default {
         return {
           id: this.$route.params.id
         }
-      },
+      }
     }
   }
 }
