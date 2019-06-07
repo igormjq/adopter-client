@@ -16,7 +16,7 @@ export default {
         return {
           id: this.$route.params.id
         }
-      }
+      },
     }
   }
 }
