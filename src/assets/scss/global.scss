@@ -35,6 +35,11 @@ section {
   font-weight: 500!important;
 }
 
-.text-pink {
-    color:  #EF3176;
+.text {
+  &-pink {
+    color: #EF3176;
+  }
+  &-gray {
+    color: #908D8D;
+  }
 }
