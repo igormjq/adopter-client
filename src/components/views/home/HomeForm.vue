@@ -12,7 +12,9 @@
           :show-labels="false"
           :searchable="true"
           @select="resetCities"
-          @input="fetchCities">
+          @input="fetchCities"
+        >
+          <template slot="noResult">Opção não encontrada</template>
         </multiselect>
         <multiselect
           :class="{ 'selected' : city.selected }"
@@ -21,7 +23,10 @@
           :options="city.options"
           :show-labels="false"
           :preselect-first="true"
-          @input="updateCity">
+          @input="updateCity"
+        >
+        <template slot="noOptions"><span>Escolha um estado</span></template>
+        <template slot="noResult"><span class="text-gray">Cidade não encontrada</span></template>
         </multiselect>
       </div>
       <multiselect
@@ -34,6 +39,7 @@
         :options="type.options"
         :show-labels="false"
         :taggable="true"
+        :searchable="false"
         @input="updateType">
       </multiselect>
       <multiselect
@@ -45,6 +51,7 @@
         :multiple="true"
         :options="size.options"
         :show-labels="false"
+        :searchable="false"
         @input="updateSize">
       </multiselect>
       <multiselect
@@ -56,6 +63,7 @@
         :multiple="true"
         :options="gender.options"
         :show-labels="false"
+        :searchable="false"
         @input="updateGender">
       </multiselect>
     </div>
