@@ -41,11 +41,13 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { GET_ANIMAL } from '../../../graphql/queries'
-import { TOGGLE_FAVORITE_ANIMAL } from '../../../graphql/mutations'
+import { GET_ANIMAL } from '../../../graphql/queries';
+import AnimalMixins from '../../../mixins/AnimalMixins';
 import Card from "../../Card.vue";
 import Social from '../../Social';
+
 export default {
+  mixins: [AnimalMixins],
   components: {
     Card,
     Social
@@ -60,49 +62,7 @@ export default {
       }
     }
   },
-  methods: {
-    animalType({ type }) {
-      return type === 'DOG' ? 'Cão' : 'Gato';
-    },
-    animalAgeGroup({ ageGroup }) {
-      return ageGroup === 'ADULT' ? 'Adulto' : 'Filhote';
-    },
-    animalGender({ gender }) {
-      return gender === 'MALE' ? 'Macho' : 'Fêmea';
-    },
-    animalSize({ size }, targetSize) {
-      return size.toLowerCase() === targetSize;
-    },
-    animalIsFavorite(animalId) {
-      if(this.user) return this.user.favoriteAnimals.some(({ id }) => id === animalId);
-    },
-    async toggleFavoriteAnimal(animal) {
-
-      if(!this.user) 
-        return this.$toasted.show('Faça login para curtir a bicharada :)', this.toastOptions);
-
-      try {
-        const { 
-          data: { 
-            toggleFavoriteAnimal: { operation, message, success }
-          }
-        } = await this.$apollo.mutate({
-          mutation: TOGGLE_FAVORITE_ANIMAL,
-          variables: {
-            animalId: animal.id
-          }
-        });
-
-        if(success) {
-          this.$store.dispatch(operation, animal);
-          this.$toasted.show(`${animal.name} ${message}`, this.toastOptions);
-        }
-        
-      } catch (e) {
-        alert(e);
-      }
-    },
-  },
+  methods: {},
   computed: {
     ...mapGetters([
       'user'

@@ -22,6 +22,14 @@
     flex: 1;
   }
 
+  &.btn-see-more {
+    border-radius: 0;
+    height: 45px;
+    margin-bottom: 30px;
+    font-weight: bolder;
+    width: 100%;
+  }
+
   &.pink {
     background-color: #EF3176;
     color: #FFF;
@@ -31,7 +39,6 @@
     border-radius: 0;
     width: 100%;
     font-weight: bolder;
-    height: 45px;
   }
 }
 .icon {

@@ -45,17 +45,19 @@
         </card>
       </transition-group>
     </container>
-    <button class="btn pink btn-block" v-if="hasNextPage" @click="$emit('fetchMore')">VEJA MAIS AMIGOS</button>
+    <container class="justify-center">
+      <button class="btn pink btn-see-more" v-if="hasNextPage" @click="$emit('fetchMore')">VEJA MAIS AMIGOS</button>
+    </container>
   </section>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
-import Card from "../../Card.vue";
-import { GET_ANIMALS } from "../../../graphql/queries.js";
-import { TOGGLE_FAVORITE_ANIMAL } from '../../../graphql/mutations.js';
+import { mapActions, mapGetters } from 'vuex'
+import AnimalMixins from '../../../mixins/AnimalMixins'
+import Card from "../../Card.vue"
 
 export default {
+  mixins: [AnimalMixins],
   components: {
     Card
   },
@@ -76,43 +78,6 @@ export default {
     };
   },
   methods: {
-    animalAgeGroup({ ageGroup }) {
-      return ageGroup === 'ADULT' ? 'Adulto' : 'Filhote';
-    },
-    animalGender({ gender }) {
-      return gender === 'MALE' ? 'Macho' : 'Fêmea';
-    },
-    animalSize({ size }, targetSize) {
-      return size.toLowerCase() === targetSize;
-    },
-    animalIsFavorite(animalId) {
-      if(this.user) return this.user.favoriteAnimals.some(({ id }) => id === animalId);
-    },
-    async toggleFavoriteAnimal(animal) {
-      if(!this.user) 
-        return this.$toasted.show('Faça login para curtir a bicharada :)', this.toastOptions);
-
-      try {
-        const { 
-          data: { 
-            toggleFavoriteAnimal: { operation, message, success }
-          }
-        } = await this.$apollo.mutate({
-          mutation: TOGGLE_FAVORITE_ANIMAL,
-          variables: {
-            animalId: animal.id
-          }
-        });
-
-        if(success) {
-          this.$store.dispatch(operation, animal);
-          this.$toasted.show(`${animal.name} ${message}`, this.toastOptions);
-        }
-        
-      } catch (e) {
-        alert(e);
-      }
-    },
     goTo(id) {
       this.$router.push(`animals/${id}`);
     }
@@ -120,7 +85,7 @@ export default {
   computed: {
     ...mapGetters([
       'user',
-      'hasNextPage'
+      'hasNextPage',
     ]),
   },
 };
@@ -129,10 +94,6 @@ export default {
 @import '../../../assets/scss/mixins.scss';
 #animalsList {
   background-color: #eaebed;
-
-  .btn {
-    padding: 15px 0;
-  }
 }
 .list {
   width: 100%;
