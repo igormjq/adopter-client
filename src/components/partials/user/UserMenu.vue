@@ -1,6 +1,6 @@
 <template>
   <ul class="user-menu">
-    <router-link to="favorites" tag="li" @click.native="toggleMenu">
+    <router-link to="/favorites" tag="li" @click.native="toggleMenu">
       <font-awesome-icon icon="heart" /> 
       <span>Favoritos</span>
     </router-link>
