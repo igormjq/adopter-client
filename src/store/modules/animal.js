@@ -76,8 +76,7 @@ const actions = {
     commit(RESET_SEARCH_FILTER);
   },
   checkNextPage({ commit }, result) {
-    const hasNextPage = (result.length >= 20) && (result.length % 2 === 0);
-    // console.log('fucking has next page', hasNextPage)
+    const hasNextPage = result && (result.length >= 20) && (result.length % 2 === 0);
     commit(CHECK_NEXT_PAGE, hasNextPage);
   }
 }

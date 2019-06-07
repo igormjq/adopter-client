@@ -17,8 +17,8 @@ export default {
       'user'
     ])
   },
-  mounted() {
-    console.log(this.$store.state);
+  created() {
+    this.$store.dispatch('checkNextPage', false);
   }
 }
 </script>
