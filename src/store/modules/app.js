@@ -1,6 +1,8 @@
 import {
   LOADING,
-  TOGGLE_MENU
+  TOGGLE_MENU,
+  OPEN_MENU,
+  CLOSE_MENU
 } from '../types/mutation-types';
 
 const state = {
@@ -19,15 +21,23 @@ const mutations = {
   [TOGGLE_MENU](state) {
     state.showMenu = !state.showMenu;
   },
+  [CLOSE_MENU](state) {
+    state.showMenu = false;
+  },
+  [OPEN_MENU] (state) {
+    state.showMenu = true;
+  }
 }
 const actions = {
   loadPage({ commit }, condition = true) {
     commit(LOADING, condition);
   },
   toggleMenu({ commit }) {
-    console.log('clicked');
     commit(TOGGLE_MENU);
   },
+  closeMenu({ commit }) {
+    commit(CLOSE_MENU);
+  }
 }
 
 export default {

@@ -14,11 +14,11 @@
       </div>
     </div>
     <div class="header__right flex align-center --full">
-      <button class="btn flex align-center" @click="toggleMenu" v-if="!isLoggedIn">
+      <button class="btn flex align-center" @click.stop="toggleMenu" v-if="!isLoggedIn">
         <span class="icon icon-paw --pink"/>
         <span>Entrar</span>
       </button>
-      <div class="user-info flex align-center" @click="toggleMenu" v-else>
+      <div class="user-info flex align-center" @click.stop="toggleMenu" v-else>
         <div class="user-name">
           {{ user.name }}
         </div>

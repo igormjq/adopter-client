@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="{ 'loading': isLoading }">
+  <div id="app" :class="{ 'loading': isLoading }" @click="$store.dispatch('closeMenu')">
     <header-component />
     <transition name="enter">
       <router-view></router-view>
@@ -50,7 +50,7 @@ export default {
     }
 
     this.$store.dispatch('loadPage', false);
-  }
+  },
 }
 </script>
 

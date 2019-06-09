@@ -2,6 +2,8 @@ export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOUT = 'LOGOUT';
 export const TOGGLE_MENU = 'TOGGLE_MENU';
+export const CLOSE_MENU = 'CLOSE_MENU';
+export const OPEN_MENU = 'OPEN_MENU';
 export const LOADING = 'LOADING';
 export const SET_USER = 'SET_USER';
 

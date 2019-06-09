@@ -1,14 +1,14 @@
 <template>
   <ul class="user-menu">
-    <router-link to="/favorites" tag="li" @click.native="toggleMenu">
+    <router-link to="/favorites" tag="li" @click.native="closeMenu">
       <font-awesome-icon icon="heart" /> 
       <span>Favoritos</span>
     </router-link>
-    <router-link to="" tag="li" @click.native="toggleMenu">
+    <router-link to="" tag="li" @click.native="closeMenu">
       <font-awesome-icon icon="cat" />
       <span>Cadastrar um animal</span>
     </router-link>
-    <router-link to="" tag="li" @click.native="toggleMenu">
+    <router-link to="" tag="li" @click.native="closeMenu">
       <font-awesome-icon icon="info-circle" />
       <span>Ajuda</span>
     </router-link>
@@ -33,7 +33,7 @@ export default {
       this.$router.push('/');
     },
     ...mapActions([
-      'toggleMenu'
+      'closeMenu'
     ])
   }
 }
