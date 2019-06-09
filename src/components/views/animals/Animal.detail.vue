@@ -112,6 +112,7 @@ export default {
 
   #animal {
     background-color: #eaebed;
+    padding-bottom: 45px;
     .back {
       margin: 15px 0;
 
