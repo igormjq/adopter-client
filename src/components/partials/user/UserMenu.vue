@@ -4,7 +4,7 @@
       <font-awesome-icon icon="heart" /> 
       <span>Favoritos</span>
     </router-link>
-    <router-link to="" tag="li" @click.native="closeMenu">
+    <router-link to="/animals/new" tag="li" @click.native="closeMenu">
       <font-awesome-icon icon="cat" />
       <span>Cadastrar um animal</span>
     </router-link>
