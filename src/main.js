@@ -3,6 +3,7 @@ import App from './App.vue'
 import VueRouter from 'vue-router'
 import VueApollo from 'vue-apollo'
 import VueToasted from 'vue-toasted'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
 import Multiselect from 'vue-multiselect'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { 
@@ -23,6 +24,7 @@ import routes from './routes'
 import apolloClient from './apollo'
 import store from './store'
 import '../node_modules/vue-multiselect/dist/vue-multiselect.min.css'
+import 'swiper/dist/css/swiper.css'
 
 // Global components
 import ContainerComponent from './components/partials/Container'
@@ -50,6 +52,7 @@ Vue.component('multiselect', Multiselect);
 Vue.use(VueRouter);
 Vue.use(VueApollo);
 Vue.use(VueToasted, { iconPack: 'fontawesome' });
+Vue.use(VueAwesomeSwiper);
 
 const apolloProvider = new VueApollo({
   defaultClient: apolloClient
