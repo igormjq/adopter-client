@@ -33,10 +33,10 @@
                 <span>{{ animalAgeGroup(animal) }} - {{ animalGender(animal) }}</span>
                 <div class="animal__info__detail__size flex --full">
                   <div
-                    v-for="size in possibleSizes"
-                    :key="size"
+                    v-for="({ key }) in possibleSizes"
+                    :key="key"
                     class="icon icon-paw"
-                    :class="{ [size]: animal.size.toLowerCase(), '--pink': animalSize(animal, size) }"
+                    :class="{ [key]: animal.size, '--pink': checkAnimalSizeIcon(animal, key) }"
                   />
                 </div>
               </div>
@@ -68,7 +68,6 @@ export default {
     return {
       first: 20,
       skip: 0,
-      possibleSizes: ["small", "medium", "large"],
       toastOptions: {
         duration: 3000,
         keepOnHover: true,

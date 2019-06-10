@@ -3,6 +3,11 @@ import { TOGGLE_FAVORITE_ANIMAL } from '../graphql/mutations';
 export default {
   data() {
     return {
+      possibleSizes: [
+        { key: 'SMALL', displayName: 'Pequeno' },
+        { key: 'MEDIUM', displayName: 'Médio' },
+        { key: 'LARGE', displayName: 'Grande' }
+      ],
       animalInfo: [
         { key: 'vaccinated', displayName: 'Vacinado', iconName: 'syringe'  },
         { key: 'castrated', displayName: 'Castrado', iconName: 'briefcase-medical' }
@@ -19,17 +24,19 @@ export default {
     animalAgeGroup({ ageGroup }) {
       return ageGroup === 'ADULT' ? 'Adulto' : 'Filhote';
     },
-    animalSize({ size }, targetSize) {
-      return size.toLowerCase() === targetSize;
+    animalSize({ size }) {
+      return this.possibleSizes.find(({ key }) => key === size).displayName;
     },
-    animalSizeName({ size }) {
-      switch(size) {
-
-      }
+    checkAnimalSizeIcon({ size }, targetSize) {
+      return size === targetSize;
     },
     animalIsFavorite(animalId) {
       if(this.user) return this.user.favoriteAnimals.some(({ id }) => id === animalId);
     },
+    animalHasDetails(animal) {
+      return this.animalInfo.some(({ key }) => animal[key]);
+    },
+    
     async toggleFavoriteAnimal(animal) {
       if(!this.user) 
         return this.$toasted.show('Faça login para curtir a bicharada :)', this.toastOptions);

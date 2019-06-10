@@ -30,8 +30,9 @@
                   <li>Espécie: {{ animalType(animal) }} </li>
                   <li>Sexo: {{ animalGender(animal) }} </li>
                   <li>Idade: {{ animalAgeGroup(animal) }} </li>
+                  <li>Porte: {{ animalSize(animal) }}</li>
                 </ul>
-                <ul class="animal__info__details__specific">
+                <ul class="animal__info__details__specific" v-if="animalHasDetails(animal)">
                   <li 
                     v-for="{ displayName, iconName, key } in animalInfo" 
                     :key="key"
@@ -103,7 +104,7 @@ export default {
         }
       }
     }
-  }
+  },
 }
 </script>
 

@@ -23,6 +23,7 @@ export const GET_ANIMAL = gql`query animal($id: ID!) {
     type
     about
     gender
+    size
     ageGroup
     castrated
     vaccinated
