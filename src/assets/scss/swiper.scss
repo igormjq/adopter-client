@@ -1,0 +1,50 @@
+.swiper {
+  &-container{
+    height: 100%;
+
+    &.swiper__progress {
+      .swiper-slide {
+        padding: 10px;
+
+        .step {
+          &-title {
+            color: #EF3176;
+            font-size: 24px;
+            font-weight: 500;
+            margin: 10px 0;
+          }
+          &__options {
+            height: 100%;
+            .option {
+              height: 100%;
+              cursor: pointer;
+              transition: all .4s;
+              border-radius: 6px;
+              color: #cecece;
+
+              h2 {
+                font-weight: 600;
+                font-size: 21px;
+                margin-top: 5px;
+              }
+
+              .icon {
+                width: 70px;
+                height: 70px;
+              }
+
+              &:hover {
+                color: #EF3176;
+                background: #F5F5F5;
+                
+              }
+            }
+          }
+        }
+      }
+      .swiper-pagination-progressbar-fill {
+        background: #EF3176;
+      }
+    }
+  }
+}
