@@ -11,11 +11,9 @@
               <div class="step__options flex align-center">
                 <div class="option --full flex flex-column justify-center align-center">
                   <div class="icon dog"></div>
-                  <h2>Cão</h2>
                 </div>
                 <div class="option --full flex flex-column justify-center align-center">
                   <div class="icon cat"></div>
-                  <h2>Gato</h2>
                 </div>
               </div>
             </swiper-slide>
