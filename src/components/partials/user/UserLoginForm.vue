@@ -100,6 +100,10 @@ export default {
       }
       &__footer {
         margin-top: 25px;
+
+        .btn {
+          height: 40px;
+        }
       }
     }
   }

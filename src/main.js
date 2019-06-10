@@ -15,7 +15,8 @@ import {
   faArrowLeft,
   faBriefcaseMedical,
   faSyringe,
-  faHeart
+  faHeart,
+  faUser
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
 import routes from './routes'
@@ -36,7 +37,8 @@ library.add(
   faArrowLeft, 
   faBriefcaseMedical,
   faSyringe,
-  faHeart
+  faHeart,
+  faUser
 );
 
 Vue.component('container', ContainerComponent);

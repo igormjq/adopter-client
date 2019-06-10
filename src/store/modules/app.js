@@ -35,7 +35,8 @@ const actions = {
   toggleMenu({ commit }) {
     commit(TOGGLE_MENU);
   },
-  closeMenu({ commit }) {
+  closeMenu({ commit }, event) {
+    console.log(event);
     commit(CLOSE_MENU);
   }
 }

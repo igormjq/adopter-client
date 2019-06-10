@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="header__left flex align-center space-between --full">
-      <router-link to="/" tag="div" class="logo flex align-center">
+      <router-link to="/" tag="div" class="logo flex align-center" @click.native="closeMenu">
         <img src="../../assets/img/logo.png" alt="Adopter logo">
       </router-link>
       <div class="header__options">
@@ -15,7 +15,7 @@
     </div>
     <div class="header__right flex align-center --full">
       <button class="btn flex align-center" @click.stop="toggleMenu" v-if="!isLoggedIn">
-        <span class="icon icon-paw --pink"/>
+        <font-awesome-icon icon="paw" style="{ color: '#EF3176'}"/>
         <span>Entrar</span>
       </button>
       <div class="user-info flex align-center" @click.stop="toggleMenu" v-else>
@@ -50,6 +50,7 @@ export default {
   },
   methods: {
     ...mapActions([
+      'closeMenu',
       'toggleMenu'
     ])
   }
@@ -97,7 +98,11 @@ export default {
 
       .btn {
         padding: 0 10px;
-        height: 35px;
+        height: 40px;
+
+        svg {
+          margin-right: 5px;
+        }
       }
     }
 

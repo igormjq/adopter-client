@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="{ 'loading': isLoading }" @click="$store.dispatch('closeMenu')">
+  <div id="app" :class="{ 'loading': isLoading }">
     <header-component />
     <transition name="enter">
       <router-view></router-view>
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import { USER_ME } from './graphql/queries'
 import HeaderComponent from './components/partials/Header'
 import FooterComponent from './components/partials/Footer'
@@ -22,6 +22,11 @@ export default {
     HeaderComponent,
     FooterComponent,
     Spinner
+  },
+  methods: {
+    ...mapActions([
+      'closeMenu'
+    ])
   },
   computed: {
     ...mapGetters([
