@@ -42,9 +42,12 @@ export default {
   },
   methods: {
     ...mapActions([
-      'checkNextPage'
+      'checkNextPage',
+      'loadPage'
     ]),
     async fetchMore() {
+      // this.loadPage();
+      console.log('fui clicado');
       this.skip = this.skip + this.first;
   
       this.$apollo.queries.animals.fetchMore({
@@ -82,6 +85,7 @@ export default {
       result({ data }) {
         this.hasResults = data.animals.length > 0;
         this.checkNextPage(data.animals);
+        this.loadPage(false);
       }
     });
   },
