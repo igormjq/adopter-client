@@ -23,7 +23,7 @@
           :options="city.options"
           :show-labels="false"
           :preselect-first="true"
-          @input="updateCity"
+          @input="updateFilterCity"
         >
         <template slot="noOptions"><span>Escolha um estado</span></template>
         <template slot="noResult"><span class="text-gray">Cidade não encontrada</span></template>
@@ -40,7 +40,7 @@
         :show-labels="false"
         :taggable="true"
         :searchable="false"
-        @input="updateType">
+        @input="updateFilterType">
       </multiselect>
       <multiselect
         :class="{ 'selected' : size.selected.length > 0 }"
@@ -52,7 +52,7 @@
         :options="size.options"
         :show-labels="false"
         :searchable="false"
-        @input="updateSize">
+        @input="updateFilterSize">
       </multiselect>
       <multiselect
         :class="{ 'selected' : gender.selected.length > 0 }"
@@ -64,7 +64,7 @@
         :options="gender.options"
         :show-labels="false"
         :searchable="false"
-        @input="updateGender">
+        @input="updateFilterGender">
       </multiselect>
     </div>
     <div class="form__footer flex">
@@ -146,11 +146,11 @@ export default {
       this.$router.push('animals');
     },
     ...mapActions([
-      'updateType',
-      'updateSize',
-      'updateAgeGroup',
-      'updateGender',
-      'updateCity',
+      'updateFilterType',
+      'updateFilterSize',
+      'updateFilterAgeGroup',
+      'updateFilterGender',
+      'updateFilterCity',
       'resetSearchFilter'
     ])
   },

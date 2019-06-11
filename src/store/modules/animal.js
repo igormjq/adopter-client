@@ -20,6 +20,9 @@ const INITIAL_STATE = {
 
 const state = {
   edit: {},
+  new: {
+    type: ''
+  },
   search: { ...INITIAL_STATE },
   hasNextPage: true
 };
@@ -57,19 +60,19 @@ const mutations = {
   }
 }
 const actions = {
-  updateType({ commit }, types) {
+  updateFilterType({ commit }, types) {
     commit(UPDATE_SEARCH_TYPE, types);
   },
-  updateSize({ commit }, sizes) {
+  updateFilterSize({ commit }, sizes) {
     commit(UPDATE_SEARCH_SIZE, sizes);
   },
-  updateGender({ commit }, genders) {
+  updateFilterGender({ commit }, genders) {
     commit(UPDATE_SEARCH_GENDER, genders)
   },
-  updateAgeGroup({ commit }, ageGroups) {
+  updateFilterAgeGroup({ commit }, ageGroups) {
     commit(UPDATE_SEAERCH_AGE_GROUP, ageGroups);
   },
-  updateCity({ commit }, city) {
+  updateFilterCity({ commit }, city) {
     commit(UPDATE_SEARCH_CITY, city);
   },
   resetSearchFilter({ commit }) {
@@ -78,7 +81,7 @@ const actions = {
   checkNextPage({ commit }, result) {
     const hasNextPage = result && (result.length >= 20) && (result.length % 2 === 0);
     commit(CHECK_NEXT_PAGE, hasNextPage);
-  }
+  },
 }
 
 export default {

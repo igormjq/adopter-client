@@ -11,9 +11,11 @@
               <div class="step__options flex align-center">
                 <div class="option --full flex flex-column justify-center align-center">
                   <div class="icon dog"></div>
+                  <input value="DOG" type="radio" v-model="test">
                 </div>
                 <div class="option --full flex flex-column justify-center align-center">
                   <div class="icon cat"></div>
+                  <input value="CAT" type="radio" v-model="test">
                 </div>
               </div>
             </swiper-slide>
@@ -27,6 +29,7 @@
   </section>
 </template>
 <script>
+  import { mapState, mapActions } from 'vuex';
   import Card from '../../Card';
   export default {
     components: {
@@ -41,6 +44,14 @@
           },
         }
       }
+    },
+    methods: {
+
+    },
+    computed: {
+      ...mapState({
+        type: state => state.animal.new.type
+      })
     }
   }
 </script>
