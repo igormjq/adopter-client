@@ -20,15 +20,24 @@
               </div>
               <div class="step__options__actions flex space-between">
                 <pre></pre>
-                <font-awesome-icon v-if="create.type" icon="arrow-right" size="lg" @click="goToStep(1)" />
+                <font-awesome-icon v-if="create.type" icon="chevron-right" size="2x" @click="goToStep(1)" />
               </div>
             </swiper-slide>
-            <swiper-slide>
+            <swiper-slide class="step flex flex-column">
               <div class="step-title flex justify-center">
                 <span>Qual o nome do nosso amigo?</span>
               </div>
-              <font-awesome-icon icon="arrow-left" size="lg" @click="goToStep(step - 1)" />
-              <font-awesome-icon v-if="create.name" icon="arrow-right" size="lg" @click="goToStep(1)" />
+              <div class="step__options flex align-center justify-center">
+                <input 
+                  :class="{ 'active': create.name }" 
+                  type="text" v-model="create.name"
+                  placeholder="Nome"
+                >
+              </div>
+              <div class="step__options__actions flex space-between">
+                <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
+                <font-awesome-icon v-if="create.name" icon="chevron-right" size="2x" @click="goToStep(2)" />
+              </div>
             </swiper-slide>
             <swiper-slide>Slide 3</swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>

@@ -4,7 +4,7 @@
 
     &.swiper__progress {
       .swiper-slide {
-        padding: 10px;
+        padding: 10px 10px 20px 10px;
 
         .step {
           &-title {
@@ -14,7 +14,24 @@
             margin: 10px 0;
           }
           &__options {
-            height: 100%;
+            flex: 1;
+
+            input[type=text] {
+              outline: none;
+              height: 35px;
+              font-size: 16px;
+              border-bottom: 2px solid #9D9D9D;
+              border-right: none;
+              border-left: none;
+              border-top: none;
+              transition: border .4s;
+              width: 75%;
+
+              &:focus, &.active {
+                border-bottom-color: #EF3176;
+              }
+            }
+
             .option {
               height: 100%;
               position: relative;
@@ -66,12 +83,9 @@
         background: #EF3176;
       }
     }
-    .fa-arrow-right, .fa-arrow-left {
+    .fa-chevron-right, .fa-chevron-left {
       cursor: pointer;
       color: #EF3176;
-    }
-    .fa-arrow-right {
-      align-self: flex-end;
     }
   }
 }
