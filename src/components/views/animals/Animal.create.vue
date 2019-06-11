@@ -20,7 +20,9 @@
               </div>
               <div class="step__options__actions flex space-between">
                 <pre></pre>
-                <font-awesome-icon v-if="create.type" icon="chevron-right" size="2x" @click="goToStep(1)" />
+                <transition name="fade">
+                  <font-awesome-icon v-if="create.type" icon="chevron-right" size="2x" @click="goToStep(1)" />
+                </transition>
               </div>
             </swiper-slide>
             <swiper-slide class="step flex flex-column">
@@ -36,10 +38,19 @@
               </div>
               <div class="step__options__actions flex space-between">
                 <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
-                <font-awesome-icon v-if="create.name" icon="chevron-right" size="2x" @click="goToStep(2)" />
+                <transition name="fade">
+                  <font-awesome-icon v-if="create.name" icon="chevron-right" size="2x" @click="goToStep(2)" />
+                </transition>
               </div>
             </swiper-slide>
-            <swiper-slide>Slide 3</swiper-slide>
+            <swiper-slide>
+              <div class="step-title flex justify-center">
+                <span>Conte-nos um pouco mais sobre {{ create.name }}...</span>
+              </div>
+              <div class="step__options flex align-center justify-center">
+                
+              </div>
+            </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
         </card>
