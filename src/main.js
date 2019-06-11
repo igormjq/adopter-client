@@ -14,10 +14,11 @@ import {
   faSignOutAlt, 
   faPaw,
   faArrowLeft,
+  faArrowRight,
   faBriefcaseMedical,
   faSyringe,
   faHeart,
-  faUser
+  faUser,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
 import routes from './routes'
@@ -36,7 +37,8 @@ library.add(
   faInfoCircle, 
   faSignOutAlt, 
   faPaw, 
-  faArrowLeft, 
+  faArrowLeft,
+  faArrowRight,
   faBriefcaseMedical,
   faSyringe,
   faHeart,
