@@ -48,7 +48,16 @@
                 <span>Conte-nos um pouco mais sobre {{ create.name }}...</span>
               </div>
               <div class="step__options flex align-center justify-center">
-                
+                <label class="adopter-checkbox">Two
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <div class="step__options__actions flex space-between">
+                <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
+                <transition name="fade">
+                  <font-awesome-icon v-if="create.name" icon="chevron-right" size="2x" @click="goToStep(3)" />
+                </transition>
               </div>
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
