@@ -34,7 +34,7 @@
                   :class="{ 'active': create.name }" 
                   type="text" v-model="create.name"
                   placeholder="Nome"
-                >
+                  @keyup.enter="() => create.name && goToStep(2)">
               </div>
               <div class="step__options__actions flex space-between">
                 <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
@@ -43,20 +43,31 @@
                 </transition>
               </div>
             </swiper-slide>
-            <swiper-slide>
+            <swiper-slide class="step flex flex-column">
               <div class="step-title flex justify-center">
                 <span>Conte-nos um pouco mais sobre {{ create.name }}...</span>
               </div>
-              <div class="step__options flex align-center justify-center">
-                <label class="adopter-checkbox">Two
-                  <input type="checkbox">
-                  <span class="checkmark"></span>
-                </label>
+              <div class="step__options flex flex-column justify-center">
+                
               </div>
               <div class="step__options__actions flex space-between">
                 <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
                 <transition name="fade">
-                  <font-awesome-icon v-if="create.name" icon="chevron-right" size="2x" @click="goToStep(3)" />
+                  <font-awesome-icon icon="chevron-right" size="2x" @click="goToStep(3)" />
+                </transition>
+              </div>
+            </swiper-slide>
+            <swiper-slide class="step flex flex-column">
+              <div class="step-title flex justify-center">
+                <span>Como está a saúde?</span>
+              </div>
+              <div class="step__options flex align-center justify-center">
+                
+              </div>
+              <div class="step__options__actions flex space-between">
+                <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
+                <transition name="fade">
+                  <font-awesome-icon icon="chevron-right" size="2x" @click="goToStep(4)" />
                 </transition>
               </div>
             </swiper-slide>
@@ -99,7 +110,7 @@
       goToStep(num) {
         this.step = num;
         this.swiper.slideTo(this.step);
-      }
+      },
     },
     computed: {
       swiper() {
