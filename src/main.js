@@ -20,7 +20,9 @@ import {
   faHeart,
   faUser,
   faChevronLeft,
-  faChevronRight
+  faChevronRight,
+  faMars,
+  faVenus,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
 import routes from './routes'
@@ -46,7 +48,9 @@ library.add(
   faHeart,
   faUser,
   faChevronLeft,
-  faChevronRight
+  faChevronRight,
+  faMars,
+  faVenus,
 );
 
 Vue.component('container', ContainerComponent);
