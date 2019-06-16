@@ -5,6 +5,7 @@ import VueApollo from 'vue-apollo'
 import VueToasted from 'vue-toasted'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import Multiselect from 'vue-multiselect'
+import AdopterCheck from './components/AdopterRadio.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { 
   faSearch, 
@@ -57,6 +58,7 @@ Vue.component('container', ContainerComponent);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.component('font-awesome-layers', FontAwesomeLayers);
 Vue.component('multiselect', Multiselect);
+Vue.component('adopter-radio', AdopterCheck);
 
 // Router
 Vue.use(VueRouter);

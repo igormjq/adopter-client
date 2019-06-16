@@ -47,55 +47,27 @@
               <div class="step-title flex justify-center">
                 <span>Conte-nos um pouco mais sobre {{ create.name }}...</span>
               </div>
-              <div class="step__options flex flex-column">
-                <div class="adopter-selectable">
-                  <div class="adopter-selectable__label">Gênero</div>
-                  <div class="adopter-selectable__items flex">
-                    <div class="item">
-                      <font-awesome-icon icon="mars" />
-                      <span>Macho</span>
-                    </div>
-                    <div class="item selected">
-                      <font-awesome-icon icon="venus" />
-                      <span>Fêmea</span>
-                    </div>
+              <div class="step__options flex flex-column space-around">
+                <div class="step__options__group">
+                  <span class="label">Gênero</span>
+                  <div class="flex">
+                    <adopter-radio value="MALE" v-model="create.gender">Macho</adopter-radio>
+                    <adopter-radio value="FEMALE" v-model="create.gender">Fêmea</adopter-radio>
                   </div>
                 </div>
-                <div class="adopter-selectable">
-                  <div class="adopter-selectable__label">Porte</div>
-                  <div class="adopter-selectable__items flex">
-                    <div class="item">
-                      <font-awesome-icon icon="paw" />
-                      <span>Pequeno</span>
-                    </div>
-                    <div class="item selected">
-                      <font-awesome-icon icon="paw" />
-                      <span>Médio</span>
-                    </div>
-                    <div class="item">
-                      <font-awesome-icon icon="paw" />
-                      <span>Grande</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="adopter-selectable">
-                  <div class="adopter-selectable__label">Etapa de vida</div>
-                  <div class="adopter-selectable__items flex">
-                    <div class="item">
-                      <font-awesome-icon icon="paw" />
-                      <span>Filhote</span>
-                    </div>
-                    <div class="item selected">
-                      <font-awesome-icon icon="paw" />
-                      <span>Adulto</span>
-                    </div>
+                <div class="step__options__group">
+                  <span class="label">Porte</span>
+                  <div class="flex">
+                    <adopter-radio value="SMALL" v-model="create.size">Pequeno</adopter-radio>
+                    <adopter-radio value="MEDIUM" v-model="create.size">Médio</adopter-radio>
+                    <adopter-radio value="LARGE" v-model="create.size">Grande</adopter-radio>
                   </div>
                 </div>
               </div>
               <div class="step__options__actions flex space-between">
                 <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
                 <transition name="fade">
-                  <font-awesome-icon icon="chevron-right" size="2x" @click="goToStep(3)" />
+                  <font-awesome-icon v-if="create.gender && create.size" icon="chevron-right" size="2x" @click="goToStep(3)" />
                 </transition>
               </div>
             </swiper-slide>
