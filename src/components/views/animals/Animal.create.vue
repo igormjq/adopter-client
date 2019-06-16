@@ -63,11 +63,18 @@
                     <adopter-radio value="LARGE" v-model="create.size">Grande</adopter-radio>
                   </div>
                 </div>
+                <div class="step__options__group">
+                  <span class="label">Etapa de vida</span>
+                  <div class="flex">
+                    <adopter-radio value="PUPPY" v-model="create.ageGroup">Filhote</adopter-radio>
+                    <adopter-radio value="ADULT" v-model="create.ageGroup">Adulto</adopter-radio>
+                  </div>
+                </div>
               </div>
               <div class="step__options__actions flex space-between">
                 <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
                 <transition name="fade">
-                  <font-awesome-icon v-if="create.gender && create.size" icon="chevron-right" size="2x" @click="goToStep(3)" />
+                  <font-awesome-icon v-if="create.gender && create.size && create.ageGroup" icon="chevron-right" size="2x" @click="goToStep(3)" />
                 </transition>
               </div>
             </swiper-slide>
@@ -106,6 +113,7 @@
           name: '',
           size: '',
           gender: '',
+          ageGroup: '',
           castrated: false,
           vaccinated: false,
           about: ''
