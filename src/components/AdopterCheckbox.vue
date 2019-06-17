@@ -1,9 +1,9 @@
 <template>
-  <label class="adopter-check radio">
+  <label class="adopter-check checkbox">
     <span class="content">
       <slot></slot>
     </span>
-    <input type="radio" :checked="shouldBeChecked" :value="value" @change="updateInput">
+    <input type="checkbox" :checked="shouldBeChecked" :value="value" @change="updateInput">
     <span class="mark"></span>
   </label>
 </template>
@@ -19,24 +19,48 @@ export default {
       type: String
     },
     modelValue: {
-      default: ''
+      type: [Boolean, Array]
+    },
+    trueValue: {
+      default: true
+    },
+    falseValue: {
+      defaule: false
     }
   },
   methods: {
-    updateInput() {
-      this.$emit('change', this.value);
+    updateInput(e) {
+      if(this.isList) {
+        let newList = [...this.modelValue];
+
+        if(e.target.checked) {
+          newList.push(this.value);
+        } else {
+          newList.splice(newList.indexOf(this.value), 1);
+        }
+
+        return this.$emit('change', newList);
+      }
+
+      this.$emit('change', e.target.checked);
     }
   },
   computed: {
+    isList() {
+      return Array.isArray(this.modelValue);
+    },
     shouldBeChecked() {
-      return this.modelValue === this.value;
+      if(this.isList) {
+        return this.modelValue.includes(this.value);
+      }
+      return this.modelValue === this.trueValue;
     }
-  }
+  },
 }
 </script>
 
 <style lang="scss">
-.adopter-check.radio {
+.adopter-check.checkbox {
   display: flex;
   align-items: center;
   position: relative;
@@ -60,7 +84,7 @@ export default {
     order: 0;
     transition: all .3s;
     border: 1px solid #e1e1e1;
-    border-radius: 50%;
+    padding-bottom: 4px;
 
     &:after {
       content: '';
@@ -98,21 +122,7 @@ export default {
           transform: rotate(45deg);
         }
       }
-    }
-
-    &[type=radio]:checked {
-      & ~ .mark {
-        &:after {
-          background-color: #FFF;
-          display: flex;
-          width: .5em;
-          height: .5em;
-          border-radius: 50%;
-          align-items: center;
-          justify-content:center;
-        }
-      }
-    }
+    };
   }
 
   

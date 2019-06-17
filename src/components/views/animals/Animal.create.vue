@@ -83,7 +83,12 @@
                 <span>Como está a saúde?</span>
               </div>
               <div class="step__options flex align-center justify-center">
-                
+                <div class="step__options__group">
+                  <div class="flex">
+                    <adopter-checkbox v-model="create.vaccinated">Vacinado</adopter-checkbox>
+                    <adopter-checkbox v-model="create.castrated">Castrado</adopter-checkbox>
+                  </div>
+                </div>
               </div>
               <div class="step__options__actions flex space-between">
                 <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
@@ -118,7 +123,7 @@
           vaccinated: false,
           about: ''
         },
-        step: 2,
+        step: 3,
         swiperOption: {
           allowTouchMove: false,
           pagination: {
