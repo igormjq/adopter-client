@@ -45,7 +45,7 @@
             </swiper-slide>
             <swiper-slide class="step flex flex-column">
               <div class="step-title flex justify-center">
-                <span>Conte-nos um pouco mais sobre {{ create.name }}...</span>
+                <span>Conte-nos um pouco sobre {{ create.name }}...</span>
               </div>
               <div class="step__options flex flex-column space-around">
                 <div class="step__options__group">
@@ -80,13 +80,17 @@
             </swiper-slide>
             <swiper-slide class="step flex flex-column">
               <div class="step-title flex justify-center">
-                <span>Como está a saúde?</span>
+                <span>Como está a saúde de {{ create.name }}?</span>
               </div>
               <div class="step__options flex align-center justify-center">
                 <div class="step__options__group">
                   <div class="flex">
-                    <adopter-checkbox v-model="create.vaccinated">Vacinado</adopter-checkbox>
-                    <adopter-checkbox v-model="create.castrated">Castrado</adopter-checkbox>
+                    <adopter-checkbox v-model="create.vaccinated">
+                      Vacinad{{ parseWordToGender(create.gender) }}
+                    </adopter-checkbox>
+                    <adopter-checkbox v-model="create.castrated">
+                      Castrad{{ parseWordToGender(create.gender) }}
+                    </adopter-checkbox>
                   </div>
                 </div>
               </div>
@@ -106,11 +110,13 @@
 </template>
 <script>
   import { mapState, mapActions } from 'vuex';
+  import AnimalMixins from '../../../mixins/AnimalMixins';
   import Card from '../../Card';
   export default {
     components: {
       Card,
     },
+    mixins: [AnimalMixins],
     data() {
       return {
         create: {
@@ -123,7 +129,7 @@
           vaccinated: false,
           about: ''
         },
-        step: 3,
+        step: 0,
         swiperOption: {
           allowTouchMove: false,
           pagination: {

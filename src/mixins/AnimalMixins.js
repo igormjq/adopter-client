@@ -22,13 +22,18 @@ export default {
     animalSize({ size }, targetSize) {
       return size.toLowerCase() === targetSize;
     },
-    animalSizeName({ size }) {
-      switch(size) {
-
-      }
-    },
     animalIsFavorite(animalId) {
       if(this.user) return this.user.favoriteAnimals.some(({ id }) => id === animalId);
+    },
+    parseWordToGender(gender) {
+      switch(gender) {
+        case 'MALE':
+          return 'o';
+        case 'FEMALE':
+          return 'a';
+        default:
+          return 'o';
+      }
     },
     async toggleFavoriteAnimal(animal) {
       if(!this.user) 
