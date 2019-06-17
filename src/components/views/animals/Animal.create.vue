@@ -48,14 +48,14 @@
                 <span>Conte-nos um pouco sobre {{ create.name }}...</span>
               </div>
               <div class="step__options flex flex-column space-around">
-                <div class="step__options__group">
+                <div class="step__options__group flex flex-column align-center">
                   <span class="label">Gênero</span>
                   <div class="flex">
                     <adopter-radio value="MALE" v-model="create.gender">Macho</adopter-radio>
                     <adopter-radio value="FEMALE" v-model="create.gender">Fêmea</adopter-radio>
                   </div>
                 </div>
-                <div class="step__options__group">
+                <div class="step__options__group flex flex-column align-center">
                   <span class="label">Porte</span>
                   <div class="flex">
                     <adopter-radio value="SMALL" v-model="create.size">Pequeno</adopter-radio>
@@ -63,7 +63,7 @@
                     <adopter-radio value="LARGE" v-model="create.size">Grande</adopter-radio>
                   </div>
                 </div>
-                <div class="step__options__group">
+                <div class="step__options__group flex flex-column align-center">
                   <span class="label">Etapa de vida</span>
                   <div class="flex">
                     <adopter-radio value="PUPPY" v-model="create.ageGroup">Filhote</adopter-radio>
