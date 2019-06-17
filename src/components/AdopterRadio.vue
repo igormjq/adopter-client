@@ -1,5 +1,5 @@
 <template>
-  <label class="adopter-check radio">
+  <label class="adopter-check radio" :class="{ 'selected': shouldBeChecked }">
     <span class="content">
       <slot></slot>
     </span>
@@ -47,20 +47,26 @@ export default {
   -ms-user-select: none;
   user-select: none;
   margin-right: 10px;
+  filter: grayscale(100%);
+  transition: filter .3s;
+
+  &.selected {
+    filter: grayscale(0);
+  }
 
   .content {
     order: 1;
+    color: #EF3176;
   }
 
   .mark {
     height: 1rem;
     width: 1rem;
-    background-color: #eee;
     margin-right: 5px;
     order: 0;
     transition: all .3s;
-    border: 1px solid #e1e1e1;
     border-radius: 50%;
+    border: 2px solid #989898;
 
     &:after {
       content: '';
@@ -78,32 +84,18 @@ export default {
 
     &:checked {
       & ~ .mark {
-        background-color: #EF3176;
+        background-color: #FFF;
         display: flex;
         align-items: center;
         justify-content: center;
-        border: none;
-      }
-    }
-    &[type=checkbox]:checked {
-      & ~ .mark {
-        &:after {
-          display: block;
-          width: 4px; // 25 -> 5
-          height: 8px; // 25 -> 10
-          border: solid white;
-          border-width: 0 3px 3px 0;
-          -webkit-transform: rotate(45deg);
-          -ms-transform: rotate(45deg);
-          transform: rotate(45deg);
-        }
+        border-color: #EF3176;
       }
     }
 
     &[type=radio]:checked {
       & ~ .mark {
         &:after {
-          background-color: #FFF;
+          background-color: #EF3176;
           display: flex;
           width: .5em;
           height: .5em;
