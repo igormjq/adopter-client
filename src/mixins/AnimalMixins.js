@@ -7,7 +7,7 @@ export default {
         { key: 'vaccinated', displayName: (gender) => 'Vacinad' + this.parseWordToGender(gender) , iconName: 'syringe'  },
         { key: 'castrated', displayName: (gender) => 'Castrad' + this.parseWordToGender(gender), iconName: 'briefcase-medical' },
         { key: 'dewormed', displayName: (gender) => 'Desverminad' + this.parseWordToGender(gender), iconName: 'pills' },
-        { key: 'specialNeeds', displayName: (gender) => 'Necessidades especiais', iconPath: require('../assets/img/icon/animal/special-needs.svg') }
+        { key: 'specialNeeds', displayName: () => 'Necessidades especiais', iconPath: require('../assets/img/icon/animal/special-needs.svg') }
       ]
     }
   },

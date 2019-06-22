@@ -84,12 +84,18 @@
               </div>
               <div class="step__options flex align-center justify-center">
                 <div class="step__options__group">
-                  <div class="flex">
+                  <div class="flex flex-wrap justify-center">
                     <adopter-checkbox v-model="create.vaccinated">
                       Vacinad{{ parseWordToGender(create.gender) }}
                     </adopter-checkbox>
                     <adopter-checkbox v-model="create.castrated">
                       Castrad{{ parseWordToGender(create.gender) }}
+                    </adopter-checkbox>
+                    <adopter-checkbox v-model="create.dewormed">
+                      Desverminad{{ parseWordToGender(create.gender) }}
+                    </adopter-checkbox>
+                    <adopter-checkbox v-model="create.specialNeeds">
+                      Possui necessidades especiais
                     </adopter-checkbox>
                   </div>
                 </div>
@@ -127,6 +133,8 @@
           ageGroup: '',
           castrated: false,
           vaccinated: false,
+          dewormed: false,
+          specialNeeds: false,
           about: ''
         },
         step: 0,
@@ -167,6 +175,10 @@
         border-radius: 0;
         &__content {
           height: 100%;
+        }
+
+        .adopter-check.checkbox {
+          margin: 5px;
         }
       }
     }
