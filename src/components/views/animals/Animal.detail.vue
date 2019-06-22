@@ -32,12 +32,14 @@
                   <li>Idade: {{ animalAgeGroup(animal) }} </li>
                 </ul>
                 <ul class="animal__info__details__specific">
-                  <li 
-                    v-for="{ displayName, iconName, key } in animalInfo" 
+                  <li
+                    class="flex align-center"
+                    v-for="{ displayName, iconName, iconPath, key } in animalInfo" 
                     :key="key"
                     v-if="animal[key]">
-                    <font-awesome-icon :icon="iconName" :style="{ 'color': '#EF3176' }"/>
-                    <span>{{ displayName }}</span>
+                    <font-awesome-icon v-if="iconName" :icon="iconName" :style="{ 'color': '#EF3176' }"/>
+                    <img :src="iconPath" v-else />
+                    <span>{{ displayName(animal.gender) }}</span>
                   </li>
                 </ul>
               </div>
@@ -206,6 +208,14 @@ export default {
             &__specific {
               &:before {
                 content: 'Outras características';
+              }
+              li {
+                img {
+                  width: 1rem;
+                }
+                span {
+                  margin-left: 5px;
+                }
               }
             }
 

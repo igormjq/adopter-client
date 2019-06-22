@@ -4,8 +4,10 @@ export default {
   data() {
     return {
       animalInfo: [
-        { key: 'vaccinated', displayName: 'Vacinado', iconName: 'syringe'  },
-        { key: 'castrated', displayName: 'Castrado', iconName: 'briefcase-medical' }
+        { key: 'vaccinated', displayName: (gender) => 'Vacinad' + this.parseWordToGender(gender) , iconName: 'syringe'  },
+        { key: 'castrated', displayName: (gender) => 'Castrad' + this.parseWordToGender(gender), iconName: 'briefcase-medical' },
+        { key: 'dewormed', displayName: (gender) => 'Desverminad' + this.parseWordToGender(gender), iconName: 'pills' },
+        { key: 'specialNeeds', displayName: (gender) => 'Necessidades especiais', iconPath: require('../assets/img/icon/animal/special-needs.svg') }
       ]
     }
   },
@@ -32,7 +34,7 @@ export default {
         case 'FEMALE':
           return 'a';
         default:
-          return 'o';
+          return '';
       }
     },
     async toggleFavoriteAnimal(animal) {

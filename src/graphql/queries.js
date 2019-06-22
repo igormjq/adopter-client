@@ -26,6 +26,8 @@ export const GET_ANIMAL = gql`query animal($id: ID!) {
     ageGroup
     castrated
     vaccinated
+    dewormed
+    specialNeeds
     profileImg
     owner {
       id
