@@ -19,7 +19,14 @@ export default {
       return gender === 'MALE' ? 'Macho' : 'Fêmea';
     },
     animalAgeGroup({ ageGroup }) {
-      return ageGroup === 'ADULT' ? 'Adulto' : 'Filhote';
+      switch(ageGroup) {
+        case 'PUPPY':
+          return 'Filhote';
+        case 'ADULT':
+          return 'Adulto';
+        case 'ELDERLY':
+          return 'Idoso';
+      }
     },
     animalSize({ size }, targetSize) {
       return size.toLowerCase() === targetSize;

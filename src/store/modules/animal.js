@@ -12,7 +12,7 @@ const INITIAL_STATE = {
   size_in: ['SMALL', 'MEDIUM', 'LARGE'],
   gender_in: ['MALE', 'FEMALE'],
   type_in: ['DOG', 'CAT'],
-  ageGroup_in: ['ADULT', 'PUPPY'],
+  ageGroup_in: ['ADULT', 'ELDERLY', 'PUPPY'],
   address: {
     city_contains: '',
   }
