@@ -32,7 +32,7 @@
               <div class="step__options flex align-center justify-center">
                 <input 
                   :class="{ 'active': create.name }" 
-                  type="text" v-model="create.name"
+                  type="text" v-model="create.name "
                   placeholder="Nome"
                   @keyup.enter="() => create.name && goToStep(2)">
               </div>
@@ -107,6 +107,30 @@
                 </transition>
               </div>
             </swiper-slide>
+            <swiper-slide class="step flex flex-column">
+              <div class="step-title flex flex-column justify-center">
+                <span>Conte aos Adopters um pouco sobre {{ create.name }}</span>
+                <div class="tip" v-if="create.specialNeeds">
+                  <font-awesome-icon icon="star-of-life" size="xs" :style="{ 'color': '#EF3176' }"/>
+                  <span>
+                    Não esqueça de descrever as necessidades especiais!
+                  </span>
+                </div>
+              </div>
+              <div class="step__options flex align-center justify-center">
+                <textarea 
+                  :class="{ 'active': create.about }" 
+                  type="text" v-model="create.about"
+                  :placeholder="`${create.name}...`"
+                  @keyup.enter="() => create.name && goToStep(2)" />
+              </div>
+              <div class="step__options__actions flex space-between">
+                <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
+                <transition name="fade">
+                  <font-awesome-icon v-if="create.name" icon="chevron-right" size="2x" @click="goToStep(2)" />
+                </transition>
+              </div>
+            </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
         </card>
@@ -135,7 +159,7 @@
           vaccinated: false,
           dewormed: false,
           specialNeeds: false,
-          about: ''
+          about: ''.trim()
         },
         step: 0,
         swiperOption: {

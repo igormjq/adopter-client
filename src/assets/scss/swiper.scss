@@ -5,7 +5,11 @@
     &.swiper__progress {
       .swiper-slide {
         padding: 10px 10px 20px 10px;
-
+        .tip {
+          font-size: 12px;
+          margin: 10px 0;
+          color: #9D9D9D;
+        }
         .step {
           &-title {
             color: #EF3176;
@@ -28,21 +32,30 @@
               }
             }
 
-            input[type=text] {
+            input[type=text], textarea {
               outline: none;
-              font-size: 28px;
               font-weight: 300;
               padding-bottom: 10px;
+              transition: border .4s;
               border-bottom: 2px solid #9D9D9D;
               border-right: none;
               border-left: none;
               border-top: none;
-              transition: border .4s;
-              width: 75%;
-
               &:focus, &.active {
-                border-bottom-color: #EF3176;
+                border-color: #EF3176;
               }
+            }
+
+            input[type=text] {
+              font-size: 28px;
+              width: 75%;
+            }
+
+            textarea {
+              width: 90%;
+              height: 90%;
+              font-size: 18px;
+              resize: none;
             }
 
             .option {
