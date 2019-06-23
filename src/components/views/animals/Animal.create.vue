@@ -122,12 +122,26 @@
                   :class="{ 'active': create.about }" 
                   type="text" v-model="create.about"
                   :placeholder="`${create.name}...`"
-                  @keyup.enter="() => create.name && goToStep(2)" />
+                  @keyup.enter="() => create.name && goToStep(5)" />
               </div>
               <div class="step__options__actions flex space-between">
                 <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
                 <transition name="fade">
-                  <font-awesome-icon v-if="create.name" icon="chevron-right" size="2x" @click="goToStep(2)" />
+                  <font-awesome-icon v-if="create.about" icon="chevron-right" size="2x" @click="goToStep(5)" />
+                </transition>
+              </div>
+            </swiper-slide>
+            <swiper-slide class="step flex flex-column">
+              <div class="step-title flex flex-column justify-center">
+                <span>Agora vamos escolher uma foto bonita</span>
+              </div>
+              <div class="step__options flex align-center justify-center">
+                <file-uploader @imageUploaded="setProfileImage" />
+              </div>
+              <div class="step__options__actions flex space-between">
+                <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
+                <transition name="fade">
+                  <font-awesome-icon icon="chevron-right" size="2x" @click="goToStep(2)" />
                 </transition>
               </div>
             </swiper-slide>
@@ -142,9 +156,11 @@
   import { mapState, mapActions } from 'vuex';
   import AnimalMixins from '../../../mixins/AnimalMixins';
   import Card from '../../Card';
+  import FileUploader from '../../MultipleFileUploader.vue';
   export default {
     components: {
       Card,
+      FileUploader
     },
     mixins: [AnimalMixins],
     data() {
@@ -155,13 +171,17 @@
           size: '',
           gender: '',
           ageGroup: '',
+          profileImg: '',
           castrated: false,
           vaccinated: false,
           dewormed: false,
           specialNeeds: false,
           about: ''.trim()
         },
-        step: 0,
+        temp: {
+          profileImg: '',
+        },
+        step: 5,
         swiperOption: {
           allowTouchMove: false,
           pagination: {
@@ -176,6 +196,11 @@
         this.step = num;
         this.swiper.slideTo(this.step);
       },
+      setProfileImage(image) {
+        if(!Array.isArray(image)) {
+          this.temp.profileImg = image;
+        }
+      }
     },
     computed: {
       swiper() {
@@ -192,7 +217,7 @@
     background-color: #eaebed;
     .wrapper {
       width: 35vw;
-      height: 50vh;
+      height: 65vh;
 
       .card {
         height: 100%;
