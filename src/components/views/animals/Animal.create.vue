@@ -141,6 +141,23 @@
               <div class="step__options__actions flex space-between">
                 <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
                 <transition name="fade">
+                  <font-awesome-icon icon="chevron-right" size="2x" @click="goToStep(6)" />
+                </transition>
+              </div>
+            </swiper-slide>
+            <swiper-slide class="step flex flex-column">
+              <div class="step-title flex flex-column justify-center">
+                <span>Ficou ótimo. Fique à vontade para escolher mais fotos!</span>
+              </div>
+              <div class="step__options flex justify-center">
+                <file-uploader 
+                  @imageUploaded="setProfileImage" 
+                  :multiple="true"
+                />
+              </div>
+              <div class="step__options__actions flex space-between">
+                <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
+                <transition name="fade">
                   <font-awesome-icon icon="chevron-right" size="2x" @click="goToStep(2)" />
                 </transition>
               </div>
@@ -181,7 +198,7 @@
         temp: {
           profileImg: '',
         },
-        step: 5,
+        step: 6,
         swiperOption: {
           allowTouchMove: false,
           pagination: {

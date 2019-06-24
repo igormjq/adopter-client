@@ -26,7 +26,9 @@ import {
   faMars,
   faVenus,
   faPills,
-  faStarOfLife
+  faStarOfLife,
+  faImages,
+  faImage
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
 import routes from './routes'
@@ -56,7 +58,9 @@ library.add(
   faMars,
   faVenus,
   faPills,
-  faStarOfLife
+  faStarOfLife,
+  faImages,
+  faImage
 );
 
 Vue.component('container', ContainerComponent);
