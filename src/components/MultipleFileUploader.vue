@@ -51,6 +51,7 @@ export default {
     async filesUploaded({ target: { files }}) {
       if(!this.multiple) {
         const [file] = files;
+        this.$emit('imageUploaded', file);
         this.readSingleFile(file);
       }
 
@@ -70,7 +71,7 @@ export default {
     bindReaderEvents(reader) {
       reader.onload = () => {
         if(this.multiple) return this.imagesList.push(reader.result);
-
+      
         return this.imageData = reader.result;
       };
       reader.onprogress = () => this.$store.dispatch('loadPage');

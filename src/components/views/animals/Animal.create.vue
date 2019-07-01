@@ -137,6 +137,7 @@
               </div>
               <div class="step__options flex align-center justify-center">
                 <file-uploader @imageUploaded="setProfileImage" />
+                <button @click="sendToFirebase">teste upload</button>
               </div>
               <div class="step__options__actions flex space-between">
                 <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
@@ -198,7 +199,7 @@
         temp: {
           profileImg: '',
         },
-        step: 6,
+        step: 5,
         swiperOption: {
           allowTouchMove: false,
           pagination: {
@@ -216,6 +217,15 @@
       setProfileImage(image) {
         if(!Array.isArray(image)) {
           this.temp.profileImg = image;
+        }
+      },
+      async sendToFirebase() {
+        if(this.temp.profileImg) {
+          const { ref } = await this.$firebase.child(`animals/${this.temp.profileImg.name}`).put(this.temp.profileImg);
+
+          const url = await ref.getDownloadURL();
+
+          console.log('aaaa', url);
         }
       }
     },

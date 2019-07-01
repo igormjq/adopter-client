@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+import firebase from './firebase'
 import VueRouter from 'vue-router'
 import VueApollo from 'vue-apollo'
 import VueToasted from 'vue-toasted'
@@ -75,6 +76,8 @@ Vue.use(VueRouter);
 Vue.use(VueApollo);
 Vue.use(VueToasted, { iconPack: 'fontawesome' });
 Vue.use(VueAwesomeSwiper);
+
+Vue.prototype.$firebase = firebase.storage().ref();
 
 const apolloProvider = new VueApollo({
   defaultClient: apolloClient
