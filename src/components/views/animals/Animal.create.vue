@@ -137,7 +137,6 @@
               </div>
               <div class="step__options flex align-center justify-center">
                 <file-uploader @imageUploaded="setProfileImage" />
-                <button @click="sendToFirebase">teste upload</button>
               </div>
               <div class="step__options__actions flex space-between">
                 <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
@@ -175,6 +174,8 @@
   import AnimalMixins from '../../../mixins/AnimalMixins';
   import Card from '../../Card';
   import FileUploader from '../../MultipleFileUploader.vue';
+  import { UploadFile } from '../../../services/FirebaseService';
+
   export default {
     components: {
       Card,
@@ -221,11 +222,7 @@
       },
       async sendToFirebase() {
         if(this.temp.profileImg) {
-          const { ref } = await this.$firebase.child(`animals/${this.temp.profileImg.name}`).put(this.temp.profileImg);
-
-          const url = await ref.getDownloadURL();
-
-          console.log('aaaa', url);
+          const url = await UploadFile(this.temp.profileImg, 'animals');
         }
       }
     },
