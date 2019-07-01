@@ -10,7 +10,8 @@
           v-for="(image, i) in imagesList"
           :key="i"
           class="images-preview__image flex align-center justify-center"
-          :style="{ 'background-image': 'url(' + image + ')' }">
+          :style="{ 'background-image': 'url(' + image + ')' }"
+          @click="removeImage($event, i)">
           <div class="delete-image">
             <font-awesome-icon icon="trash-alt" size="2x"/>
           </div>
@@ -72,6 +73,10 @@ export default {
       }
       
       this.sendData();
+    },
+    removeImage(event, i) {
+      this.imagesList.splice(i, 1);
+      this.imageFilesList.splice(i, 1);
     },
     validateFiles(files) {
       const spaceRemaning = 6 - (this.imageFilesList.length);
