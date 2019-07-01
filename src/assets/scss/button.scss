@@ -33,6 +33,11 @@
   &.pink {
     background-color: #EF3176;
     color: #FFF;
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: .65;
+    }
   }
 
   &.btn-block {

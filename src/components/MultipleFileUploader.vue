@@ -9,9 +9,12 @@
         <div
           v-for="(image, i) in imagesList"
           :key="i"
-          class="images-preview__image"
-          :style="{ 'background-image': 'url(' + image + ')' }"
-        />
+          class="images-preview__image flex align-center justify-center"
+          :style="{ 'background-image': 'url(' + image + ')' }">
+          <div class="delete-image">
+            <font-awesome-icon icon="trash-alt" size="2x"/>
+          </div>
+        </div>
       </div>
       <font-awesome-icon :icon="multiple ? 'images' : 'image'" size="5x" :style="{ 'color': '#8a8a8a' }" v-if="isEmpty" />
     </div>
@@ -22,7 +25,11 @@
       @input="filesUploaded"
       ref="fileUploadInput"
     >
-    <button v-if="showButton" class="btn pink" :class="{ 'btn-block': !multiple }" @click="openFilePicker">
+    <button 
+      v-if="showButton" class="btn pink" 
+      :class="{ 'btn-block': !multiple }" 
+      @click="openFilePicker"
+      :disabled="imageFilesList.length === 6">
       {{ buttonText }}
     </button>
   </div>
@@ -33,34 +40,50 @@ export default {
   props: {
     multiple: {
       type: Boolean,
-      default: false
+      default: false,
     },
     showButton: {
       type: Boolean,
-      default: true
+      default: true,
     }
   },
   data() {
     return {
       imagesList: [],
       imageData: null,
-      reader: new FileReader()
+      imageFile: null,
+      imageFilesList: [],
     }
   },
   methods: {
     async filesUploaded({ target: { files }}) {
       if(!this.multiple) {
         const [file] = files;
-        this.$emit('imageUploaded', file);
-        this.readSingleFile(file);
-      }
+        this.imageFile = file;
 
-      this.readMultipleFiles(files);
+        this.readSingleFile(file);
+        
+      } else if (this.validateFiles(files)) {
+        this.imageFilesList.push(...files);
+
+        this.readMultipleFiles(files);
+      } else {
+        alert('Limite de arquivos (6) excedido');
+      }
+      
+      this.sendData();
+    },
+    validateFiles(files) {
+      const spaceRemaning = 6 - (this.imageFilesList.length);
+
+      return (files.length <= 6) && (files.length <= spaceRemaning);
     },
     readMultipleFiles(files) {
       for (let file of files) {
         this.readSingleFile(file);
       }
+
+      this.sendData();
     },
     readSingleFile(file) {
       const reader = new FileReader();
@@ -81,7 +104,9 @@ export default {
       this.$refs.fileUploadInput.click();
     },
     sendData() {
-      return this.multiple ? this.imagesList : this.imageData;
+      return this.multiple ? 
+        this.$emit('imageUploaded', this.imageFilesList) : 
+        this.$emit('imageUploaded', this.imageFile);
     }
   },
   computed: {
@@ -120,6 +145,36 @@ export default {
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
+            position: relative;
+
+            .delete-image {
+              display: none;
+              color: #FFF;
+              position: absolute;
+            }
+
+            &:before {
+              content: '';
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              top: 0;
+              left: 0;
+              opacity: 0;
+              transition: opacity .5s;
+              background-color: rgba(239, 49, 118, 0.79);
+            }
+
+            &:hover {
+              cursor: pointer;
+
+              &:before {
+                opacity: 1;
+              }
+              .delete-image {
+                display: block;
+              }
+            }
           }
         }
       }

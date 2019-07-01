@@ -136,7 +136,7 @@
                 <span>Agora vamos escolher uma foto bonita</span>
               </div>
               <div class="step__options flex align-center justify-center">
-                <file-uploader @imageUploaded="setProfileImage" />
+                <file-uploader @imageUploaded="setUploadedData" />
               </div>
               <div class="step__options__actions flex space-between">
                 <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
@@ -151,7 +151,7 @@
               </div>
               <div class="step__options flex justify-center">
                 <file-uploader 
-                  @imageUploaded="setProfileImage" 
+                  @imageUploaded="setUploadedData" 
                   :multiple="true"
                 />
               </div>
@@ -199,6 +199,7 @@
         },
         temp: {
           profileImg: '',
+          photos: [],
         },
         step: 5,
         swiperOption: {
@@ -215,9 +216,11 @@
         this.step = num;
         this.swiper.slideTo(this.step);
       },
-      setProfileImage(image) {
-        if(!Array.isArray(image)) {
-          this.temp.profileImg = image;
+      setUploadedData(data) {
+        if(!Array.isArray(data)) {
+          this.temp.profileImg = data;
+        } else {
+          this.temp.photos = data;
         }
       },
       async sendToFirebase() {

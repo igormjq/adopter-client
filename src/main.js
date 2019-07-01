@@ -28,7 +28,8 @@ import {
   faPills,
   faStarOfLife,
   faImages,
-  faImage
+  faImage,
+  faTrashAlt
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
 import routes from './routes'
@@ -60,7 +61,8 @@ library.add(
   faPills,
   faStarOfLife,
   faImages,
-  faImage
+  faImage,
+  faTrashAlt
 );
 
 Vue.component('container', ContainerComponent);

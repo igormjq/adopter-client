@@ -10,6 +10,7 @@ export const UploadFile = async (file, path) => {
     
     return ref.getDownloadURL();
   } catch(err) {
+    
     return err;
   }
 };
