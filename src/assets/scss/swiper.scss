@@ -123,10 +123,21 @@
                 margin-bottom: 10px;
               }
               &__details {
+                // display: grid;
+                // grid-template-rows: repeat(3, 1fr);
+
+                & > div {
+                  display: flex;
+                  align-items: center;
+                  padding: 10px 0;
+                  
+                  &:not(:last-child) {
+                    border-bottom: 1px solid #f7f7f7;
+                  }
+                }
                 ul {
                   margin-bottom: 5px;
                   padding-bottom: 10px;
-                  border-bottom: 1px solid #f7f7f7;
 
                   li {
                     margin-bottom: 5px;

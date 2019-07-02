@@ -69,7 +69,10 @@ export default {
 
         this.readMultipleFiles(files);
       } else {
-        alert('Limite de arquivos (6) excedido');
+        this.$swal( {
+          type: 'error',
+          text: 'Limite de imagens excedido (máx. 6)'
+        });
       }
       
       this.sendData();
@@ -120,7 +123,7 @@ export default {
     },
     isEmpty() {
       return !(this.imageData || !!this.imagesList.length);
-    }
+    },
   },
 }
 </script>

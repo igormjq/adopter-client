@@ -196,7 +196,11 @@
                       </ul>
                     </div>
                     <div class="summary__about">
-                      <p>{{ create.about }}</p>
+                      <p>
+                        <font-awesome-icon class="text-pink" icon="quote-left" size="xs" />
+                        {{ create.about }}
+                        <font-awesome-icon icon="quote-right" class="text-pink" size="xs" />
+                      </p>
                     </div>
                   </div>
                 </div>       
@@ -228,25 +232,25 @@
     data() {
       return {
         create: {
-          type: '',
-          name: '',
-          size: '',
-          gender: '',
-          ageGroup: '',
+          type: 'DOG',
+          name: 'Fúlvio',
+          size: 'MEDIUM',
+          gender: 'MALE',
+          ageGroup: 'ADULT',
           profileImg: '',
           photos: [],
-          castrated: false,
-          vaccinated: false,
+          castrated: true,
+          vaccinated: true,
           dewormed: false,
           specialNeeds: false,
-          about: ''.trim()
+          about: 'Um cachorro bacana que encontrei no parque. Precisa de um lar.'.trim()
         },
         temp: {
           profileImg: '',
           profileImgPreview: '',
           photos: [],
         },
-        step: 0,
+        step: 6,
         swiperOption: {
           allowTouchMove: false,
           pagination: {

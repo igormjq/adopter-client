@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import VueApollo from 'vue-apollo'
 import VueToasted from 'vue-toasted'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import VueSweetAlert from 'vue-sweetalert2'
 import Multiselect from 'vue-multiselect'
 import AdopterRadioInput from './components/AdopterRadio.vue'
 import AdopterCheckboxInput from './components/AdopterCheckbox.vue'
@@ -29,7 +30,9 @@ import {
   faStarOfLife,
   faImages,
   faImage,
-  faTrashAlt
+  faTrashAlt,
+  faQuoteRight,
+  faQuoteLeft,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
 import routes from './routes'
@@ -37,6 +40,7 @@ import apolloClient from './apollo'
 import store from './store'
 import '../node_modules/vue-multiselect/dist/vue-multiselect.min.css'
 import 'swiper/dist/css/swiper.css'
+import 'sweetalert2/dist/sweetalert2.min.css'
 
 // Global components
 import ContainerComponent from './components/partials/Container'
@@ -62,7 +66,9 @@ library.add(
   faStarOfLife,
   faImages,
   faImage,
-  faTrashAlt
+  faTrashAlt,
+  faQuoteLeft,
+  faQuoteRight,
 );
 
 Vue.component('container', ContainerComponent);
@@ -77,6 +83,7 @@ Vue.use(VueRouter);
 Vue.use(VueApollo);
 Vue.use(VueToasted, { iconPack: 'fontawesome' });
 Vue.use(VueAwesomeSwiper);
+Vue.use(VueSweetAlert, {});
 
 const apolloProvider = new VueApollo({
   defaultClient: apolloClient
