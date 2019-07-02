@@ -57,6 +57,10 @@ export const USER_ME = gql`query me {
         uf
       }
     }
+    address {
+      city
+      uf
+    }
     role {
       name
       displayName

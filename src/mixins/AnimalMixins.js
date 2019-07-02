@@ -41,7 +41,7 @@ export default {
         case 'FEMALE':
           return 'a';
         default:
-          return '';
+          return 'o';
       }
     },
     async toggleFavoriteAnimal(animal) {

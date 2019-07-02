@@ -29,12 +29,44 @@
               <div class="step-title flex justify-center">
                 <span>Qual o nome do nosso amigo?</span>
               </div>
-              <div class="step__options flex align-center justify-center">
-                <input 
-                  :class="{ 'active': create.name }" 
-                  type="text" v-model="create.name "
-                  placeholder="Nome"
-                  @keyup.enter="() => create.name && goToStep(2)">
+              <div class="step__options flex flex-column align-center justify-center">
+                <div class="step__options__group flex">
+                  <input 
+                    :class="{ 'active': create.name }" 
+                    type="text" v-model="create.name "
+                    placeholder="Nome"
+                    @keyup.enter="() => create.name && goToStep(2)"
+                  >
+                </div>
+                <div class="step__options__group flex">
+                  <div class="address-info">
+                    <p class="text-pink">Endereço</p>
+                    <multiselect
+                      :class="['bottom-border', { 'selected' : locationService.uf.selected }]"
+                      v-model="locationService.uf.selected" 
+                      label="sigla"
+                      placeholder="UF"
+                      class="uf-select"
+                      :options="locationService.uf.options"
+                      :show-labels="false"
+                      :searchable="true"
+                      @select="resetCities"
+                      @input="getCitiesByUf">
+                      <template slot="noResult">Opção não encontrada</template>
+                    </multiselect>
+                    <multiselect
+                      :class="['bottom-border', { 'selected' : locationService.city.selected }]"
+                      v-model="locationService.city.selected"
+                      placeholder="Cidade"
+                      :options="locationService.city.options"
+                      :show-labels="false"
+                      :preselect-first="true">
+                      <template slot="noOptions"><span>Escolha um estado</span></template>
+                      <template slot="noResult"><span class="text-gray">Cidade não encontrada</span></template>
+                    </multiselect>
+                  </div>
+                </div>
+                  
               </div>
               <div class="step__options__actions flex space-between">
                 <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
@@ -49,7 +81,7 @@
               </div>
               <div class="step__options flex flex-column space-around">
                 <div class="step__options__group flex flex-column align-center">
-                  <span class="label">Gênero</span>
+                  <span class="label">Sexo</span>
                   <div class="flex">
                     <adopter-radio value="MALE" v-model="create.gender">Macho</adopter-radio>
                     <adopter-radio value="FEMALE" v-model="create.gender">Fêmea</adopter-radio>
@@ -58,16 +90,29 @@
                 <div class="step__options__group flex flex-column align-center">
                   <span class="label">Porte</span>
                   <div class="flex">
-                    <adopter-radio value="SMALL" v-model="create.size">Pequeno</adopter-radio>
-                    <adopter-radio value="MEDIUM" v-model="create.size">Médio</adopter-radio>
-                    <adopter-radio value="LARGE" v-model="create.size">Grande</adopter-radio>
+                    <adopter-radio value="SMALL" v-model="create.size">
+                      Pequeno
+                    </adopter-radio>
+                    <adopter-radio value="MEDIUM" v-model="create.size">
+                      Médio
+                    </adopter-radio>
+                    <adopter-radio value="LARGE" v-model="create.size">
+                      Grande
+                    </adopter-radio>
                   </div>
                 </div>
                 <div class="step__options__group flex flex-column align-center">
                   <span class="label">Etapa de vida</span>
                   <div class="flex">
-                    <adopter-radio value="PUPPY" v-model="create.ageGroup">Filhote</adopter-radio>
-                    <adopter-radio value="ADULT" v-model="create.ageGroup">Adulto</adopter-radio>
+                    <adopter-radio value="PUPPY" v-model="create.ageGroup">
+                      Filhote
+                    </adopter-radio>
+                    <adopter-radio value="ADULT" v-model="create.ageGroup">
+                      Adult{{ parseWordToGender(create.gender)}}
+                    </adopter-radio>
+                    <adopter-radio value="ELDERLY" v-model="create.ageGroup">
+                      Idos{{ parseWordToGender(create.gender)}}
+                    </adopter-radio>
                   </div>
                 </div>
               </div>
@@ -122,7 +167,7 @@
                   :class="{ 'active': create.about }" 
                   type="text" v-model="create.about"
                   :placeholder="`${create.name}...`"
-                  @keyup.enter="() => create.name && goToStep(5)" />
+                  @keyup.enter="() => create.about && goToStep(5)" />
               </div>
               <div class="step__options__actions flex space-between">
                 <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
@@ -220,6 +265,7 @@
 <script>
   import { mapState, mapActions } from 'vuex';
   import AnimalMixins from '../../../mixins/AnimalMixins';
+  import AddressMixins from '../../../mixins/AddressMixins.js';
   import Card from '../../Card';
   import FileUploader from '../../MultipleFileUploader.vue';
   import { UploadFile } from '../../../services/FirebaseService';
@@ -229,7 +275,7 @@
       Card,
       FileUploader
     },
-    mixins: [AnimalMixins],
+    mixins: [AnimalMixins, AddressMixins],
     data() {
       return {
         create: {
@@ -244,29 +290,32 @@
           vaccinated: true,
           dewormed: false,
           specialNeeds: false,
-          address: {},
-          about: 'Um cachorro bacana que encontrei no parque. Precisa de um lar.'.trim()
+          address: {
+            uf: '',
+            city: '',
+          },
+          about: 'Um cachorro bacana que encontrei no parque. Precisa de um lar.'.trim(),
         },
         temp: {
           profileImg: '',
           profileImgPreview: '',
           photos: [],
         },
-        step: 7,
+        step: 2,
         swiperOption: {
           allowTouchMove: false,
           pagination: {
             el: '.swiper-pagination',
-            type: 'progressbar'
+            type: 'progressbar',
           },
         },
         swalOptions: {
           WARNING: {
             type: 'warning',
-            title: 'Lembre-se'
+            title: 'Lembre-se',
           },
           CONFIRM: {
-            type: 'confirm'
+            type: 'confirm',
           }
         }
       }
@@ -314,6 +363,7 @@
       }
     },
     computed: {
+      ...mapState(['user']),
       swiper() {
         return this.$refs.createAnimalSwiper.swiper
       },
@@ -330,7 +380,7 @@
     },
     mounted() {
       this.swiper.slideTo(this.step);
-    }
+    },
   }
 </script>
 <style lang="scss">
@@ -352,5 +402,11 @@
         }
       }
     }
+    // .address-info {
+    //   display: grid;
+    //   grid-template-columns: .3fr 1fr;
+    //   width: 75%;
+    //   margin-top: 15px;
+    // }
   }
 </style>

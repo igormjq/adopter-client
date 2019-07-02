@@ -1,47 +1,4 @@
 .form {
-  .multiselect {
-    &.selected {
-      .multiselect__tags {
-        border-color: #EF3176;
-      }
-      .multiselect__select:before {
-        color: #EF3176;
-        border-color: #EF3176 transparent transparent;
-      }
-    }
-
-    &__option {
-      &--highlight {
-        background-color: #EF3176;
-      }
-    }
-
-    &__tags {
-      border: 1px solid #c4c4c4;
-      border-radius: 6px;
-      color: #EF3176;
-      background-color: #FFF;
-      font-weight: 300;
-    }
-    &__tag {
-      background-color: #EF3176;
-      &-icon {
-        background-color: #f9639a;
-
-        &:after {
-          color: #FFF;
-        }
-
-      }
-    }
-    &__select {
-      &:before {
-        color: #c4c4c4;
-        border-color: #c4c4c4 transparent transparent;
-      }
-    }
-  }
-
   &__body {
     width: 100%;
     & > * {
@@ -50,6 +7,67 @@
   }
   &__footer {
     width: 100%;
+  }
+}
+
+.multiselect {
+  &.bottom-border {
+    .multiselect__tags {
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-radius: 0;
+    }
+  }
+  &.bottom-border.selected {
+    .multiselect__tags {
+      border-color: #EF3176;
+      border-width: 2px;
+    }
+    .multiselect__select:before {
+      color: #EF3176;
+      border-color: #EF3176 transparent transparent;
+    }
+  }
+  &.selected {
+    .multiselect__tags {
+      border-color: #EF3176;
+    }
+    .multiselect__select:before {
+      color: #EF3176;
+      border-color: #EF3176 transparent transparent;
+    }
+  }
+
+  &__option {
+    &--highlight {
+      background-color: #EF3176;
+    }
+  }
+
+  &__tags {
+    border: 1px solid #c4c4c4;
+    border-radius: 6px;
+    color: #EF3176;
+    background-color: #FFF;
+    font-weight: 300;
+  }
+  &__tag {
+    background-color: #EF3176;
+    &-icon {
+      background-color: #f9639a;
+
+      &:after {
+        color: #FFF;
+      }
+
+    }
+  }
+  &__select {
+    &:before {
+      color: #c4c4c4;
+      border-color: #c4c4c4 transparent transparent;
+    }
   }
 }
 

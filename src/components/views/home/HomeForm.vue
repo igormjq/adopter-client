@@ -76,6 +76,7 @@
 <script>
 import axios from 'axios';
 import { mapActions } from 'vuex';
+import { FetchStates, FetchCities } from '../../../services/LocationService.js';
 
 export default {
   data() {
