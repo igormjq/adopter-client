@@ -115,7 +115,6 @@
                 background-repeat: no-repeat;
                 width: 100px;
                 height: 100px;
-                // border-radius: 50%;
               }
               .name {
                 font-weight: 600;
@@ -123,9 +122,6 @@
                 margin-bottom: 10px;
               }
               &__details {
-                // display: grid;
-                // grid-template-rows: repeat(3, 1fr);
-
                 & > div {
                   display: flex;
                   align-items: center;
@@ -148,6 +144,9 @@
             }
             &__actions {
               height: 30px;
+              .btn {
+                border-radius: 0;
+              }
             }
           }
         }

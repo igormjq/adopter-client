@@ -207,6 +207,7 @@
               </div>
               <div class="step__options__actions flex space-between">
                 <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
+                <button class="btn" @click="showAdoptionWarning">Cadastrar!</button>
               </div>
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
@@ -250,13 +251,22 @@
           profileImgPreview: '',
           photos: [],
         },
-        step: 6,
+        step: 7,
         swiperOption: {
           allowTouchMove: false,
           pagination: {
             el: '.swiper-pagination',
             type: 'progressbar'
           },
+        },
+        swalOptions: {
+          WARNING: {
+            type: 'warning',
+            title: 'Lembre-se'
+          },
+          CONFIRM: {
+            type: 'confirm'
+          }
         }
       }
     },
@@ -274,8 +284,32 @@
       },
       async sendToFirebase() {
         if(this.temp.profileImg) {
-          const url = await UploadFile(this.temp.profileImg, 'animals');
+          this.create.profileImg = await UploadFile(this.temp.profileImg, 'animals');
         }
+        if(this.temp.photos.length > 0) {
+          this.create.photos = await Promise.all(
+            this.temp.photos.map(photo => UploadFile(photo, 'animals'))
+          );
+        };
+      },
+      async showAdoptionWarning() {
+        await this.$swal({ 
+          ...this.swalOptions.WARNING, 
+          text: `Você é o responsável por ${this.create.name}`,
+          showCancelButton: true,
+          cancelButtonText: 'Voltar',
+          confirmButtonColor: '#EF3176',
+          confirmButtonText: 'Entendi. Posso terminar agora?',
+        });
+
+        await this.submitAnimalCreate();
+      },
+      async submitAnimalCreate() {
+        this.$store.dispatch('loadPage');
+
+        await this.sendToFirebase();
+
+        this.$store.dispatch('loadPage', false);
       }
     },
     computed: {
