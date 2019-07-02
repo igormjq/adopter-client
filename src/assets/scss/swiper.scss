@@ -99,6 +99,45 @@
                 }
               }
             }
+      
+            .summary-card {
+              box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+              border-radius: 8px;
+              // display: grid;
+              // grid-template-columns: repeat(2, 1fr);
+              height: 100%;
+              overflow: scroll;
+              padding: 10px;
+              font-size: 14px;
+              color: #6F6F6F;
+              position: relative;
+
+              .image-preview {
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+              }
+              .name {
+                font-weight: 600;
+                font-size: 24px;
+                margin-bottom: 10px;
+              }
+              &__details {
+                ul {
+                  margin-bottom: 5px;
+                  padding-bottom: 10px;
+                  border-bottom: 1px solid #f7f7f7;
+
+                  li {
+                    margin-bottom: 5px;
+                  }
+                }
+              }
+            
+            }
             &__actions {
               height: 30px;
             }

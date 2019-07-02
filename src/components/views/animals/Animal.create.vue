@@ -158,8 +158,51 @@
               <div class="step__options__actions flex space-between">
                 <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
                 <transition name="fade">
-                  <font-awesome-icon icon="chevron-right" size="2x" @click="goToStep(2)" />
+                  <font-awesome-icon icon="chevron-right" size="2x" @click="goToStep(7)" />
                 </transition>
+              </div>
+            </swiper-slide>
+            <swiper-slide class="step flex flex-column">
+              <div class="step-title flex flex-column justify-center">
+                <span>Estamos a um clique de ajudar. Confirme as informações!</span>
+              </div>
+              <div class="step__options flex justify-center">
+                <div class="summary-card">
+                  <div class="summary-card__details flex flex-column">
+                    <div class="flex space-between">
+                      <div>
+                        <p class="name text-pink">{{ create.name }}</p>
+                        <ul>
+                          <li>Espécie: {{ animalType(create) }}</li>
+                          <li>Sexo: {{ animalGender(create) }}</li>
+                          <li>Etapa: {{ animalAgeGroup(create) }}</li>
+                        </ul>
+                      </div>
+                      <div 
+                        class="image-preview" 
+                        :style="{ 'background-image': 'url(' + loadTemporaryProfileImage +')'}"/>
+                    </div>
+                    <div>
+                      <ul>
+                        <li
+                          class="flex align-center"
+                          v-for="{ displayName, iconName, iconPath, key } in animalInfo" 
+                          :key="key"
+                          v-if="create[key]">
+                          <font-awesome-icon class="inlist-icon" v-if="iconName" :icon="iconName" :style="{ 'color': '#EF3176' }"/>
+                          <img class="inlist-icon" :src="iconPath" v-else />
+                          <span>{{ displayName(create.gender) }}</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="summary__about">
+                      <p>{{ create.about }}</p>
+                    </div>
+                  </div>
+                </div>       
+              </div>
+              <div class="step__options__actions flex space-between">
+                <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
               </div>
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
@@ -185,20 +228,21 @@
     data() {
       return {
         create: {
-          type: '',
-          name: '',
-          size: '',
-          gender: '',
-          ageGroup: '',
+          type: 'DOG',
+          name: 'Flenders',
+          size: 'SMALL',
+          gender: 'MALE',
+          ageGroup: 'PUPPY',
           profileImg: '',
-          castrated: false,
-          vaccinated: false,
-          dewormed: false,
-          specialNeeds: false,
-          about: ''.trim()
+          castrated: true,
+          vaccinated: true,
+          dewormed: true,
+          specialNeeds: true,
+          about: 'Lindo cusco achado no esgoto'.trim()
         },
         temp: {
           profileImg: '',
+          profileImgPreview: '',
           photos: [],
         },
         step: 5,
@@ -232,6 +276,16 @@
     computed: {
       swiper() {
         return this.$refs.createAnimalSwiper.swiper
+      },
+      loadTemporaryProfileImage() {
+        const reader = new FileReader();
+        reader.onload = () => this.temp.profileImgPreview = reader.result;
+
+        if(this.temp.profileImg) {
+          reader.readAsDataURL(this.temp.profileImg);
+          return this.temp.profileImgPreview;
+        }
+        
       }
     },
     mounted() {

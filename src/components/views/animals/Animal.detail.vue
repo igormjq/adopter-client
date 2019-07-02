@@ -29,7 +29,7 @@
                 <ul class="animal__info__details__general">
                   <li>Espécie: {{ animalType(animal) }} </li>
                   <li>Sexo: {{ animalGender(animal) }} </li>
-                  <li>Idade: {{ animalAgeGroup(animal) }} </li>
+                  <li>Etapa: {{ animalAgeGroup(animal) }} </li>
                 </ul>
                 <ul class="animal__info__details__specific">
                   <li
