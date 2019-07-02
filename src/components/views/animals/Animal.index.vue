@@ -46,8 +46,6 @@ export default {
       'loadPage'
     ]),
     async fetchMore() {
-      // this.loadPage();
-      console.log('fui clicado');
       this.skip = this.skip + this.first;
   
       this.$apollo.queries.animals.fetchMore({

@@ -244,6 +244,7 @@
           vaccinated: true,
           dewormed: false,
           specialNeeds: false,
+          address: {},
           about: 'Um cachorro bacana que encontrei no parque. Precisa de um lar.'.trim()
         },
         temp: {
