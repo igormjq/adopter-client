@@ -228,24 +228,25 @@
     data() {
       return {
         create: {
-          type: 'DOG',
-          name: 'Flenders',
-          size: 'SMALL',
-          gender: 'MALE',
-          ageGroup: 'PUPPY',
+          type: '',
+          name: '',
+          size: '',
+          gender: '',
+          ageGroup: '',
           profileImg: '',
-          castrated: true,
-          vaccinated: true,
-          dewormed: true,
-          specialNeeds: true,
-          about: 'Lindo cusco achado no esgoto'.trim()
+          photos: [],
+          castrated: false,
+          vaccinated: false,
+          dewormed: false,
+          specialNeeds: false,
+          about: ''.trim()
         },
         temp: {
           profileImg: '',
           profileImgPreview: '',
           photos: [],
         },
-        step: 5,
+        step: 0,
         swiperOption: {
           allowTouchMove: false,
           pagination: {
