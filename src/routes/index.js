@@ -3,7 +3,8 @@ import AnimalHome from '../components/views/animals/Animal.vue';
 import Animals from '../components/views/animals/Animal.index.vue'
 import AnimalDetail from '../components/views/animals/Animal.detail.vue';
 import AnimalCreate from '../components/views/animals/Animal.create.vue';
-import Favorites from '../components/views/animals/Animal.favorites.vue'
+import Favorites from '../components/views/animals/Animal.favorites.vue';
+import AdoptionArea from '../components/views/adoption-area/AdoptionArea.index.vue';
 
 export default [
   { path: '/', component: Home },
@@ -13,5 +14,6 @@ export default [
       { path: ':id', component: AnimalDetail },
     ]
   },
-  { path: '/favorites', component: Favorites }
+  { path: '/favorites', component: Favorites },
+  { path: '/adoption-area', component: AdoptionArea }
 ]

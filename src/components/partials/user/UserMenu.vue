@@ -8,6 +8,10 @@
       <font-awesome-icon icon="cat" />
       <span>Cadastrar um animal</span>
     </router-link>
+    <router-link to="/adoption-area" tag="li" @click.native="closeMenu">
+      <font-awesome-icon icon="home" />
+      <span>Minhas adoções</span>
+    </router-link>
     <router-link to="" tag="li" @click.native="closeMenu">
       <font-awesome-icon icon="info-circle" />
       <span>Ajuda</span>

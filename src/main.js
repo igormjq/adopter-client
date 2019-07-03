@@ -33,7 +33,8 @@ import {
   faTrashAlt,
   faQuoteRight,
   faQuoteLeft,
-  faMapMarkerAlt
+  faMapMarkerAlt,
+  faHome
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
 import routes from './routes'
@@ -70,7 +71,8 @@ library.add(
   faTrashAlt,
   faQuoteLeft,
   faQuoteRight,
-  faMapMarkerAlt
+  faMapMarkerAlt,
+  faHome
 );
 
 Vue.component('container', ContainerComponent);

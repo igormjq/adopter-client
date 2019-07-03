@@ -67,4 +67,23 @@ export const USER_ME = gql`query me {
       displayName
     }
   }
+}`;
+
+export const GET_ADOPTION_REQUESTS = gql`{
+  me {
+    id
+    receivedAdoptionRequests {
+      sentBy {
+        name
+      }
+    }
+    adoptionRequests {
+      animal {
+        name
+      }
+      sentBy {
+        name
+      }
+    }
+  }
 }`
