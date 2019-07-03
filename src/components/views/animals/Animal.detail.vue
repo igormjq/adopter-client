@@ -71,6 +71,7 @@
 import { mapGetters } from 'vuex';
 import { GET_ANIMAL } from '../../../graphql/queries';
 import { CREATE_ADOPTION_REQUEST } from '../../../graphql/mutations';
+import { CheckError } from '../../../services/ErrorHandlerService.js';
 import AnimalMixins from '../../../mixins/AnimalMixins';
 import Card from "../../Card.vue";
 import Social from '../../Social';
@@ -104,20 +105,26 @@ export default {
 
       this.$store.dispatch('loadPage');
 
-      const {
-        data: {
-          createAdoptionRequest: { id }
-        }
-      } = await this.$apollo.mutate({
-        mutation: CREATE_ADOPTION_REQUEST,
-        variables: {
-          animalId: this.animal.id
-        }
-      });
+      try {
+        const {
+          data: {
+            createAdoptionRequest: { id }
+          }
+        } = await this.$apollo.mutate({
+          mutation: CREATE_ADOPTION_REQUEST,
+          variables: {
+            animalId: this.animal.id
+          }
+        });
+      } catch (error) {
+        await this.$swal({
+          type: 'warning',
+          text: CheckError(error)
+        });
 
-      this.$store.dispatch('loadPage', false);
-
-      console.log('aidi', id);
+      } finally {
+        this.$store.dispatch('loadPage', false);
+      }
     }
   },
   computed: {

@@ -6,13 +6,13 @@
     </div>
     <form class="form" @submit.prevent="logUser">
       <div class="form__body">
-        <div class="form__element flex flex-column">
+        <div class="form__element flex flex-column" :class="{'--filled': user.email }">
           <span class="flex align-center">Email</span>
-          <input class="flex --full adopter-input" type="text" v-model="user.email" required>
+          <input class="flex adopter-input" type="text" v-model="user.email" required>
         </div>
         <div class="form__element flex flex-column">
           <span class="flex align-center">Senha</span>
-          <input class="flex --full adopter-input" type="password" v-model="user.password" required>
+          <input class="flex adopter-input" type="password" v-model="user.password" required>
         </div>
       </div>
         <div class="form__footer flex">
@@ -25,7 +25,7 @@
 <script>
 import Card from '../../Card'
 import { LOG_USER } from '../../../graphql/mutations.js'
-import { CheckLoginError } from '../../../services/ErrorHandlerService.js'
+import { CheckError } from '../../../services/ErrorHandlerService.js'
 
 export default {
   components: {
@@ -56,7 +56,7 @@ export default {
         this.$store.dispatch('login', data.login);
 
       } catch (error) {
-        this.error = CheckLoginError(error);
+        this.error = CheckError(error);
 
         await this.$swal({
           type: 'error',
