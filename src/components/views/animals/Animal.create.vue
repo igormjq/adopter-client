@@ -38,25 +38,36 @@
                     @keyup.enter="() => create.name && goToStep(2)"
                   >
                 </div>
-                <div class="step__options__group flex">
-                  <div class="address-info">
-                    <p class="text-pink">Endereço</p>
+              </div>
+              <div class="step__options__actions flex space-between">
+                <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
+                <transition name="fade">
+                  <font-awesome-icon v-if="create.name" icon="chevron-right" size="2x" @click="goToStep(2)" />
+                </transition>
+              </div>
+            </swiper-slide>
+            <swiper-slide class="step flex flex-column">
+              <div class="step-title flex flex-column justify-center">
+                <span>Onde vive {{ create.name }}?</span>
+              </div>
+              <div class="address-picker">
+                <div class="address-info">
                     <multiselect
-                      :class="['bottom-border', { 'selected' : locationService.uf.selected }]"
-                      v-model="locationService.uf.selected" 
+                      :class="['bottom-border', { 'selected' : temp.address.uf }]"
+                      v-model="temp.address.uf" 
                       label="sigla"
                       placeholder="UF"
                       class="uf-select"
                       :options="locationService.uf.options"
                       :show-labels="false"
                       :searchable="true"
-                      @select="resetCities"
+                      @select="create.address.city = ''"
                       @input="getCitiesByUf">
                       <template slot="noResult">Opção não encontrada</template>
                     </multiselect>
                     <multiselect
-                      :class="['bottom-border', { 'selected' : locationService.city.selected }]"
-                      v-model="locationService.city.selected"
+                      :class="['bottom-border', { 'selected' : create.address.city }]"
+                      v-model="create.address.city"
                       placeholder="Cidade"
                       :options="locationService.city.options"
                       :show-labels="false"
@@ -64,14 +75,13 @@
                       <template slot="noOptions"><span>Escolha um estado</span></template>
                       <template slot="noResult"><span class="text-gray">Cidade não encontrada</span></template>
                     </multiselect>
+                    {{ create.address.uf }}
                   </div>
-                </div>
-                  
               </div>
               <div class="step__options__actions flex space-between">
                 <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
                 <transition name="fade">
-                  <font-awesome-icon v-if="create.name" icon="chevron-right" size="2x" @click="goToStep(2)" />
+                  <font-awesome-icon v-if="create.address.city" icon="chevron-right" size="2x" @click="goToStep(3)" />
                 </transition>
               </div>
             </swiper-slide>
@@ -119,7 +129,7 @@
               <div class="step__options__actions flex space-between">
                 <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
                 <transition name="fade">
-                  <font-awesome-icon v-if="create.gender && create.size && create.ageGroup" icon="chevron-right" size="2x" @click="goToStep(3)" />
+                  <font-awesome-icon v-if="create.gender && create.size && create.ageGroup" icon="chevron-right" size="2x" @click="goToStep(4)" />
                 </transition>
               </div>
             </swiper-slide>
@@ -148,7 +158,7 @@
               <div class="step__options__actions flex space-between">
                 <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
                 <transition name="fade">
-                  <font-awesome-icon icon="chevron-right" size="2x" @click="goToStep(4)" />
+                  <font-awesome-icon icon="chevron-right" size="2x" @click="goToStep(5)" />
                 </transition>
               </div>
             </swiper-slide>
@@ -167,12 +177,12 @@
                   :class="{ 'active': create.about }" 
                   type="text" v-model="create.about"
                   :placeholder="`${create.name}...`"
-                  @keyup.enter="() => create.about && goToStep(5)" />
+                  @keyup.enter="() => create.about && goToStep(6)" />
               </div>
               <div class="step__options__actions flex space-between">
                 <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
                 <transition name="fade">
-                  <font-awesome-icon v-if="create.about" icon="chevron-right" size="2x" @click="goToStep(5)" />
+                  <font-awesome-icon v-if="create.about" icon="chevron-right" size="2x" @click="goToStep(6)" />
                 </transition>
               </div>
             </swiper-slide>
@@ -186,7 +196,7 @@
               <div class="step__options__actions flex space-between">
                 <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
                 <transition name="fade">
-                  <font-awesome-icon icon="chevron-right" size="2x" @click="goToStep(6)" />
+                  <font-awesome-icon icon="chevron-right" size="2x" @click="goToStep(7)" />
                 </transition>
               </div>
             </swiper-slide>
@@ -203,7 +213,7 @@
               <div class="step__options__actions flex space-between">
                 <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
                 <transition name="fade">
-                  <font-awesome-icon icon="chevron-right" size="2x" @click="goToStep(7)" />
+                  <font-awesome-icon icon="chevron-right" size="2x" @click="goToStep(8)" />
                 </transition>
               </div>
             </swiper-slide>
@@ -222,6 +232,10 @@
                           <li>Sexo: {{ animalGender(create) }}</li>
                           <li>Etapa: {{ animalAgeGroup(create) }}</li>
                         </ul>
+                      </div>
+                      <div>
+                        <font-awesome-icon class="inlist-icon text-pink" icon="map-marker-alt" />
+                        <span>{{ create.address.city }} - {{ create.address.uf }}</span>
                       </div>
                       <div 
                         class="image-preview" 
@@ -252,7 +266,7 @@
               </div>
               <div class="step__options__actions flex space-between">
                 <font-awesome-icon icon="chevron-left" size="2x" @click="goToStep(step - 1)" />
-                <button class="btn" @click="showAdoptionWarning">Cadastrar!</button>
+                <button class="btn pink" @click="showAdoptionWarning">Finalizar</button>
               </div>
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
@@ -284,24 +298,28 @@
           size: 'MEDIUM',
           gender: 'MALE',
           ageGroup: 'ADULT',
+          address: {
+            uf: '',
+            city: '',
+          },
           profileImg: '',
           photos: [],
           castrated: true,
           vaccinated: true,
           dewormed: false,
           specialNeeds: false,
-          address: {
-            uf: '',
-            city: '',
-          },
           about: 'Um cachorro bacana que encontrei no parque. Precisa de um lar.'.trim(),
         },
         temp: {
           profileImg: '',
           profileImgPreview: '',
           photos: [],
+          address: {
+            uf: '',
+            city: ''
+          }
         },
-        step: 2,
+        step: 0,
         swiperOption: {
           allowTouchMove: false,
           pagination: {
@@ -346,8 +364,6 @@
         await this.$swal({ 
           ...this.swalOptions.WARNING, 
           text: `Você é o responsável por ${this.create.name}`,
-          showCancelButton: true,
-          cancelButtonText: 'Voltar',
           confirmButtonColor: '#EF3176',
           confirmButtonText: 'Entendi. Posso terminar agora?',
         });
@@ -375,7 +391,11 @@
           reader.readAsDataURL(this.temp.profileImg);
           return this.temp.profileImgPreview;
         }
-        
+      }
+    },
+    watch: {
+      'temp.address.uf'({ sigla }) {
+        this.create.address.uf = sigla;
       }
     },
     mounted() {
@@ -402,11 +422,20 @@
         }
       }
     }
-    // .address-info {
-    //   display: grid;
-    //   grid-template-columns: .3fr 1fr;
-    //   width: 75%;
-    //   margin-top: 15px;
-    // }
+    .address-picker {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      .address-info {
+        width: 100%;
+        
+        & > div {
+          margin-bottom: 10px;
+          &:first-child {
+            width: 80px;
+          }
+        }
+      }
+    }
   }
 </style>

@@ -1,4 +1,3 @@
-
 import { FetchStates, FetchCities } from '../services/LocationService';
 
 export default {
