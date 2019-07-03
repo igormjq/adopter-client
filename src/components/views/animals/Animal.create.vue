@@ -293,22 +293,22 @@
     data() {
       return {
         create: {
-          type: 'DOG',
-          name: 'Fúlvio',
-          size: 'MEDIUM',
-          gender: 'MALE',
-          ageGroup: 'ADULT',
+          type: '',
+          name: '',
+          size: '',
+          gender: '',
+          ageGroup: '',
           address: {
             uf: '',
             city: '',
           },
           profileImg: '',
           photos: [],
-          castrated: true,
-          vaccinated: true,
+          castrated: false,
+          vaccinated: false,
           dewormed: false,
           specialNeeds: false,
-          about: 'Um cachorro bacana que encontrei no parque. Precisa de um lar.'.trim(),
+          about: ''.trim(),
         },
         temp: {
           profileImg: '',
@@ -439,7 +439,7 @@
     watch: {
       'temp.address.uf'({ sigla }) {
         this.create.address.uf = sigla;
-      }
+      },
     },
     mounted() {
       this.swiper.slideTo(this.step);
