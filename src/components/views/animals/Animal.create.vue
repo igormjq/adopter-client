@@ -75,7 +75,6 @@
                       <template slot="noOptions"><span>Escolha um estado</span></template>
                       <template slot="noResult"><span class="text-gray">Cidade não encontrada</span></template>
                     </multiselect>
-                    {{ create.address.uf }}
                   </div>
               </div>
               <div class="step__options__actions flex space-between">
@@ -331,6 +330,7 @@
           WARNING: {
             type: 'warning',
             title: 'Lembre-se',
+            showCloseButton: true
           },
           CONFIRM: {
             type: 'confirm',
@@ -361,14 +361,17 @@
         };
       },
       async showAdoptionWarning() {
-        await this.$swal({ 
+        const action = await this.$swal({ 
           ...this.swalOptions.WARNING, 
           text: `Você é o responsável por ${this.create.name}`,
           confirmButtonColor: '#EF3176',
           confirmButtonText: 'Entendi. Posso terminar agora?',
         });
 
+        if(action.dismiss) return;
+
         await this.submitAnimalCreate();
+        
       },
       async submitAnimalCreate() {
         this.$store.dispatch('loadPage');
