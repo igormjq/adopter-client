@@ -32,6 +32,7 @@ export const GET_ANIMAL = gql`query animal($id: ID!) {
     owner {
       id
       name
+      phone
       email
     }
     photos

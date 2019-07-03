@@ -46,3 +46,9 @@ export const CREATE_ANIMAL = gql`mutation createAnimal($data: CreateAnimalInput!
     name
   }
 }`
+
+export const CREATE_ADOPTION_REQUEST = gql`mutation createAdoptionRequest($animalId: ID!) {
+  createAdoptionRequest(animalId: $animalId) {
+    id
+  }
+}`

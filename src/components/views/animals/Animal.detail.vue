@@ -57,7 +57,7 @@
               <social :networks="['facebook', 'instagram', 'twitter']" />
             </div>
             <div class="animal__actions__buttons flex flex-column">
-              <button class="btn pink">Quero adotar</button>
+              <button class="btn pink" @click="sendAdoptionRequest">Quero adotar</button>
               <button class="btn">Quer ser meu padrinho?</button>
             </div>
           </div>
@@ -70,9 +70,11 @@
 <script>
 import { mapGetters } from 'vuex';
 import { GET_ANIMAL } from '../../../graphql/queries';
+import { CREATE_ADOPTION_REQUEST } from '../../../graphql/mutations';
 import AnimalMixins from '../../../mixins/AnimalMixins';
 import Card from "../../Card.vue";
 import Social from '../../Social';
+import { AdoptionRequestTemplate } from '../../templates/AdoptionRequestTemplate'
 
 export default {
   mixins: [AnimalMixins],
@@ -90,7 +92,34 @@ export default {
       }
     }
   },
-  methods: {},
+  methods: {
+    async sendAdoptionRequest() {
+      const { dismiss } = await this.$swal({
+        html: AdoptionRequestTemplate(this.animal),
+        confirmButtonColor: '#EF3176',
+        confirmButtonText: 'Confirmar pedido de adoção'
+      });
+
+      if (dismiss) return;
+
+      this.$store.dispatch('loadPage');
+
+      const {
+        data: {
+          createAdoptionRequest: { id }
+        }
+      } = await this.$apollo.mutate({
+        mutation: CREATE_ADOPTION_REQUEST,
+        variables: {
+          animalId: this.animal.id
+        }
+      });
+
+      this.$store.dispatch('loadPage', false);
+
+      console.log('aidi', id);
+    }
+  },
   computed: {
     ...mapGetters([
       'user'
