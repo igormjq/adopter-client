@@ -44,6 +44,5 @@ export const CREATE_ANIMAL = gql`mutation createAnimal($data: CreateAnimalInput!
   createAnimal(data: $data) {
     id
     name
-    type
   }
 }`

@@ -282,6 +282,7 @@
   import Card from '../../Card';
   import FileUploader from '../../MultipleFileUploader.vue';
   import { UploadFile } from '../../../services/FirebaseService';
+  import { CREATE_ANIMAL } from '../../../graphql/mutations';
 
   export default {
     components: {
@@ -327,6 +328,10 @@
           },
         },
         swalOptions: {
+          options: {
+            confirmButtonColor: '#EF3176',
+            cancelButtonColor: '#9D9D9D'
+          },
           WARNING: {
             type: 'warning',
             title: 'Lembre-se',
@@ -334,6 +339,9 @@
           },
           CONFIRM: {
             type: 'confirm',
+          },
+          SUCCESS: {
+            type: 'success',
           }
         }
       }
@@ -362,21 +370,53 @@
       },
       async showAdoptionWarning() {
         const action = await this.$swal({ 
+          ...this.swalOptions.options,
           ...this.swalOptions.WARNING, 
           text: `Você é o responsável por ${this.create.name}`,
-          confirmButtonColor: '#EF3176',
           confirmButtonText: 'Entendi. Posso terminar agora?',
         });
 
         if(action.dismiss) return;
 
         await this.submitAnimalCreate();
-        
       },
       async submitAnimalCreate() {
         this.$store.dispatch('loadPage');
 
         await this.sendToFirebase();
+
+        try {
+          const {
+            data: {
+              createAnimal: { id, name }
+            }
+          } = await this.$apollo.mutate({
+            mutation: CREATE_ANIMAL,
+            variables: {
+              data: this.create
+            }
+          });
+
+          if(id) {
+            const { dismiss } = await this.$swal({
+              ...this.swalOptions.options,
+              ...this.swalOptions.SUCCESS,
+              text: `Você acabou de cadastrar mais um amigo no Adopter. Esperamos que ${ name } consiga um lar rapidinho.`,
+              confirmButtonText: 'Legal, deixe me ver!',
+              showCancelButton: true,
+              cancelButtonText: 'Ir para página inicial'
+            });
+
+            if(dismiss) {
+              return this.$router.push('/')
+            }
+
+            this.$router.push(`/animals/${id}`);
+          }
+
+        } catch (err) {
+          console.log(err);
+        }
 
         this.$store.dispatch('loadPage', false);
       }

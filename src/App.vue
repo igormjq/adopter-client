@@ -50,7 +50,13 @@ export default {
 
       } catch(error) {
         console.log('Erro', error);
-        alert('Não autorizado');
+
+        await this.$swal({
+          type: 'error',
+          text: 'Não autorizado'
+        });
+
+        this.$router.push('/');
       }
     }
 

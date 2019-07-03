@@ -174,8 +174,9 @@ export default {
 
         &__info {
           color: #6F6F6F;
+          min-height: 40vh;
           @include grid(2, 30px);
-          
+
           &__header {
             position: relative;
             h1 {

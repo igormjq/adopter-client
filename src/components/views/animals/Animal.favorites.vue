@@ -1,5 +1,5 @@
 <template>
-  <list :animals="user.favoriteAnimals" />
+  <list v-if="user" :animals="user.favoriteAnimals" />
 </template>
 
 <script>
