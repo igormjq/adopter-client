@@ -14,7 +14,6 @@
           <span class="flex align-center">Senha</span>
           <input class="flex --full adopter-input" type="password" v-model="user.password" required>
         </div>
-        <p v-if="error">{{ error }}</p>
       </div>
         <div class="form__footer flex">
           <button class="btn btn-block pink" type="submit">ENTRAR</button>
@@ -26,6 +25,7 @@
 <script>
 import Card from '../../Card'
 import { LOG_USER } from '../../../graphql/mutations.js'
+import { CheckLoginError } from '../../../services/ErrorHandlerService.js'
 
 export default {
   components: {
@@ -54,10 +54,18 @@ export default {
         });
 
         this.$store.dispatch('login', data.login);
-        this.$store.dispatch('loadPage', false);
 
-      } catch(e) {
-        this.error = e.message.split('error:')[1];
+      } catch (error) {
+        this.error = CheckLoginError(error);
+
+        await this.$swal({
+          type: 'error',
+          title: 'Oops...',
+          text: this.error
+        });
+        
+      } finally {
+        this.$store.dispatch('loadPage', false);
       }
     },
     resetForm() {
