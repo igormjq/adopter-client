@@ -8,34 +8,6 @@ import VueSweetAlert from 'vue-sweetalert2'
 import Multiselect from 'vue-multiselect'
 import AdopterRadioInput from './components/AdopterRadio.vue'
 import AdopterCheckboxInput from './components/AdopterCheckbox.vue'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { 
-  faSearch, 
-  faCat, 
-  faDog, 
-  faInfoCircle, 
-  faSignOutAlt, 
-  faPaw,
-  faArrowLeft,
-  faArrowRight,
-  faBriefcaseMedical,
-  faSyringe,
-  faHeart,
-  faUser,
-  faChevronLeft,
-  faChevronRight,
-  faMars,
-  faVenus,
-  faPills,
-  faStarOfLife,
-  faImages,
-  faImage,
-  faTrashAlt,
-  faQuoteRight,
-  faQuoteLeft,
-  faMapMarkerAlt,
-  faHome
-} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
 import routes from './routes'
 import apolloClient from './apollo'
@@ -43,37 +15,10 @@ import store from './store'
 import '../node_modules/vue-multiselect/dist/vue-multiselect.min.css'
 import 'swiper/dist/css/swiper.css'
 import 'sweetalert2/dist/sweetalert2.min.css'
+import './icons';
 
 // Global components
 import ContainerComponent from './components/partials/Container'
-
-library.add(
-  faSearch, 
-  faCat, 
-  faDog, 
-  faInfoCircle, 
-  faSignOutAlt, 
-  faPaw, 
-  faArrowLeft,
-  faArrowRight,
-  faBriefcaseMedical,
-  faSyringe,
-  faHeart,
-  faUser,
-  faChevronLeft,
-  faChevronRight,
-  faMars,
-  faVenus,
-  faPills,
-  faStarOfLife,
-  faImages,
-  faImage,
-  faTrashAlt,
-  faQuoteLeft,
-  faQuoteRight,
-  faMapMarkerAlt,
-  faHome
-);
 
 Vue.component('container', ContainerComponent);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
