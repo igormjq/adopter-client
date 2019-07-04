@@ -52,3 +52,10 @@ export const CREATE_ADOPTION_REQUEST = gql`mutation createAdoptionRequest($anima
     id
   }
 }`
+
+export const ACCEPT_ADOPTION_REQUEST = gql`mutation acceptAdoptionRequest($id: ID!) {
+  acceptAdoptionRequest(id: $id) {
+    id
+    accepted
+  }
+}`

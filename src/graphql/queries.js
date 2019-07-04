@@ -73,6 +73,7 @@ export const GET_ADOPTION_REQUESTS = gql`{
   me {
     id
     receivedAdoptionRequests {
+      id
       animal {
         name
         type
@@ -81,8 +82,10 @@ export const GET_ADOPTION_REQUESTS = gql`{
         name
         email
       }
+      accepted
     }
     adoptionRequests {
+      id
       animal {
         name
         type

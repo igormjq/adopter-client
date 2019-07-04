@@ -39,11 +39,13 @@
                     <th>Email</th>
                     <th>Ações</th>
                   </tr>
-                  <tr v-for="({ animal, sentBy }) in me.receivedAdoptionRequests">
+                  <tr v-for="({ id, animal, sentBy, accepted }) in me.receivedAdoptionRequests">
                     <td>{{ animal.name }}</td>
                     <td>{{ sentBy.name }}</td>
                     <td>{{ sentBy.email }}</td>
-                    <td>Aceitar</td>
+                    <td>
+                      <button @click="acceptAdoptionRequest(id)" class="btn btn-block pink">Aceitar</button>
+                    </td>
                   </tr>
                 </table>
               </div>
@@ -59,6 +61,7 @@
 import { mapGetters } from 'vuex';
 import Card from '../../Card.vue';
 import { GET_ADOPTION_REQUESTS } from '../../../graphql/queries';
+import { ACCEPT_ADOPTION_REQUEST } from '../../../graphql/mutations';
 
 export default {
   components: {
@@ -78,7 +81,10 @@ export default {
     },
     checkStatus(status) {
       return status ? 'Aceito' : 'Pendente'
-    }
+    },
+    async acceptAdoptionRequest(id) {
+      console.log('esse é o id', id);
+    },
   },
   computed: {
     ...mapGetters(['user']),
@@ -88,8 +94,10 @@ export default {
       query: GET_ADOPTION_REQUESTS,
       fetchPolicy: 'network-only'
     },
-    
   },
+  // mounted() {
+  //   console.log(this.$apollo.queries);
+  // }
 }
 </script>
 
@@ -101,7 +109,7 @@ export default {
 
   .card {
     width: 60vw;
-    height: 70vh;
+    min-height: 70vh;
     background: #FFF;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
   }
@@ -121,6 +129,10 @@ export default {
       color: #EF3176;
       border: 1px solid #dcdcdc;
       border-top: none;
+      
+      button {
+        border-radius: 0;
+      }
     }
     th, td {
       padding: 10px;
