@@ -95,10 +95,17 @@ export default {
   },
   methods: {
     async sendAdoptionRequest() {
+      if(!this.user) {
+        return this.$toasted.show('Entre na plataforma para solicitar adoções', this.toastOptions);
+      }
+
       const { dismiss } = await this.$swal({
         html: AdoptionRequestTemplate(this.animal),
         confirmButtonColor: '#EF3176',
-        confirmButtonText: 'Confirmar pedido de adoção'
+        confirmButtonText: 'Confirmar pedido de adoção',
+        showCloseButton: true,
+        showCancelButton: true,
+        cancelButtonText: 'Vou pensar um pouco melhor...'
       });
 
       if (dismiss) return;
@@ -116,15 +123,21 @@ export default {
             animalId: this.animal.id
           }
         });
+        this.$store.dispatch('loadPage', false);
+
+        await this.$swal({
+          type: 'success',
+          title: 'Muito obrigado!',
+          text: `Seu pedido de adoção foi enviado com sucesso para ${this.animal.owner.name}!`
+        });
       } catch (error) {
+        this.$store.dispatch('loadPage', false);
+
         await this.$swal({
           type: 'warning',
-          text: CheckError(error)
+          text: CheckError(error),
         });
-
-      } finally {
-        this.$store.dispatch('loadPage', false);
-      }
+      };
     }
   },
   computed: {

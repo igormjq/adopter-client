@@ -1,37 +1,130 @@
 <template>
-  <section id="adoptionArea" class="flex --full">
-    <div class="content flex --full">
-      <container>
-        <h2>Cu do caralho</h2>
-      </container>
+  <section id="adoptionArea" class="flex align-center justify-center">
+    <div class="card">
+      <div class="tab-system">
+        <div class="tab-system__wrapper flex flex-column">
+          <div class="tab-system__header">
+            <ul>
+              <li class="flex align-center justify-center" :class="{ active: isActiveTab('received')}" @click="switchTab('received')">Recebidas</li>
+              <li class="flex align-center justify-center" :class="{ active: isActiveTab('sent')}" @click="switchTab('sent')">Enviadas</li>
+            </ul>
+          </div>
+          <div class="tab-system__tabs flex">
+            <div class="tab" v-if="isActiveTab('sent')">
+              <div class="tab__title flex align-center justify-center text-pink">Pedidos enviados</div>
+              <div class="tab__content flex flex-column justify-center">
+                <table class="custom-table">
+                  <tr>
+                    <th>Animal</th>
+                    <th>Responsável</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                  </tr>
+                  <tr v-for="({ animal, accepted }) in me.adoptionRequests">
+                    <td>{{ animal.name }}</td>
+                    <td>{{ animal.owner.name }}</td>
+                    <td>{{ animal.owner.email }}</td>
+                    <td>{{ checkStatus(accepted) }}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="tab" v-if="isActiveTab('received')">
+              <div class="tab__title flex align-center justify-center text-pink">Pedidos recebidos</div>
+              <div class="tab__content flex flex-column justify-center">
+                <table class="custom-table">
+                  <tr>
+                    <th>Animal</th>
+                    <th>Solicitante</th>
+                    <th>Email</th>
+                    <th>Ações</th>
+                  </tr>
+                  <tr v-for="({ animal, sentBy }) in me.receivedAdoptionRequests">
+                    <td>{{ animal.name }}</td>
+                    <td>{{ sentBy.name }}</td>
+                    <td>{{ sentBy.email }}</td>
+                    <td>Aceitar</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
+import Card from '../../Card.vue';
 import { GET_ADOPTION_REQUESTS } from '../../../graphql/queries';
 
 export default {
-  computed: {
-    ...mapGetters(['user']) 
+  components: {
+    Card,
   },
-  async created() {
-    const { 
-      data: {
-        me
-      }
-    } = await this.$apollo.query({
+  data() {
+    return {
+      targetTab: 'received',
+    }
+  },
+  methods: {
+    switchTab(tab) {
+      this.targetTab = tab;
+    },
+    isActiveTab(value) {
+      return this.targetTab === value
+    },
+    checkStatus(status) {
+      return status ? 'Aceito' : 'Pendente'
+    }
+  },
+  computed: {
+    ...mapGetters(['user']),
+  },
+  apollo: {
+    me: {
       query: GET_ADOPTION_REQUESTS,
-    });
-
-    console.log('me', me);
-  }
+      fetchPolicy: 'network-only'
+    },
+    
+  },
 }
 </script>
 
 <style lang="scss">
+@import '../../../assets/scss/mixins.scss';
+
 #adoptionArea {
   background-color: #EAEBED;
+
+  .card {
+    width: 60vw;
+    height: 70vh;
+    background: #FFF;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  }
+
+  .custom-table {
+    width: 90%;
+    padding: 0 10px;
+    font-size: 14px;
+    margin: 0 auto;
+
+    th {
+      border: 1px solid #dcdcdc;
+    }
+
+    td {
+      background: #F1F1F1;
+      color: #EF3176;
+      border: 1px solid #dcdcdc;
+      border-top: none;
+    }
+    th, td {
+      padding: 10px;
+    }
+  }
 }
 </style>

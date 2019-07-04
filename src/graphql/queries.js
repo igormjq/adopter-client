@@ -73,17 +73,29 @@ export const GET_ADOPTION_REQUESTS = gql`{
   me {
     id
     receivedAdoptionRequests {
+      animal {
+        name
+        type
+      }
       sentBy {
         name
+        email
       }
     }
     adoptionRequests {
       animal {
         name
+        type
+        owner {
+          name
+          email
+        }
       }
       sentBy {
         name
+        email
       }
+      accepted
     }
   }
 }`
