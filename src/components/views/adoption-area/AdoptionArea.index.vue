@@ -44,7 +44,7 @@
                     <th>Animal</th>
                     <th>Solicitante</th>
                     <th>Email</th>
-                    <th>Ações</th>
+                    <th>Status</th>
                   </tr>
                   <tr v-for="({ id, animal, sentBy, accepted }) in me.receivedAdoptionRequests" :key="id">
                     <td>{{ animal.name }}</td>
@@ -52,7 +52,10 @@
                     <td>{{ sentBy.email }}</td>
                     <td>
                       <button v-if="!accepted" @click="acceptAdoptionRequest(id, sentBy)" class="btn btn-block pink">Aceitar</button>
-                      <span v-else>Aceito</span>
+                      <div v-else>
+                        <span>Aceito</span>
+                        <font-awesome-icon icon="check" />
+                      </div>
                     </td>
                   </tr>
                 </table>
