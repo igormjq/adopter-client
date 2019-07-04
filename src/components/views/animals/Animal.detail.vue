@@ -63,6 +63,21 @@
           </div>
         </div>
       </card>
+      <card>
+        <div slot="content" class="communication-card">
+          <div class="communication-card__input-container">
+            <div class="title flex align-center">
+              <img class="inlist-icon" src="../../../assets/img/icon/comment.svg">
+              <span>Deixe um comentário</span>
+            </div>
+            <div class="wrapper">
+              <textarea
+                placeholder="Está com dúvidas? Deixe uma mensagem ao Adopter responsável"
+                v-model="comment.text" rows="5"></textarea>
+            </div>
+          </div>
+        </div>
+      </card>
     </container>
   </section>
 </template>
@@ -85,6 +100,9 @@ export default {
   },
   data() {
     return {
+      comment: {
+        text: ''
+      },
       toastOptions: {
         duration: 3000,
         keepOnHover: true,
@@ -164,8 +182,17 @@ export default {
   #animal {
     background-color: #eaebed;
     padding-bottom: 45px;
+
+    & > .container {
+      .card {
+        margin-top: 15px;
+        padding: 35px;
+        font-weight: 300;
+      }
+    }
+
     .back {
-      margin: 15px 0;
+      margin-top: 15px;
 
       .icon-arrow-back {
         cursor: pointer;
@@ -173,9 +200,6 @@ export default {
 
     }
     .animal-card {
-      padding: 35px;
-      font-weight: 300;
-
       .animal {
         &__avatar {
           background-position: center;
@@ -280,6 +304,37 @@ export default {
             line-height: 20px;
             max-height: 200px;
             overflow-y: scroll;
+          }
+        }
+      }
+    }
+
+    .communication-card {
+      &__input-container {
+        .title {
+          color: #EF3176;
+          margin-bottom: 10px;
+          font-size: 18px;
+
+          .inlist-icon {
+            width: 1.8rem;
+          }
+        }
+        .wrapper {
+          textarea {
+            outline: none;
+            font-size: 16px;
+            padding: 15px;
+            font-weight: 300;
+            padding-bottom: 10px;
+            transition: border .4s;
+            border-radius: 6px;
+            border: 1px solid #6F6F6F;
+            resize: none;
+            width: 100%;
+            &:focus, &.active {
+              border-color: #EF3176;
+            }
           }
         }
       }
