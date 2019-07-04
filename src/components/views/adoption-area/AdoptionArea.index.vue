@@ -44,7 +44,8 @@
                     <td>{{ sentBy.name }}</td>
                     <td>{{ sentBy.email }}</td>
                     <td>
-                      <button @click="acceptAdoptionRequest(id)" class="btn btn-block pink">Aceitar</button>
+                      <button v-if="!accepted" @click="acceptAdoptionRequest(id, sentBy)" class="btn btn-block pink">Aceitar</button>
+                      <span v-else>Aceito</span>
                     </td>
                   </tr>
                 </table>
@@ -73,6 +74,33 @@ export default {
     }
   },
   methods: {
+    async acceptAdoptionRequest(id, { name }) {
+      const { dismiss } = await this.$swal({
+        type: 'question',
+        title: 'Uhul!',
+        text: `Você tem certeza que deseja aceitar o pedido de adoção feito por ${name}?`,
+        confirmButtonText: 'Sim',
+        confirmButtonColor: '#EF3176',
+        showCancelButton: true,
+        showCloseButton: true,
+      });
+
+      if(dismiss) return;
+
+      const {
+        updateAdoptionRequest: { accept }
+      } = await this.$apollo.mutate({
+        mutation: ACCEPT_ADOPTION_REQUEST,
+        variables: {
+          id
+        }
+      });
+
+      if(accept) {
+        this.$apollo.queries.me.refetch();
+      }
+
+    },
     switchTab(tab) {
       this.targetTab = tab;
     },
@@ -81,9 +109,6 @@ export default {
     },
     checkStatus(status) {
       return status ? 'Aceito' : 'Pendente'
-    },
-    async acceptAdoptionRequest(id) {
-      console.log('esse é o id', id);
     },
   },
   computed: {
@@ -95,9 +120,6 @@ export default {
       fetchPolicy: 'network-only'
     },
   },
-  // mounted() {
-  //   console.log(this.$apollo.queries);
-  // }
 }
 </script>
 
