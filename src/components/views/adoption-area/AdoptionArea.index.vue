@@ -13,33 +13,36 @@
             <div class="tab" v-if="isActiveTab('sent')">
               <div class="tab__title flex align-center justify-center text-pink">Pedidos enviados</div>
               <div class="tab__content flex flex-column justify-center">
-                <table class="custom-table">
+                <table class="custom-table" v-if="me.adoptionRequests.length">
                   <tr>
                     <th>Animal</th>
                     <th>Responsável</th>
                     <th>Email</th>
                     <th>Status</th>
                   </tr>
-                  <tr v-for="({ animal, accepted }) in me.adoptionRequests">
+                  <tr v-for="({ id, animal, accepted }) in me.adoptionRequests" :key="id">
                     <td>{{ animal.name }}</td>
                     <td>{{ animal.owner.name }}</td>
                     <td>{{ animal.owner.email }}</td>
                     <td>{{ checkStatus(accepted) }}</td>
                   </tr>
                 </table>
+                <div class="no-result" v-else>
+                  Você ainda não enviou pedidos de adoção.
+                </div>
               </div>
             </div>
             <div class="tab" v-if="isActiveTab('received')">
               <div class="tab__title flex align-center justify-center text-pink">Pedidos recebidos</div>
               <div class="tab__content flex flex-column justify-center">
-                <table class="custom-table">
+                <table class="custom-table" v-if="me.receivedAdoptionRequests.length">
                   <tr>
                     <th>Animal</th>
                     <th>Solicitante</th>
                     <th>Email</th>
                     <th>Ações</th>
                   </tr>
-                  <tr v-for="({ id, animal, sentBy, accepted }) in me.receivedAdoptionRequests">
+                  <tr v-for="({ id, animal, sentBy, accepted }) in me.receivedAdoptionRequests" :key="id">
                     <td>{{ animal.name }}</td>
                     <td>{{ sentBy.name }}</td>
                     <td>{{ sentBy.email }}</td>
@@ -49,6 +52,9 @@
                     </td>
                   </tr>
                 </table>
+                <div class="no-result" v-else>
+                  Você ainda não recebeu pedidos de adoção.
+                </div>
               </div>
             </div>
           </div>
