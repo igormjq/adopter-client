@@ -4,9 +4,13 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { setContext } from 'apollo-link-context';
 
 // HTTP connection to the API
+const uri = window.location.protocol.startsWith('https') ? 
+'https://adopter-api.herokuapp.com/' : 
+'http://localhost:4000'
+
 const httpLink = createHttpLink({
-  uri: 'http://localhost:4000/',
-})
+  uri,
+});
 
 // Cache implementation
 const cache = new InMemoryCache()
