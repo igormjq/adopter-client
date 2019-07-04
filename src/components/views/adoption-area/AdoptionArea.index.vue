@@ -24,7 +24,11 @@
                     <td>{{ animal.name }}</td>
                     <td>{{ animal.owner.name }}</td>
                     <td>{{ animal.owner.email }}</td>
-                    <td>{{ checkStatus(accepted) }}</td>
+                    <td>
+                      {{ checkStatus(accepted) }}
+                      <font-awesome-icon v-if="accepted" icon="check" />
+                      <font-awesome-icon icon="clock" v-else />
+                    </td>
                   </tr>
                 </table>
                 <div class="no-result" v-else>

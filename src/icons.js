@@ -25,7 +25,8 @@ import {
   faQuoteLeft,
   faMapMarkerAlt,
   faHome,
-  faCheck
+  faCheck,
+  faClock,
 } from '@fortawesome/free-solid-svg-icons'
 
 const bindIcons = () => library.add(
@@ -54,7 +55,8 @@ const bindIcons = () => library.add(
   faQuoteRight,
   faMapMarkerAlt,
   faHome,
-  faCheck
+  faCheck,
+  faClock
 );
 
 export default bindIcons();
