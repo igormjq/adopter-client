@@ -35,6 +35,14 @@ export const GET_ANIMAL = gql`query animal($id: ID!) {
       phone
       email
     }
+    comments {
+      id
+      text
+      author {
+        id
+        name
+      }
+    }
     photos
   }
 } `

@@ -78,23 +78,18 @@
               <button class="btn pink">Enviar</button>
             </div>
             <div class="chat-component">
-              <!-- <div class="chat-component__message flex flex-column">
+              <div 
+                class="chat-component__message flex flex-column"
+                :class="{ 'is-author': checkIsAuthor(author.id) }" 
+                v-for="({ id, text, author }) in animal.comments">
                 <div class="chat-component__message__text">
-                  <p>Olá, ele possui todas as vacina?</p>
+                  <p>{{ text }}</p>
                 </div>
                 <div class="chat-component__message__footer flex space-between">
-                  <span class="name">Cariane</span><span>Há 2 horas</span>
-                </div>
-              </div>
-              <div class="chat-component__message flex flex-column is-author">
-                <div class="chat-component__message__text">
-                  <p>Oi, Cariane, tudo bem? Ele possui todas, sim. Obrigado pelo interesse!</p>
-                </div>
-                <div class="chat-component__message__footer flex space-between">
-                  <span>Basílio</span>
+                  <span class="name">{{ author.name }}</span>
                   <span>Há 2 horas</span>
                 </div>
-              </div> -->
+              </div>
             </div>
           </div>
         </div>
@@ -177,6 +172,9 @@ export default {
           text: CheckError(error),
         });
       };
+    },
+    checkIsAuthor(id) {
+      return this.animal.owner.id === id;
     }
   },
   computed: {
