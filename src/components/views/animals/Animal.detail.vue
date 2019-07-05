@@ -79,15 +79,20 @@
             </div>
             <div class="chat-component">
               <div 
-                class="chat-component__message flex flex-column"
+                class="chat-component__message flex align-center"
                 :class="{ 'is-author': checkIsAuthor(author.id) }" 
                 v-for="({ id, text, author }) in animal.comments" :key="id">
-                <div class="chat-component__message__text">
+                <div 
+                  class="chat-component__message__avatar" 
+                  :style="{ backgroundImage: 'url(' + author.profileImg + ')' }" />
+                <div class="chat-component__message__content flex flex-column">
+                  <div class="chat-component__message__content__text">
                   <p>{{ text }}</p>
                 </div>
-                <div class="chat-component__message__footer flex space-between">
+                <div class="chat-component__message__content__footer flex space-between">
                   <span class="name">{{ author.name }}</span>
                   <span>Há 2 horas</span>
+                </div>
                 </div>
               </div>
             </div>

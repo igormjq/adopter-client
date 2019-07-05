@@ -2,7 +2,27 @@
   display: flex;
   flex-direction: column;
 
+  &__message__avatar {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
   &__message {
+    &.is-author {
+      justify-content: flex-end;
+
+      .chat-component__message__content {
+        background-color: #F1F1F1;
+        color: #9D9D9D;
+      }
+    }
+  }
+
+  &__message__content {
     display: flex;
     min-height: 120px;
     padding: 20px;
@@ -12,12 +32,6 @@
     margin: 15px 0;
     color: #EF3176;
     font-weight: 500;
-
-    &.is-author {
-      background-color: #F1F1F1;
-      align-self: flex-end;
-      color: #9D9D9D;
-    }
 
     &__footer {
       color: #EF3176;

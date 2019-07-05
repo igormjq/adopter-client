@@ -34,6 +34,7 @@ export const GET_ANIMAL = gql`query animal($id: ID!) {
       name
       phone
       email
+      profileImg
     }
     comments {
       id
@@ -41,6 +42,7 @@ export const GET_ANIMAL = gql`query animal($id: ID!) {
       author {
         id
         name
+        profileImg
       }
     }
     photos
