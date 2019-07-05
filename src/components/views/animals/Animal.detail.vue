@@ -75,13 +75,13 @@
                 placeholder="Está com dúvidas? Deixe uma mensagem ao Adopter responsável"
                 v-model="comment.text" rows="5">
               </textarea>
-              <button class="btn pink">Enviar</button>
+              <button class="btn pink" @click="sendMessage" @keyup.enter="sendMessage">Enviar</button>
             </div>
             <div class="chat-component">
               <div 
                 class="chat-component__message flex flex-column"
                 :class="{ 'is-author': checkIsAuthor(author.id) }" 
-                v-for="({ id, text, author }) in animal.comments">
+                v-for="({ id, text, author }) in animal.comments" :key="id">
                 <div class="chat-component__message__text">
                   <p>{{ text }}</p>
                 </div>
@@ -101,7 +101,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import { GET_ANIMAL } from '../../../graphql/queries';
-import { CREATE_ADOPTION_REQUEST } from '../../../graphql/mutations';
+import { CREATE_ADOPTION_REQUEST, COMMENT_ON_ANIMAL } from '../../../graphql/mutations';
 import { CheckError } from '../../../services/ErrorHandlerService.js';
 import AnimalMixins from '../../../mixins/AnimalMixins';
 import Card from "../../Card.vue";
@@ -175,6 +175,34 @@ export default {
     },
     checkIsAuthor(id) {
       return this.animal.owner.id === id;
+    },
+    async sendMessage() {
+      if(!this.user) {
+        console.log('Não tem user');
+      };
+
+      try {
+        const {
+          data: {
+            commentOnAnimal: { id }
+          }
+        } = await this.$apollo.mutate({
+          mutation: COMMENT_ON_ANIMAL,
+          variables: {
+            animalId: this.animal.id,
+            text: this.comment.text
+          }
+        });
+
+        if(id) {
+          this.comment.text = '';
+          this.$apollo.queries.animal.refetch();
+        }
+
+      } catch (err) {
+        console.log('deu ruim', err);
+      }
+
     }
   },
   computed: {
@@ -190,7 +218,7 @@ export default {
           id: this.$route.params.id
         }
       }
-    }
+    },
   }
 }
 </script>

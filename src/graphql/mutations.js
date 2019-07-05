@@ -59,3 +59,15 @@ export const ACCEPT_ADOPTION_REQUEST = gql`mutation acceptAdoptionRequest($id: I
     accepted
   }
 }`
+
+export const COMMENT_ON_ANIMAL = gql`mutation commentOnAnimal($animalId: ID!, $text: String!) {
+  commentOnAnimal(animalId: $animalId, text: $text) {
+    id
+    comments {
+      text
+      author {
+        name
+      }
+    }
+  }
+}`
