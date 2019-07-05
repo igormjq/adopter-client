@@ -81,7 +81,7 @@
               <div 
                 class="chat-component__message flex align-center"
                 :class="{ 'is-author': checkIsAuthor(author.id) }" 
-                v-for="({ id, text, author }) in animal.comments" :key="id">
+                v-for="({ id, text, author, createdAt }) in animal.comments" :key="id">
                 <div 
                   class="chat-component__message__avatar" 
                   :style="{ backgroundImage: 'url(' + author.profileImg + ')' }" />
@@ -91,7 +91,7 @@
                 </div>
                 <div class="chat-component__message__content__footer flex space-between">
                   <span class="name">{{ author.name }}</span>
-                  <span>Há 2 horas</span>
+                  <span>{{ formatDate(createdAt) }}</span>
                 </div>
                 </div>
               </div>
@@ -105,6 +105,9 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import dayjs from 'dayjs';
+import 'dayjs/locale/pt-br';
+import relativeTime from 'dayjs/plugin/relativeTime'
 import { GET_ANIMAL } from '../../../graphql/queries';
 import { CREATE_ADOPTION_REQUEST, COMMENT_ON_ANIMAL } from '../../../graphql/mutations';
 import { CheckError } from '../../../services/ErrorHandlerService.js';
@@ -178,12 +181,20 @@ export default {
         });
       };
     },
+    formatDate(value) {
+      const date = new Date(value);
+
+      return dayjs(date).fromNow();
+    },
     checkIsAuthor(id) {
       return this.animal.owner.id === id;
     },
     async sendMessage() {
       if(!this.user) {
-        console.log('Não tem user');
+        return this.$swal({
+          type: 'error',
+          message: 'Identifique-se para mandar quantas perguntas quiser'
+        })
       };
 
       try {
@@ -224,6 +235,10 @@ export default {
         }
       }
     },
+  },
+  created() {
+    dayjs.locale('pt-br')
+    dayjs.extend(relativeTime);
   }
 }
 </script>
