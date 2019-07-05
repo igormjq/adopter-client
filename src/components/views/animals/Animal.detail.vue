@@ -70,10 +70,31 @@
               <img class="inlist-icon" src="../../../assets/img/icon/comment.svg">
               <span>Deixe um comentário</span>
             </div>
-            <div class="wrapper">
+            <div class="wrapper flex flex-column">
               <textarea
                 placeholder="Está com dúvidas? Deixe uma mensagem ao Adopter responsável"
-                v-model="comment.text" rows="5"></textarea>
+                v-model="comment.text" rows="5">
+              </textarea>
+              <button class="btn pink">Enviar</button>
+            </div>
+            <div class="chat-component">
+              <!-- <div class="chat-component__message flex flex-column">
+                <div class="chat-component__message__text">
+                  <p>Olá, ele possui todas as vacina?</p>
+                </div>
+                <div class="chat-component__message__footer flex space-between">
+                  <span class="name">Cariane</span><span>Há 2 horas</span>
+                </div>
+              </div>
+              <div class="chat-component__message flex flex-column is-author">
+                <div class="chat-component__message__text">
+                  <p>Oi, Cariane, tudo bem? Ele possui todas, sim. Obrigado pelo interesse!</p>
+                </div>
+                <div class="chat-component__message__footer flex space-between">
+                  <span>Basílio</span>
+                  <span>Há 2 horas</span>
+                </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -308,7 +329,6 @@ export default {
         }
       }
     }
-
     .communication-card {
       &__input-container {
         .title {
@@ -335,6 +355,13 @@ export default {
             &:focus, &.active {
               border-color: #EF3176;
             }
+          }
+          .btn {
+            align-self: flex-end;
+            margin-top: 10px;
+            height: 40px;
+            width: 100px;
+            font-weight: 800;
           }
         }
       }

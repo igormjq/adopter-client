@@ -1,0 +1,37 @@
+.chat-component {
+  display: flex;
+  flex-direction: column;
+
+  &__message {
+    display: flex;
+    min-height: 120px;
+    padding: 20px;
+    width: 65%;
+    border-radius: 6px;
+    background: rgba(255, 173, 203, 0.4);
+    margin: 15px 0;
+    color: #EF3176;
+    font-weight: 500;
+
+    &.is-author {
+      background-color: #F1F1F1;
+      align-self: flex-end;
+      color: #9D9D9D;
+    }
+
+    &__footer {
+      color: #EF3176;
+      span {
+        font-size: 14px;
+        &:first-child {
+          font-size: initial;
+          font-weight: 700;
+        }
+      }
+    }
+
+    &__text {
+      flex: 1;
+    }
+  }
+}
